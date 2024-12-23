@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 1719771087}
   - component: {fileID: 1719771086}
   - component: {fileID: 1719771085}
+  - component: {fileID: 1719771091}
   m_Layer: 0
   m_Name: WaterMash
   m_TagString: Untagged
@@ -535,6 +536,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1719771091
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719771084}
+  m_Enabled: 1
+  m_SortingLayerID: 731148139
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
