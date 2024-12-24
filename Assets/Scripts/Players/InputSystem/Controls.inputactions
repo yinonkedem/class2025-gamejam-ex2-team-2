@@ -2,7 +2,7 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "a01f44a5-84a2-4cfd-b9b6-f3ea8cc0f5f1",
             "actions": [
                 {
@@ -10,6 +10,24 @@
                     "type": "PassThrough",
                     "id": "3f1e37f1-13db-4af7-bbb1-2362f989d9aa",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "85a9b783-67ac-4714-b2ed-01306ea77477",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "909d2d5b-53a1-4229-be55-8c593b1111bb",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -125,6 +143,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a8b500ce-c312-4800-ae03-23ddc0c76a08",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyBoard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e874504f-9b16-4b63-a2bf-84ed85128566",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyBoard",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -133,6 +173,11 @@
         {
             "name": "KeyBoard",
             "bindingGroup": "KeyBoard",
+            "devices": []
+        },
+        {
+            "name": "KeyBoard1",
+            "bindingGroup": "KeyBoard1",
             "devices": []
         }
     ]

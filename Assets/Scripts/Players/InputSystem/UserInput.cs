@@ -21,7 +21,7 @@ public class UserInput : MonoBehaviour
             Destroy(gameObject);
         }
         controls = new Controls();
-        controls.Movement.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
     }
 
     private void OnEnable()
