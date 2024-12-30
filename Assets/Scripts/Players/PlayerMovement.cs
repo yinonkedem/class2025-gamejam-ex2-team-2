@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode upMoveKey;
     [SerializeField] private KeyCode downMoveKey;
     [SerializeField] private float speed;
-
+    private bool isMovementPrevented = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,27 +27,30 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = 0f;
-        vertical = 0f;
+        if (!isMovementPrevented)
+        {
+            horizontal = 0f;
+            vertical = 0f;
 
-        if (Input.GetKey(rightMoveKey))
-        {
-            horizontal = 1f;
-        }
-        else if (Input.GetKey(leftMoveKey))
-        {
-            horizontal = -1f;
-        }
+            if (Input.GetKey(rightMoveKey))
+            {
+                horizontal = 1f;
+            }
+            else if (Input.GetKey(leftMoveKey))
+            {
+                horizontal = -1f;
+            }
 
-        if (Input.GetKey(upMoveKey))
-        {
-            vertical = 1f;
+            if (Input.GetKey(upMoveKey))
+            {
+                vertical = 1f;
+            }
+            else if (Input.GetKey(downMoveKey))
+            {
+                vertical = -1f;
+            }
+            Flip();
         }
-        else if (Input.GetKey(downMoveKey))
-        {
-            vertical = -1f;
-        }
-        Flip();
     }
 
     private void FixedUpdate()
@@ -69,6 +72,20 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    //Function that prevent from moving for x secionds
+    public IEnumerator MovePrevent(float seconds)
+    {
+        float originSpeed = speed;
+        speed = 0f;
+        isMovementPrevented = true;
+
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(seconds);
+        speed = originSpeed;
+        isMovementPrevented = false;
+
     }
 }
 

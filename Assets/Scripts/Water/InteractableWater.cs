@@ -95,7 +95,7 @@ public class InteractableWater : MonoBehaviour
         // wave propagation
         for (int i = 0; i < wavePropagationIterations; i++)
         {
-            for (int j = 0; j < _waterPoints.Count - 1; j++)
+            for (int j = 1; j < _waterPoints.Count - 1; j++)
             {
 
                 float leftDelta = spread *
