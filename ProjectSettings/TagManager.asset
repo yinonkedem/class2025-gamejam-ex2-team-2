@@ -8,6 +8,9 @@ TagManager:
   - Bottom Wall
   - Right Wall
   - Left Wall
+  - Enemy
+  - Pink Player
+  - Grey Player
   layers:
   - Default
   - TransparentFX

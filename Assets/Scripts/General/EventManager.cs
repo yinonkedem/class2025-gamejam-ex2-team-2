@@ -16,6 +16,10 @@ public class EventManager : Singleton<EventManager>
     public const string EVENT_ADD_ATTACK_TO_GREY_PLAYER = "Event: add atack for the pink player";
     public const string EVENT_GREY_PLAYER_HIT_FROM_ATTACK = "Event: hit logic when grey player get hit";
     public const string EVENT_PINK_PLAYER_HIT_FROM_ATTACK = "Event: hit logic when pink player get hit";
+    public const string EVENT_PINK_PLAYER_DIE = "Event: pink player die";
+    public const string EVENT_GREY_PLAYER_DIE = "Event: grey player die";
+
+
 
 
     private void Init()

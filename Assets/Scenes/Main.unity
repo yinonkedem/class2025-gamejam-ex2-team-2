@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 110279965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -3.47, z: -0.04221003}
+  m_LocalPosition: {x: 0.9, y: -3.71, z: -0.04221003}
   m_LocalScale: {x: 140.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 751751045}
   m_Layer: 0
   m_Name: GreyPlayer
-  m_TagString: Untagged
+  m_TagString: Grey Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1568,7 +1568,7 @@ Transform:
   m_GameObject: {fileID: 1778333651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.16, y: 0.09, z: 0}
+  m_LocalPosition: {x: 1.77, y: 2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 1973510162}
   m_Layer: 0
   m_Name: PinkPlayer
-  m_TagString: Untagged
+  m_TagString: Pink Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
