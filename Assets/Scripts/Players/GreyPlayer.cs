@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class GreyPlayer : MonoBehaviour
     {
         EventManager.Instance.StartListening(EventManager.EVENT_ADD_ATTACK_TO_GREY_PLAYER, AddAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
+        EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_DIE, Die);
 
         isHaveAnAttack = false;
         isUnderAttack = false;
@@ -81,4 +83,12 @@ public class GreyPlayer : MonoBehaviour
         yield return new WaitForSeconds(GameManager.Instance.GetTimeOfAttack());
         isHaveAnAttack = false;
     }
+
+
+    private void Die(GameObject arg0)
+    {
+        Debug.Log("Grey player is dead");
+    }
+
+
 }

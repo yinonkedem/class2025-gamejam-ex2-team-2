@@ -18,6 +18,8 @@ public class PinkPlayer : MonoBehaviour
     {
         EventManager.Instance.StartListening(EventManager.EVENT_ADD_ATTACK_TO_PINK_PLAYER, AddAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
+        EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_DIE, Die);
+
 
         isHaveAnAttack = false;
         isUnderAttack = false;
@@ -79,4 +81,10 @@ public class PinkPlayer : MonoBehaviour
         yield return new WaitForSeconds(GameManager.Instance.GetTimeOfAttack());
         isHaveAnAttack = false;
     }
+
+    private void Die(GameObject arg0)
+    {
+        Debug.Log("Pink player is dead");
+    }
+
 }
