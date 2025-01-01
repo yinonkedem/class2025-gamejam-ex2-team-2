@@ -42,6 +42,7 @@ public class GreyPlayer : MonoBehaviour
             currentAttack.transform.Rotate(0, 0, 45);
             StartCoroutine(Utils.Instance.ChangeColorAndDisappear(currentAttack, colorOfTheAttack, GameManager.Instance.GetTimeOfAttack() / 2f));
             EventManager.Instance.TriggerEvent(EventManager.EVENT_PINK_PLAYER_HIT_FROM_ATTACK, gameObject);
+            GameManager.Instance.HitEnemiesInTheWater();
             StartCoroutine(ChangeIsHaveAnAttack());
 
         }
