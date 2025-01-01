@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private float timeToAllowPlayerToAttack = 60f;
+    [SerializeField] private float timeToAllowPlayerToAttack;
     [SerializeField] private float timeOfAttack = 10f;
 
     // Start is called before the first frame update

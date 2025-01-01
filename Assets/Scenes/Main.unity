@@ -915,7 +915,6 @@ MonoBehaviour:
   greyAttackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
   attackKey: 9
   colorOfTheAttack: {r: 0, g: 1, b: 0, a: 1}
-  duarationOfTheBottleTillDisappear: 3
 --- !u!1 &825797386
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,7 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bb4c70125c03c43a484038bc6b180a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToAllowPlayerToAttack: 10
+  timeToAllowPlayerToAttack: 30
   timeOfAttack: 10
 --- !u!4 &825797388
 Transform:
@@ -1900,7 +1899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa4149273a6d7f46b01fadf6035f1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAwarenessDistance: 5
+  _playerAwarenessDistance: 4
 --- !u!114 &1778333653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2276,7 +2275,6 @@ MonoBehaviour:
   pinkAttackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
   attackKey: 32
   colorOfTheAttack: {r: 1, g: 0, b: 1, a: 1}
-  duarationOfTheBottleTillDisappear: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,22 +7,18 @@ public class PinkPlayer : MonoBehaviour
     [SerializeField] private GameObject pinkAttackPrefab;
     [SerializeField] private KeyCode attackKey;
     [SerializeField] private Color colorOfTheAttack = Color.magenta;
-    [SerializeField] private float duarationOfTheBottleTillDisappear = 3f;
 
     private GameObject currentAttack;
-    private bool isUnderAttack;
+    private bool isUnderAttack = false;
+    private bool isAttacking = false;
+    private bool isHaveAnAttack = false;
 
-    private bool isHaveAnAttack;
     // Start is called before the first frame update
     void Start()
     {
         EventManager.Instance.StartListening(EventManager.EVENT_ADD_ATTACK_TO_PINK_PLAYER, AddAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_DIE, Die);
-
-
-        isHaveAnAttack = false;
-        isUnderAttack = false;
     }
 
     // Update is called once per frame
@@ -36,12 +32,13 @@ public class PinkPlayer : MonoBehaviour
 
     private void Attack(GameObject obj)
     {
-        if (!isUnderAttack && isHaveAnAttack)
+        if (!isUnderAttack && isHaveAnAttack && !isAttacking)
         {
+            isAttacking = true;
             isHaveAnAttack = false;
             Debug.Log("Pink player is attacking");
             currentAttack.transform.Rotate(0, 0, 45);
-            StartCoroutine(Utils.Instance.ChangeColorAndDisappear(currentAttack, colorOfTheAttack, duarationOfTheBottleTillDisappear));
+            StartCoroutine(Utils.Instance.ChangeColorAndDisappear(currentAttack, colorOfTheAttack, GameManager.Instance.GetTimeOfAttack()/2f));
             EventManager.Instance.TriggerEvent(EventManager.EVENT_GREY_PLAYER_HIT_FROM_ATTACK, gameObject);
             StartCoroutine(ChangeIsHaveAnAttack());
         }
@@ -51,7 +48,7 @@ public class PinkPlayer : MonoBehaviour
     private void AddAttack(GameObject obj)
     {
         Debug.Log("Pink player is adding attack");
-        if (!isHaveAnAttack && !isUnderAttack)
+        if (!isHaveAnAttack && !isUnderAttack && !isAttacking)
         {
             isHaveAnAttack =true;
             currentAttack = Instantiate(pinkAttackPrefab, transform.position + new Vector3(0,1.2f,0), Quaternion.identity);
@@ -82,6 +79,7 @@ public class PinkPlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(GameManager.Instance.GetTimeOfAttack());
         isHaveAnAttack = false;
+        isAttacking = false;
     }
 
     private void Die(GameObject arg0)
