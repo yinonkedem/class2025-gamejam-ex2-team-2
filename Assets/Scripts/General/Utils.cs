@@ -33,4 +33,29 @@ public class Utils : Singleton<Utils>
 
         Destroy(objectTochangeItsColor); // Destroy the attack object after it disappears
     }
+
+
+    //TODO : make the timer to be above the gameObjectToAddTimerTo
+    public void StartTimerAbove(GameObject gameObjectToAddTimerTo)
+    {
+      
+        GameObject timer = FindInactiveObjectByName("Timer");
+        timer.SetActive(true);
+    }
+
+
+
+
+    public GameObject FindInactiveObjectByName(string name)
+    {
+        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>();
+        foreach (Transform obj in objs)
+        {
+            if (obj.hideFlags == HideFlags.None && obj.name == name)
+            {
+                return obj.gameObject;
+            }
+        }
+        return null;
+    }
 }

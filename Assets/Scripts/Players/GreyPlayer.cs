@@ -65,6 +65,7 @@ public class GreyPlayer : MonoBehaviour
     private void HitFromAttack(GameObject obj)
     {
         //TODO : start animation
+        Utils.Instance.StartTimerAbove(gameObject);
         isUnderAttack = true;
         PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         StartCoroutine(playerMovement.MovePrevent(GameManager.Instance.GetTimeOfAttack()));
