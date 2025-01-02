@@ -81,61 +81,59 @@ public class InteractableWater : MonoBehaviour
     private void FixedUpdate()
     {
         // Update all springs positions
-        for (int i = 0; i < _waterPoints.Count - 1; i++)
+        for (int i = 1; i < _waterPoints.Count - 1; i++)
         {
             WaterPoint point = _waterPoints[i];
             float x = point.Pos - point.TargetHeight;
             float acceleration =
-                -springConstant * x - point.Velocity * damping;
+                -springConstant * (x - point.Velocity) * damping;
             point.Pos += point.Velocity * speedMult * Time.fixedDeltaTime;
             _vertices[_topVerticesIndex[i]].y = point.Pos;
             point.Velocity += acceleration * Time.fixedDeltaTime * speedMult;
         }
 
         // wave propagation
-        for (int i = 0; i < wavePropagationIterations; i++)
+        for (int j = 0; j < wavePropagationIterations; j++)
         {
-            for (int j = 1; j < _waterPoints.Count - 1; j++)
+            for (int i = 1; i < _waterPoints.Count - 1; i++)
             {
 
                 float leftDelta = spread *
                                   (_waterPoints[i].Pos -
-                                   _waterPoints[j - 1].Pos);
-                _waterPoints[j - 1].Velocity +=
+                                   _waterPoints[i - 1].Pos) * speedMult * Time.fixedDeltaTime;
+                _waterPoints[i - 1].Velocity +=
                     leftDelta * Time.fixedDeltaTime;
 
                 float rightDelta = spread *
-                                   (_waterPoints[j].Pos -
-                                    _waterPoints[j + 1].Pos);
-                _waterPoints[j + 1].Velocity +=
+                                   (_waterPoints[i].Pos -
+                                    _waterPoints[i + 1].Pos);
+                _waterPoints[i + 1].Velocity +=
                     rightDelta * Time.fixedDeltaTime;
             }
         }
-        
         // Update the mesh
         _mesh.vertices = _vertices;
     }
 
-    public void Splash(Vector3 position, float force)
+    public void Splash(Collider2D collision, float force)
     {
-        float closestDist = float.MaxValue;
-        int closestIndex = 0;
-        for (int i = 0; i < _topVerticesIndex.Length; i++)
+        float radius = collision.bounds.extents.x * playerCollisionRadiusMult;
+        Vector2 center = collision.transform.position;
+        
+        for (int i = 0; i < _waterPoints.Count; i++)
         {
-            float dist = Vector3.Distance(position, _vertices[_topVerticesIndex[i]]);
-            if (dist < closestDist)
+            Vector2 vertexWorldPos = transform.TransformPoint(_vertices[_topVerticesIndex[i]]);
+            if (IsPointInsideCircle(vertexWorldPos, center, radius))
             {
-                closestDist = dist;
-                closestIndex = i;
+                _waterPoints[i].Velocity = force;
             }
         }
-
-        _waterPoints[closestIndex].Velocity = force * forceMultiplier;
     }
     
     private bool IsPointInsideCircle(Vector2 point, Vector2 circleCenter, float radius)
     {
-        return Vector2.Distance(point, circleCenter) < radius;
+        float distanceSquared = (point - circleCenter).sqrMagnitude;
+        return distanceSquared <= radius * radius;
     }
     
     private void Reset()
