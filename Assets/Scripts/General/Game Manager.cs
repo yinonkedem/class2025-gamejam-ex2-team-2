@@ -20,16 +20,7 @@ public class GameManager : Singleton<GameManager>
        
         
     }
-
-    private void CallAllowPinkPlayerToAttack()
-    {
-        EventManager.Instance.TriggerEvent(EventManager.EVENT_ADD_ATTACK_TO_PINK_PLAYER, gameObject);
-    }
-
-    private void CallAllowGreyPlayerToAttack()
-    {
-        EventManager.Instance.TriggerEvent(EventManager.EVENT_ADD_ATTACK_TO_GREY_PLAYER, gameObject);
-    }
+    
     public float GetTimeOfAttack()
     {
         return timeOfAttack;
