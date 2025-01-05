@@ -106,9 +106,6 @@ public class ScreenChanger : MonoBehaviour
 
         GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
         startGame.SetActive(false);
-        
-        // Activate the MultipleTargetCamera scrit in the MainCamera
-        Camera.main.GetComponent<MultipleTargetCamera>().enabled = true;
     }
 
 }
