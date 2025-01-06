@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Pink Player
   - Grey Player
+  - Water Ending
   layers:
   - Default
   - TransparentFX
