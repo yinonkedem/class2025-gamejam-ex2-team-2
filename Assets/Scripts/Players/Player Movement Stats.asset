@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 3306b2ba7772775469cee8e460747467, type: 3}
   m_Name: Player Movement Stats
   m_EditorClassIdentifier: 
@@ -25,6 +26,8 @@ MonoBehaviour:
   GroundDetectionRayLength: 0.02
   HeadDetectionRayLength: 0.02
 =======
+=======
+>>>>>>> Stashed changes
   m_Script: {fileID: 11500000, guid: 442413de76b2df84082caaaf73c591be, type: 3}
   m_Name: Player Movement Stats
   m_EditorClassIdentifier: 
@@ -80,4 +83,7 @@ MonoBehaviour:
   DrawRight: 1
   ArcResolution: 20
   VisualizationSteps: 90
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
