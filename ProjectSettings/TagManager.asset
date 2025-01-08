@@ -12,6 +12,7 @@ TagManager:
   - Pink Player
   - Grey Player
   - Water Ending
+  - Shot
   layers:
   - Default
   - TransparentFX

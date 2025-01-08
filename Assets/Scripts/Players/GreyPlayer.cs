@@ -9,6 +9,9 @@ public class GreyPlayer : MonoBehaviour
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
     [SerializeField] private GameObject oxygenBar;
+    [SerializeField] private float attackSpeed = 10f;
+    [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
+
     private OxygenBarController oxygenBarController;
 
 
@@ -42,14 +45,27 @@ public class GreyPlayer : MonoBehaviour
             isAboveWater = false;
         }
         UpdateOxygenBarPosition();
+        if (Input.GetKeyDown(attackKeyCode))
+        {
+            Debug.Log("GreyPlayer pressed E to attack!");
+            Attack();
+        }
     }
 
-    private void Attack(GameObject obj)
+    private void Attack()
     {
+        Vector3 attackPosition = transform.position + new Vector3(1f, 0f, 0f); // Position it slightly in front of the player
+        GameObject attackObject = Instantiate(greyAttackPrefab, attackPosition, Quaternion.identity);
 
+        // Add velocity to the attack
+        Rigidbody2D rb = attackObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = new Vector2(0f, attackSpeed); // Adjust the speed and direction as needed
+        }
+
+        Debug.Log("PinkPlayer attacked!");
     }
-    
-
     private void HitFromAttack(GameObject obj)
     {
         //TODO : start animation
