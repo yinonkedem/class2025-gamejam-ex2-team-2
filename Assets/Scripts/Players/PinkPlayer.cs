@@ -5,7 +5,6 @@ using UnityEngine;
 public class PinkPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject pinkAttackPrefab;
-    [SerializeField] private KeyCode attackKey;
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
     [SerializeField] private GameObject oxygenBar;
@@ -33,10 +32,6 @@ public class PinkPlayer : MonoBehaviour
     void Update()
     {
         oxygenBarController.PreventFlip();
-        if (Input.GetKey(attackKey) && isHaveAnAttack)
-        {
-            Attack(gameObject);
-        }
         
         if (IsAboveObjectWithTag("Water Ending"))
         {
@@ -78,8 +73,6 @@ public class PinkPlayer : MonoBehaviour
         // Check if a collider was hit
         if (hit.collider != null)
         {
-            Debug.Log($"Raycast hit: {hit.collider.name}");
-
             // Check if the object hit by the ray has the correct tag
             if (hit.collider.CompareTag(tag))
             {
