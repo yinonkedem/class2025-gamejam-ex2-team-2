@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 107901567}
   m_Layer: 0
   m_Name: Player 2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,7 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyAttackPrefab: {fileID: 0}
-  attackKey: 0
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
@@ -1844,7 +1843,7 @@ GameObject:
   - component: {fileID: 751664186}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1972,7 +1971,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pinkAttackPrefab: {fileID: 0}
-  attackKey: 0
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 929996173}
@@ -2217,7 +2215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyAttackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
-  attackKey: 9
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
@@ -4396,6 +4393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1759390104}
   - component: {fileID: 1759390105}
+  - component: {fileID: 1759390107}
   - component: {fileID: 1759390106}
   m_Layer: 0
   m_Name: Graphics
@@ -4492,6 +4490,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1759390107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759390103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6737c6a7ee827374ba422e2f4c36c373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchInterval: 20
+  pauseDuration: 10
+  numberOfAttacks: 1
+  maxAttackLevel: 3
 --- !u!1 &1778333651
 GameObject:
   m_ObjectHideFlags: 0
@@ -5079,7 +5093,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pinkAttackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
-  attackKey: 32
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 929996173}
