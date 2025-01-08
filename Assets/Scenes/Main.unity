@@ -501,10 +501,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d47724371844fb4a8521ce993b3ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyAttackPrefab: {fileID: 0}
+  greyAttackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
+  attackSpeed: 10
+  attackKeyCode: 279
 --- !u!61 &107901568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1971,10 +1973,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3306b2ba7772775469cee8e460747467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinkAttackPrefab: {fileID: 0}
+  pinkAttackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 929996173}
+  attackSpeed: 10
+  attackKeyCode: 101
 --- !u!61 &751664186
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2028,7 +2032,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751664180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 004c5ef68abeed740a0419c4f250aaa3, type: 2}
   m_CullingMode: 0
@@ -2240,6 +2244,8 @@ MonoBehaviour:
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
+  attackSpeed: 10
+  attackKeyCode: 279
 --- !u!1 &783652924
 GameObject:
   m_ObjectHideFlags: 0
@@ -4622,6 +4628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778333655}
   - component: {fileID: 1778333653}
+  - component: {fileID: 1778333658}
   - component: {fileID: 1778333652}
   - component: {fileID: 1778333656}
   - component: {fileID: 1778333657}
@@ -4748,6 +4755,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.52, y: 3.62}
   m_EdgeRadius: 0
+--- !u!114 &1778333658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778333651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476b12d271518444a48dff87e054f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 3
 --- !u!1 &1791069122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,6 +5222,8 @@ MonoBehaviour:
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 929996173}
+  attackSpeed: 10
+  attackKeyCode: 101
 --- !u!95 &1973510163
 Animator:
   serializedVersion: 5
