@@ -2407,7 +2407,7 @@ GameObject:
   - component: {fileID: 826638256}
   - component: {fileID: 826638255}
   m_Layer: 0
-  m_Name: bgupdete2
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2644,7 +2644,7 @@ Transform:
   m_GameObject: {fileID: 900011953}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -789.3, y: -633.64, z: 9.861611}
+  m_LocalPosition: {x: -789.3, y: -627.61, z: 9.861611}
   m_LocalScale: {x: 239.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
