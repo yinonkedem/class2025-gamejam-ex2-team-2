@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PinkPlayer : MonoBehaviour
     [SerializeField] private GameObject pinkAttackPrefab;
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
+    [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
     [SerializeField] private GameObject oxygenBar;
     [SerializeField] private float attackSpeed = 10f;
     [SerializeField] private KeyCode attackKeyCode = KeyCode.E;
@@ -149,7 +151,14 @@ public class PinkPlayer : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bolt"))
+        {
+            Debug.Log("Pink player is hit by bolt attack");
 
-
-
+            currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
+    }
 }

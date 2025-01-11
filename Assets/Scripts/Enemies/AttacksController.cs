@@ -12,8 +12,13 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private float pauseDuration = 10f;  // Time in seconds to pause between switches
     [SerializeField] private int numberOfAttacks = 1;  // Time in seconds to pause between switches
     [SerializeField] private int maxAttackLevel = 3;  // Time in seconds to pause between switches
+    [SerializeField] private float timeEnemyPrepareToAttack = 2f;  // Time in seconds to pause between switches
+    [SerializeField] private float timeBetweenTargetToBolt = 2f;  // Time in seconds to pause between switches
+    [SerializeField] private GameObject attackTargetPrefab;
+    [SerializeField] private GameObject boltAttackPrefab;
+
     
-    
+    private Dictionary<int, System.Action> attacks = new Dictionary<int, System.Action>();
     private bool isPaused = false;
     private int currentAttack = -1;
     private bool isSeAttackApplied = false;
@@ -25,14 +30,50 @@ public class AttacksController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         Invoke("StartCoroutineDelayed", 5f);
+        attacks.Add(1, StartBoltAttack);
     }
-    
-    // void Update()
-    // {
-    //     // Force update the Animator parameter every frame
-    //     _animator.SetInteger("numberOfAttack", currentAttack);
-    // }
-    
+
+
+    // After timeEnemyPrepareToAttack seconds, create instance of the prefab : attackTarget and place it one one of the players location\
+    // then after one second instantiate the attack prefab : boltAttack where the target placed 
+    private void StartBoltAttack()
+    {
+        StartCoroutine(PrepareAndExecuteBoltAttack());
+    }
+
+    private IEnumerator PrepareAndExecuteBoltAttack()
+    {
+        // Wait for the preparation time
+        yield return new WaitForSeconds(timeEnemyPrepareToAttack);
+
+        // Create an instance of the attack target at one of the player's locations
+        GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity);
+
+        // Wait for one second
+        yield return new WaitForSeconds(timeBetweenTargetToBolt);
+
+        // Instantiate the bolt attack at the target's position
+        GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position +Vector3.up, Quaternion.identity);
+
+        // Optionally, destroy the attack target after the bolt attack is instantiated
+        Destroy(attackTarget);
+        
+        yield return new WaitForSeconds(4f);
+
+        Destroy(boltAttack);
+
+    }
+
+    private Vector3 GetRandomPlayerPosition()
+    {
+        // Assuming you have a way to get all player objects in the scene
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // Select a random player
+        GameObject randomPlayer = players[Random.Range(0, players.Length)];
+        return randomPlayer.transform.position;
+    }
+
 
     void StartCoroutineDelayed()
     {
@@ -51,6 +92,7 @@ public class AttacksController : MonoBehaviour
             {
                 // Set the current attack
                 currentAttack = i;
+                attacks[i].Invoke();
                 _animator.SetInteger("numberOfAttack", currentAttack);
                 Debug.Log($"Switching to Attack {currentAttack}");
     

@@ -11,6 +11,7 @@ public class GreyPlayer : MonoBehaviour
     [SerializeField] private GameObject oxygenBar;
     [SerializeField] private float attackSpeed = 10f;
     [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
+    [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
 
     private OxygenBarController oxygenBarController;
 
@@ -122,6 +123,16 @@ public class GreyPlayer : MonoBehaviour
         }
 
         return false;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bolt"))
+        {
+            Debug.Log("Grey player is hit by bolt attack");
+            currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
     }
 
     private void UpdateOxygen()
