@@ -57,10 +57,15 @@ public class AttacksController : MonoBehaviour
 
         // Optionally, destroy the attack target after the bolt attack is instantiated
         Destroy(attackTarget);
+
+        float boltAnimationTime =  boltAttack.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
         
-        yield return new WaitForSeconds(4f);
+        
+        yield return new WaitForSeconds(boltAnimationTime);
 
         Destroy(boltAttack);
+        currentAttack = -1;
+        _animator.SetInteger("numberOfAttack", currentAttack);
 
     }
 
