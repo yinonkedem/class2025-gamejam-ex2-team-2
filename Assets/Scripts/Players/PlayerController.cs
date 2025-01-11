@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player is dead");
         Destroy(gameObject);
         Destroy(oxygenBar);
-        GameManager.Instance.CheckGameOver();
     }
+
+
 }
