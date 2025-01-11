@@ -13,7 +13,7 @@ public class GreyPlayer : MonoBehaviour
     [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
     [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
 
-    private OxygenBarController oxygenBarController;
+    private BarController oxygenBarController;
 
 
     private GameObject currentAttack; 
@@ -29,7 +29,7 @@ public class GreyPlayer : MonoBehaviour
         EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_DIE, Die);
         currentOxygenValue = maxTimeWithoutOxygen;
-        oxygenBarController = oxygenBar.GetComponent<OxygenBarController>();
+        oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         InvokeRepeating("UpdateOxygen", 0f, 1f);  
     }
@@ -88,13 +88,10 @@ public class GreyPlayer : MonoBehaviour
     
     private void UpdateOxygenBarPosition()
     {
-        if (oxygenBar != null)
-        {
-            // Set the oxygen bar's position relative to the player
-            Vector3 oxygenBarPosition = transform.position; // Get the player's position
-            oxygenBarPosition.y += 1f;  // Offset to place it above the player
-            oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
-        }
+        // Set the oxygen bar's position relative to the player
+        Vector3 oxygenBarPosition = transform.position; // Get the player's position
+        oxygenBarPosition.y += 1f;  // Offset to place it above the player
+        oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
     }
     
 

@@ -13,7 +13,7 @@ public class PinkPlayer : MonoBehaviour
     [SerializeField] private float attackSpeed = 10f;
     [SerializeField] private KeyCode attackKeyCode = KeyCode.E;
 
-    private OxygenBarController oxygenBarController;
+    private BarController oxygenBarController;
 
     private GameObject currentAttack;
     private bool isUnderAttack = false;
@@ -28,7 +28,7 @@ public class PinkPlayer : MonoBehaviour
         EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
         EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_DIE, Die);
         currentOxygenValue = maxTimeWithoutOxygen;
-        oxygenBarController = oxygenBar.GetComponent<OxygenBarController>();
+        oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         InvokeRepeating("UpdateOxygen", 0f, 1f);        
     }
@@ -71,13 +71,10 @@ public class PinkPlayer : MonoBehaviour
     
     private void UpdateOxygenBarPosition()
     {
-        if (oxygenBar != null)
-        {
-            // Set the oxygen bar's position relative to the player
-            Vector3 oxygenBarPosition = transform.position; // Get the player's position
-            oxygenBarPosition.y += 1f;  // Offset to place it above the player
-            oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
-        }
+        // Set the oxygen bar's position relative to the player
+        Vector3 oxygenBarPosition = transform.position; // Get the player's position
+        oxygenBarPosition.y += 1f;  // Offset to place it above the player
+        oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
     }
     
 
