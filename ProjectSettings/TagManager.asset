@@ -15,6 +15,7 @@ TagManager:
   - Shot
   - Bolt
   - Main Screen
+  - Ink
   layers:
   - Default
   - TransparentFX

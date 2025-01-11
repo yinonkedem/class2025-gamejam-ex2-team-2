@@ -64,11 +64,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("PinkPlayer attacked!");
     }
-    private void HitFromAttack(GameObject obj)
-    {
-        //TODO : start animation
-        isUnderAttack = true;
-    }
+
     
     
     
@@ -116,6 +112,11 @@ public class PlayerController : MonoBehaviour
             currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
+        if(other.CompareTag("Ink"))
+        {
+            Debug.Log("Player is hit by ink attack");
+            Die();
+        }
     }
 
     private void UpdateOxygen()
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player is dead");
         Destroy(gameObject);
         Destroy(oxygenBar);
-        GameManager.Instance.CheckGameOver();
     }
+
+
 }

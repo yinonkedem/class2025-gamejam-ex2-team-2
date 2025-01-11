@@ -8,8 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float timeOfAttack = 10f;
     
     private bool arePlayerWon = false;
-    private bool arePlayerOneDefeated = false;
-    private bool arePlayerTwoDefeated = false;
+
     private bool arePlayersDefeated = false;
 
 
@@ -27,18 +26,24 @@ public class GameManager : Singleton<GameManager>
         set => arePlayersDefeated = value;
     }
     
+    private void Update()
+    {
+        CheckGameOver();
+    }
+    
     public void CheckGameOver()
     {
-        if (arePlayerOneDefeated && arePlayerTwoDefeated)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("Players Length: " + players.Length);
+        // if there is not object with tag Player
+        if (players.Length == 0)
         {
             arePlayersDefeated = true;
             Debug.Log("Game Over");
             ScreenChanger.Instance.ActivateGameOver();
         }
-
     }
     
-
     
     public float GetTimeOfAttack()
     {
