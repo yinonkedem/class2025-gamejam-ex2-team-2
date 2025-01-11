@@ -6,18 +6,24 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private float timeToAllowPlayerToAttack;
     [SerializeField] private float timeOfAttack = 10f;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private bool arePlayerWon = false;
+    private bool arePlayersDefeated = false;
+    //create getter and setters for the private variables
+    
+    public bool ArePlayerWon
     {
+        get => arePlayerWon;
+        set => arePlayerWon = value;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public bool ArePlayersDefeated
     {
-       
-        
+        get => arePlayersDefeated;
+        set => arePlayersDefeated = value;
     }
+    
+
     
     public float GetTimeOfAttack()
     {

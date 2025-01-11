@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
-  maxTimeWithoutOxygen: 20
+  maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
   attackSpeed: 10

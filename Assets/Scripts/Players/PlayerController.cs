@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateOxygen()
     {
-        if (currentOxygenValue <= 0)
+        if (currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
         {
             Die();
         }
@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.ArePlayersDefeated = true;
         Debug.Log("Player is dead");
         ScreenChanger.Instance.ActivateGameOver();
     }

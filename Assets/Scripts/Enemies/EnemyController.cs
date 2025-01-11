@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
     {
         currentLife -= decreaseLifeCountWhenGetHit;
         lifeBarController.updateBar(currentLife,maxLife);
-        if (currentLife <= 0)
+        if (currentLife <= 0 && !GameManager.Instance.ArePlayersDefeated)
         {
             Die();
         }
@@ -59,6 +59,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.ArePlayerWon = true;
         Debug.Log("Enemy is dead");
         ScreenChanger.Instance.ActivateWinningGame();
     }
