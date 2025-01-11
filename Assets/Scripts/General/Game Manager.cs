@@ -8,7 +8,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float timeOfAttack = 10f;
     
     private bool arePlayerWon = false;
+    private bool arePlayerOneDefeated = false;
+    private bool arePlayerTwoDefeated = false;
     private bool arePlayersDefeated = false;
+
+
     //create getter and setters for the private variables
     
     public bool ArePlayerWon
@@ -21,6 +25,17 @@ public class GameManager : Singleton<GameManager>
     {
         get => arePlayersDefeated;
         set => arePlayersDefeated = value;
+    }
+    
+    public void CheckGameOver()
+    {
+        if (arePlayerOneDefeated && arePlayerTwoDefeated)
+        {
+            arePlayersDefeated = true;
+            Debug.Log("Game Over");
+            ScreenChanger.Instance.ActivateGameOver();
+        }
+
     }
     
 

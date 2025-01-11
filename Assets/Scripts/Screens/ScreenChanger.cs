@@ -72,40 +72,6 @@ public class ScreenChanger : MonoBehaviour
 
     
 
-    // public void ResetGame()
-    // {
-    //     Debug.Log("Resetting game");
-    //     StartCoroutine(ReloadSceneAndDeactivateStartGame());
-    // }
-    //
-    // private IEnumerator ReloadSceneAndDeactivateStartGame()
-    // {
-    //     // Load the scene asynchronously
-    //     AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
-    //
-    //     // Wait until the asynchronous scene fully loads
-    //     while (!asyncLoad.isDone)
-    //     {
-    //         yield return null;
-    //     }
-    //
-    //     // Deactivate the "Start Game" object after the scene has loaded
-    //     GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
-    //     if (startGame != null)
-    //     {
-    //         startGame.SetActive(false);
-    //         Debug.Log("Start Game object deactivated.");
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError("Start Game object not found.");
-    //     }
-    //
-    //     // Reactivate other game objects if needed
-    //     // GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
-    //     // mainObject.SetActive(true);
-    // }
-
 
     private IEnumerator WaitForEnter()
     {

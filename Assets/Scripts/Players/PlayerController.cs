@@ -140,6 +140,8 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.ArePlayersDefeated = true;
         Debug.Log("Player is dead");
-        ScreenChanger.Instance.ActivateGameOver();
+        Destroy(gameObject);
+        Destroy(oxygenBar);
+        GameManager.Instance.CheckGameOver();
     }
 }
