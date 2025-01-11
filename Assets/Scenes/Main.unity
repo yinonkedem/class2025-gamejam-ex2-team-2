@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d47724371844fb4a8521ce993b3ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyAttackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
+  attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
   maxTimeWithoutOxygen: 20
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
@@ -1747,7 +1747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 675599340}
   m_Layer: 0
-  m_Name: Oxygen Bars
+  m_Name: Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 751664181}
   - component: {fileID: 751664184}
   - component: {fileID: 751664183}
-  - component: {fileID: 751664185}
+  - component: {fileID: 751664188}
   - component: {fileID: 751664186}
   - component: {fileID: 751664187}
   m_Layer: 0
@@ -2002,25 +2002,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &751664185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751664180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3306b2ba7772775469cee8e460747467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pinkAttackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
-  maxTimeWithoutOxygen: 20
-  oxygenAddedAfterSecondInTheAir: 3
-  oxygenDecreasedNumberFromBoltAttack: 5
-  oxygenBar: {fileID: 929996173}
-  attackSpeed: 10
-  attackKeyCode: 101
 --- !u!61 &751664186
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2087,6 +2068,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &751664188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751664180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d47724371844fb4a8521ce993b3ea3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
+  maxTimeWithoutOxygen: 30
+  oxygenAddedAfterSecondInTheAir: 3
+  oxygenBar: {fileID: 929996173}
+  attackSpeed: 10
+  attackKeyCode: 101
+  oxygenDecreasedNumberFromBoltAttack: 5
 --- !u!1 &751751042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d47724371844fb4a8521ce993b3ea3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyAttackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
+  attackPrefab: {fileID: 0}
   maxTimeWithoutOxygen: 30
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
@@ -4865,7 +4865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8476b12d271518444a48dff87e054f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 30
+  maxLife: 25
   decreaseLifeCountWhenGetHit: 1
   lifeBar: {fileID: 1205203871}
 --- !u!1 &1791069122
@@ -5494,6 +5494,13 @@ MonoBehaviour:
   oxygenBar: {fileID: 929996173}
   attackSpeed: 10
   attackKeyCode: 101
+  oxygenBarController: {fileID: 0}
+  currentAttack: {fileID: 0}
+  isUnderAttack: 0
+  isAttacking: 0
+  isHaveAnAttack: 0
+  isAboveWater: 0
+  currentOxygenValue: 0
 --- !u!95 &1973510163
 Animator:
   serializedVersion: 5

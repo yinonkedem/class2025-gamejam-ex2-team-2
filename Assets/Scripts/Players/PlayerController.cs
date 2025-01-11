@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreyPlayer : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject greyAttackPrefab;
+    [SerializeField] private GameObject attackPrefab;
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
     [SerializeField] private GameObject oxygenBar;
@@ -46,7 +46,6 @@ public class GreyPlayer : MonoBehaviour
         UpdateOxygenBarPosition();
         if (Input.GetKeyDown(attackKeyCode))
         {
-            Debug.Log("GreyPlayer pressed E to attack!");
             Attack();
         }
     }
@@ -54,7 +53,7 @@ public class GreyPlayer : MonoBehaviour
     private void Attack()
     {
         Vector3 attackPosition = transform.position + new Vector3(1f, 0f, 0f); // Position it slightly in front of the player
-        GameObject attackObject = Instantiate(greyAttackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
+        GameObject attackObject = Instantiate(attackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
 
         // Add velocity to the attack
         Rigidbody2D rb = attackObject.GetComponent<Rigidbody2D>();
@@ -113,7 +112,7 @@ public class GreyPlayer : MonoBehaviour
     {
         if (other.CompareTag("Bolt"))
         {
-            Debug.Log("Grey player is hit by bolt attack");
+            Debug.Log("Player is hit by bolt attack");
             currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
@@ -139,7 +138,7 @@ public class GreyPlayer : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Grey player is dead");
+        Debug.Log("Player is dead");
         ScreenChanger.Instance.ActivateGameOver();
     }
 }
