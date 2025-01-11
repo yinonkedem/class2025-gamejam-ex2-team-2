@@ -26,8 +26,6 @@ public class GreyPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
-        EventManager.Instance.StartListening(EventManager.EVENT_GREY_PLAYER_DIE, Die);
         currentOxygenValue = maxTimeWithoutOxygen;
         oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
@@ -56,7 +54,7 @@ public class GreyPlayer : MonoBehaviour
     private void Attack()
     {
         Vector3 attackPosition = transform.position + new Vector3(1f, 0f, 0f); // Position it slightly in front of the player
-        GameObject attackObject = Instantiate(greyAttackPrefab, attackPosition, Quaternion.identity);
+        GameObject attackObject = Instantiate(greyAttackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
 
         // Add velocity to the attack
         Rigidbody2D rb = attackObject.GetComponent<Rigidbody2D>();
@@ -73,17 +71,6 @@ public class GreyPlayer : MonoBehaviour
         isUnderAttack = true;
     }
     
-
-    private void Die(GameObject arg0)
-    {
-        Debug.Log("Grey player is dead"); 
-        DieLogic();
-    }
-
-    private void DieLogic()
-    {
-        
-    }
     
     
     private void UpdateOxygenBarPosition()
@@ -136,7 +123,7 @@ public class GreyPlayer : MonoBehaviour
     {
         if (currentOxygenValue <= 0)
         {
-            DieLogic();
+            Die();
         }
         if (!isAboveWater && currentOxygenValue > 0)
         {
@@ -148,5 +135,11 @@ public class GreyPlayer : MonoBehaviour
         }
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
 
+    }
+
+    private void Die()
+    {
+        Debug.Log("Grey player is dead");
+        ScreenChanger.Instance.ActivateGameOver();
     }
 }

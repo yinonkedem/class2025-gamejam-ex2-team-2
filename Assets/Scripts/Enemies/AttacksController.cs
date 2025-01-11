@@ -47,13 +47,13 @@ public class AttacksController : MonoBehaviour
         yield return new WaitForSeconds(timeEnemyPrepareToAttack);
 
         // Create an instance of the attack target at one of the player's locations
-        GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity);
+        GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity, GameObject.Find("Main").transform);
 
         // Wait for one second
         yield return new WaitForSeconds(timeBetweenTargetToBolt);
 
         // Instantiate the bolt attack at the target's position
-        GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position +Vector3.up, Quaternion.identity);
+        GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
 
         // Optionally, destroy the attack target after the bolt attack is instantiated
         Destroy(attackTarget);

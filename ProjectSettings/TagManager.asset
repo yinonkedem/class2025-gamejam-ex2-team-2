@@ -14,6 +14,7 @@ TagManager:
   - Water Ending
   - Shot
   - Bolt
+  - Main Screen
   layers:
   - Default
   - TransparentFX

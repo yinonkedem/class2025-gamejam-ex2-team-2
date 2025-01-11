@@ -50,6 +50,16 @@ public class EnemyController : MonoBehaviour
     {
         currentLife -= decreaseLifeCountWhenGetHit;
         lifeBarController.updateBar(currentLife,maxLife);
+        if (currentLife <= 0)
+        {
+            Die();
+        }
         Debug.Log("Enemy life decreased");
+    }
+
+    private void Die()
+    {
+        Debug.Log("Enemy is dead");
+        ScreenChanger.Instance.ActivateWinningGame();
     }
 }

@@ -25,8 +25,6 @@ public class PinkPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_HIT_FROM_ATTACK, HitFromAttack);
-        EventManager.Instance.StartListening(EventManager.EVENT_PINK_PLAYER_DIE, Die);
         currentOxygenValue = maxTimeWithoutOxygen;
         oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
@@ -117,24 +115,12 @@ public class PinkPlayer : MonoBehaviour
         isUnderAttack = true;
     }
 
- 
-
-    private void Die(GameObject arg0)
-    {
-        Debug.Log("Pink player is dead");
-        DieLogic();
-    }
-
-    private void DieLogic()
-    {
-        
-    }
 
     private void UpdateOxygen()
     {
         if (currentOxygenValue <= 0)
         {
-            DieLogic();
+            Die();
         }
         if (!isAboveWater && currentOxygenValue > 0)
         {
@@ -147,7 +133,14 @@ public class PinkPlayer : MonoBehaviour
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
 
     }
+    
+    private void Die()
+    {
+        Debug.Log("Grey player is dead");
+        ScreenChanger.Instance.ActivateGameOver();
+    }
 
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bolt"))
