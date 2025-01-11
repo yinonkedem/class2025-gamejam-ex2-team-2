@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
-  maxTimeWithoutOxygen: 1000
+  maxTimeWithoutOxygen: 40
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 783652924}
   attackSpeed: 10
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
-  maxTimeWithoutOxygen: 1000
+  maxTimeWithoutOxygen: 40
   oxygenAddedAfterSecondInTheAir: 3
   oxygenBar: {fileID: 929996173}
   attackSpeed: 10
@@ -4551,7 +4551,7 @@ GameObject:
   - component: {fileID: 1778333657}
   m_Layer: 0
   m_Name: enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5432,6 +5432,10 @@ PrefabInstance:
     - target: {fileID: 6689949315758041419, guid: e83ddea17c76b184494af3d135ceade4, type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6689949315758041419, guid: e83ddea17c76b184494af3d135ceade4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7943950854325254591, guid: e83ddea17c76b184494af3d135ceade4, type: 3}
       propertyPath: m_Size.x

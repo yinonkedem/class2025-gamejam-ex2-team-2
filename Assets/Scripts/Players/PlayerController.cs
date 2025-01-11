@@ -117,6 +117,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player is hit by ink attack");
             Die();
         }
+        if(other.CompareTag("Enemy"))
+        {
+            Debug.Log("Player is hit by enemy");
+            currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
     }
 
     private void UpdateOxygen()

@@ -12,16 +12,7 @@ public class PlayerAwarenessController : MonoBehaviour
 
     private Transform[] _players;
 
-    // private void Awake()
-    // {
-    //     PlayerMovement[] playerMovements = FindObjectsOfType<PlayerMovement>();
-    //     _players = new Transform[playerMovements.Length];
-    //     for (int i = 0; i < playerMovements.Length; i++)
-    //     {
-    //         _players[i] = playerMovements[i].transform;
-    //     }
-    // }
-    
+
     private void Awake()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
