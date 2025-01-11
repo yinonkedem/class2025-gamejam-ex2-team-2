@@ -13,6 +13,7 @@ TagManager:
   - Grey Player
   - Water Ending
   - Shot
+  - Bolt
   layers:
   - Default
   - TransparentFX
