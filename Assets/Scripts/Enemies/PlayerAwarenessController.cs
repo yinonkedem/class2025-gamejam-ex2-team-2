@@ -12,15 +12,18 @@ public class PlayerAwarenessController : MonoBehaviour
 
     private Transform[] _players;
 
+
     private void Awake()
     {
-        PlayerMovement[] playerMovements = FindObjectsOfType<PlayerMovement>();
-        _players = new Transform[playerMovements.Length];
-        for (int i = 0; i < playerMovements.Length; i++)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        _players = new Transform[players.Length];
+        for (int i = 0; i < players.Length; i++)
         {
-            _players[i] = playerMovements[i].transform;
+            _players[i] = players[i].transform;
         }
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -30,15 +33,27 @@ public class PlayerAwarenessController : MonoBehaviour
 
         foreach (Transform player in _players)
         {
-            Vector2 enemyToPlayerVector = player.position - transform.position;
-            float distanceToPlayer = enemyToPlayerVector.magnitude;
-
-            if (distanceToPlayer <= closestDistance)
+            if(player!=null)
             {
-                closestDistance = distanceToPlayer;
-                closestPlayer = player;
-                DirectionToPlayer = enemyToPlayerVector.normalized;
+                Vector2 enemyToPlayerVector = player.position - transform.position;
+                float distanceToPlayer = enemyToPlayerVector.magnitude;
+
+                if (distanceToPlayer <= closestDistance)
+                {
+                    Debug.Log("enemy is close");
+                    GameObject ink = Utils.Instance.FindInactiveObjectByName("Ink");
+                    ink.SetActive(true);
+                    closestDistance = distanceToPlayer;
+                    closestPlayer = player;
+                    DirectionToPlayer = enemyToPlayerVector.normalized;
+                }
+                else
+                {
+                    GameObject ink = Utils.Instance.FindInactiveObjectByName("Ink");
+                    ink.SetActive(false);
+                }
             }
+
         }
 
         AwareOfPlayer = closestPlayer != null;

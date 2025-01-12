@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OxygenBarController : MonoBehaviour
+public class BarController : MonoBehaviour
 {
     [SerializeField] private Slider slider;
 

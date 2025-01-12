@@ -13,6 +13,9 @@ TagManager:
   - Grey Player
   - Water Ending
   - Shot
+  - Bolt
+  - Main Screen
+  - Ink
   layers:
   - Default
   - TransparentFX

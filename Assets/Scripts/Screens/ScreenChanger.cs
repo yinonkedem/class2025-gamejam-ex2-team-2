@@ -14,17 +14,17 @@ public class ScreenChanger : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Debug.Log("[Singleton] Trying to instantiate a second instance of a singleton class.");
+            Debug.Log("[Singleton] Destroying duplicate ScreenChanger instance.");
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
 
     private void Start()
     {
@@ -35,65 +35,79 @@ public class ScreenChanger : MonoBehaviour
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
     }
-
+    
+    
     public void ResetGame()
     {
-        Debug.Log("Resetting game");
-        StartCoroutine(ReloadSceneAndDeactivateStartGame());
+        Debug.Log("Resetting game...");
+        StartCoroutine(ReloadSceneAndEnsureSingleInstance());
     }
 
-    private IEnumerator ReloadSceneAndDeactivateStartGame()
+    private IEnumerator ReloadSceneAndEnsureSingleInstance()
     {
         // Load the scene asynchronously
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 
-        // Wait until the asynchronous scene fully loads
+        // Wait until the scene is fully loaded
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        // Deactivate the "Start Game" object after the scene has loaded
-        GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
-        if (startGame != null)
+        // Find the "Main" screen and ensure only one instance is active
+        GameObject[] mainScreens = GameObject.FindGameObjectsWithTag("Main Screen");
+        if (mainScreens.Length > 1)
         {
-            startGame.SetActive(false);
-            Debug.Log("Start Game object deactivated.");
-        }
-        else
-        {
-            Debug.LogError("Start Game object not found.");
+            Debug.LogWarning($"Found {mainScreens.Length} Main screens. Destroying duplicates...");
+            for (int i = 1; i < mainScreens.Length; i++)
+            {
+                Destroy(mainScreens[i]);
+            }
         }
 
-        // Reactivate other game objects if needed
-        GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
-        mainObject.SetActive(true);
+        // Activate the remaining Main screen
+        mainScreens[0].SetActive(true);
+        Debug.Log("Game reset complete.");
     }
 
+    
 
+
+    private IEnumerator WaitForEnter()
+    {
+        while (!Input.GetKeyDown(KeyCode.Return))
+        {
+            yield return null;
+        }
+
+        ResetGame();
+    }
+    
+    //regular function thar run until enter is pressed
+    
     public void ActivateWinningGame()
     {
         GameObject winningObject = Utils.Instance.FindInactiveObjectByName(WINNING_SCREEN);
+        winningObject.SetActive(true);
 
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
-
-
-        winningObject.SetActive(true);
-
+        
         Debug.Log("Winning Game activated.");
+        
+        StartCoroutine(WaitForEnter());
     }
 
     public void ActivateGameOver()
     {
         GameObject gameOverObject = Utils.Instance.FindInactiveObjectByName(GAME_OVER_SCREEN);
+        gameOverObject.SetActive(true);
 
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
-
-        gameOverObject.SetActive(true);
-
+        
         Debug.Log("Game Over activated.");
+        StartCoroutine(WaitForEnter());
 
     }
 

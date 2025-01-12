@@ -6,18 +6,44 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private float timeToAllowPlayerToAttack;
     [SerializeField] private float timeOfAttack = 10f;
+    
+    private bool arePlayerWon = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private bool arePlayersDefeated = false;
 
-    // Update is called once per frame
-    void Update()
+
+    //create getter and setters for the private variables
+    
+    public bool ArePlayerWon
     {
-       
-        
+        get => arePlayerWon;
+        set => arePlayerWon = value;
     }
+    
+    public bool ArePlayersDefeated
+    {
+        get => arePlayersDefeated;
+        set => arePlayersDefeated = value;
+    }
+    
+    private void Update()
+    {
+        CheckGameOver();
+    }
+    
+    public void CheckGameOver()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("Players Length: " + players.Length);
+        // if there is not object with tag Player
+        if (players.Length == 0)
+        {
+            arePlayersDefeated = true;
+            Debug.Log("Game Over");
+            ScreenChanger.Instance.ActivateGameOver();
+        }
+    }
+    
     
     public float GetTimeOfAttack()
     {

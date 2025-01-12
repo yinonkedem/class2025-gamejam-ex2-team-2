@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         speed = originSpeed;
         isMovementPrevented = false;
-
     }
 }
 
