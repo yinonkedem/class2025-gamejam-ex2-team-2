@@ -125,19 +125,12 @@ public class EnemyMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HandleEnemyOffScreen(collision.gameObject.tag);
-        if (collision.gameObject.tag.EndsWith("Player"))
+        if (collision.gameObject.tag.Contains("Wall"))
         {
-            if (collision.gameObject.tag.Equals("Grey Player"))
-            {
-                EventManager.Instance.TriggerEvent(EventManager.EVENT_GREY_PLAYER_DIE, gameObject);
-            }
-            else
-            {
-                EventManager.Instance.TriggerEvent(EventManager.EVENT_PINK_PLAYER_DIE, gameObject);
-            }
+            HandleEnemyOffScreen(collision.gameObject.tag);
         }
-
     }
+    
 
     //function that stop the movement for X seconds
     public IEnumerator StopMovement(float time)
@@ -149,9 +142,7 @@ public class EnemyMovement : MonoBehaviour
         _speed = originSpeed;
         isAllowoedToMove = true;
     }
-
-
-
+    
 
 }
 

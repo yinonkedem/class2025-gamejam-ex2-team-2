@@ -37,12 +37,7 @@ public class MultipleTargetCamera : MonoBehaviour
         Vector3 newPosition = centerPoint + offset;
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
     }
-
-    // private void Zoom()
-    // {
-    //     float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
-    //     cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, newZoom, Time.deltaTime);
-    // }
+    
 
     
     private void Zoom()
@@ -82,5 +77,10 @@ public class MultipleTargetCamera : MonoBehaviour
             }
         }
         return bounds.center;
+    }
+    
+    public void UpdateTargets(Transform target)
+    {
+        targets.Add(target);
     }
 }
