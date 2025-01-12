@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static Vector2 Movement;
-    public static bool JumpWasPressed;
-    public static bool JumpIsHeld;
-    public static bool JumpWasReleased;
-    public static bool RunIsHeld;
-    public static bool DashWasPressed;
+    public Vector2 Movement;
+    public bool JumpWasPressed;
+    public bool JumpIsHeld;
+    public bool JumpWasReleased;
+    public bool RunIsHeld;
+    public bool DashWasPressed;
 
     private InputAction _moveAction;
     private InputAction _jumpAction;
