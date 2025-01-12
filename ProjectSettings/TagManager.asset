@@ -17,7 +17,6 @@ TagManager:
   - Main Screen
   - Ink
   - Mini Enemy
-
   layers:
   - Default
   - TransparentFX
@@ -25,7 +24,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
@@ -56,5 +55,5 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: SortingTexture
-    uniqueID: 731148139
+    uniqueID: 1786878683
     locked: 0
