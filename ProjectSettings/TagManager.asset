@@ -16,6 +16,8 @@ TagManager:
   - Bolt
   - Main Screen
   - Ink
+  - Player 2
+  - Player 1
   layers:
   - Default
   - TransparentFX

@@ -315,6 +315,8 @@ GameObject:
   - component: {fileID: 107901569}
   - component: {fileID: 107901568}
   - component: {fileID: 107901567}
+  - component: {fileID: 107901573}
+  - component: {fileID: 107901572}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player
@@ -496,6 +498,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &107901572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107901565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732104f7bcb9d5849b3bb32fe9942648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {x: 0, y: 0}
+  JumpWasPressed: 0
+  JumpIsHeld: 0
+  JumpWasReleased: 0
+  RunIsHeld: 0
+  DashWasPressed: 0
+--- !u!114 &107901573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107901565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 83475d147c1c84149bc4c0805474411a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player 2
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &110279965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1495,6 @@ GameObject:
   m_Component:
   - component: {fileID: 642645435}
   - component: {fileID: 642645436}
-  - component: {fileID: 642645437}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -1495,21 +1544,9 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player 1
+  m_DefaultActionMap: Player 2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &642645437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642645434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 732104f7bcb9d5849b3bb32fe9942648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &653147939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1770,8 @@ GameObject:
   - component: {fileID: 751664188}
   - component: {fileID: 751664186}
   - component: {fileID: 751664187}
+  - component: {fileID: 751664189}
+  - component: {fileID: 751664190}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -1935,6 +1974,54 @@ MonoBehaviour:
   attackSpeed: 10
   attackKeyCode: 101
   oxygenDecreasedNumberFromBoltAttack: 5
+--- !u!114 &751664189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751664180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 83475d147c1c84149bc4c0805474411a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player 1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &751664190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751664180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732104f7bcb9d5849b3bb32fe9942648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {x: 0, y: 0}
+  JumpWasPressed: 0
+  JumpIsHeld: 0
+  JumpWasReleased: 0
+  RunIsHeld: 0
+  DashWasPressed: 0
 --- !u!1 &783652924
 GameObject:
   m_ObjectHideFlags: 0
