@@ -76,6 +76,8 @@ public class PlayerMovment1 : MonoBehaviour
     
     // Input manager
     private InputManager inputManager;
+    
+    // 
 
 
     private void Update()
@@ -748,7 +750,6 @@ public class PlayerMovment1 : MonoBehaviour
         ResetWallJumpValues();
         StopWallSlide();
     }
-
     
     private void Dash()
     {

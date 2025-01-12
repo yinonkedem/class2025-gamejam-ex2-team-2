@@ -17,6 +17,7 @@ TagManager:
   - Main Screen
   - Ink
   - Mini Enemy
+  - Water
   layers:
   - Default
   - TransparentFX
