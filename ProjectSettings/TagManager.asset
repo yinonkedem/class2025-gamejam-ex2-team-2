@@ -16,8 +16,8 @@ TagManager:
   - Bolt
   - Main Screen
   - Ink
-  - Player 2
-  - Player 1
+  - Mini Enemy
+
   layers:
   - Default
   - TransparentFX
