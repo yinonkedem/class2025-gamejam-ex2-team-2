@@ -73,6 +73,9 @@ public class PlayerMovment1 : MonoBehaviour
     private bool _isDashFastFalling;
     private float _dashFastFallTime;
     private float _dashFastFallReleaseSpeed;
+    
+    // Input manager
+    private InputManager inputManager;
 
 
     private void Update()
@@ -97,19 +100,19 @@ public class PlayerMovment1 : MonoBehaviour
         
         if (_isGrounded)
         {
-            Move(MoveStats.groundAcceleration, MoveStats.groundDeceleration, InputManager.Movement);
+            Move(MoveStats.groundAcceleration, MoveStats.groundDeceleration, inputManager.Movement);
         }
         else
         {
             // Wall jumping
             if (_useWallJumpMoveStats)
             {
-                Move(MoveStats.wallJumpMoveAcceleration, MoveStats.wallJumpMoveDeceleration, InputManager.Movement);
+                Move(MoveStats.wallJumpMoveAcceleration, MoveStats.wallJumpMoveDeceleration, inputManager.Movement);
             }
             // Airborne
             else
             {
-                Move(MoveStats.airAcceleration, MoveStats.airDeceleration, InputManager.Movement);
+                Move(MoveStats.airAcceleration, MoveStats.airDeceleration, inputManager.Movement);
             }
         }
 
@@ -135,6 +138,7 @@ public class PlayerMovment1 : MonoBehaviour
     
     private void Awake()
     {
+        inputManager = GetComponent<InputManager>();
         _isFacingRight = true;
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -150,7 +154,7 @@ public class PlayerMovment1 : MonoBehaviour
                 TurnCheck(moveInput);
 
                 float targetVelocity = 0f;
-                if (InputManager.RunIsHeld)
+                if (inputManager.RunIsHeld)
                 {
                     targetVelocity = moveInput.x * MoveStats.maxRunSpeed;
                 }
@@ -251,7 +255,7 @@ public class PlayerMovment1 : MonoBehaviour
     private void JunpCheck()
     {
         // WHEN WE PRESS THE JUMP BUTTON
-        if (InputManager.JumpWasPressed)
+        if (inputManager.JumpWasPressed)
         {
             if (_isWallSlideFalling && _wallJumpPostBufferTimer >= 0f)
             {
@@ -268,7 +272,7 @@ public class PlayerMovment1 : MonoBehaviour
         }
 
         // WHEN WE RELEASE THE JUMP BUTTON
-        if (InputManager.JumpWasReleased)
+        if (inputManager.JumpWasReleased)
         {
             if (_jumpBufferTimer > 0f)
             {
@@ -417,10 +421,6 @@ public class PlayerMovment1 : MonoBehaviour
             _fastFallTime += Time.fixedDeltaTime;
         }
 
-
-
-
-
     }
     
     #endregion
@@ -495,7 +495,7 @@ public class PlayerMovment1 : MonoBehaviour
         }
 
         // Wall jump fast falling
-        if (InputManager.JumpWasReleased && !_isWallSliding && !_isTouchingWall && _isWallJumping)
+        if (inputManager.JumpWasReleased && !_isWallSliding && !_isTouchingWall && _isWallJumping)
         {
             if (VerticalVelocity > 0f)
             {
@@ -515,7 +515,7 @@ public class PlayerMovment1 : MonoBehaviour
             }
         }
 
-        if (InputManager.JumpWasPressed && _wallJumpPostBufferTimer > 0f)
+        if (inputManager.JumpWasPressed && _wallJumpPostBufferTimer > 0f)
         {
             InitiateWallJump();
         }
@@ -669,7 +669,7 @@ public class PlayerMovment1 : MonoBehaviour
     
     private void DashCheck()
     {
-        if (InputManager.DashWasPressed)
+        if (inputManager.DashWasPressed)
         {
             if (_isGrounded && _dashOnGroundTimer < 0f && !_isDashing)
             {
@@ -695,7 +695,7 @@ public class PlayerMovment1 : MonoBehaviour
     
     private void InitiateDash()
     {
-        _dashDirection = InputManager.Movement;
+        _dashDirection = inputManager.Movement;
 
         Vector2 closestDirection = Vector2.zero;
         float minDistance = Vector2.Distance(_dashDirection, MoveStats.DashDirections[0]);
