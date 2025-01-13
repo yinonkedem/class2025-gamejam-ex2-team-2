@@ -6,16 +6,18 @@ using UnityEngine.PlayerLoop;
 
 public class AttacksController : MonoBehaviour
 {
-    
-    
-    [SerializeField] private float switchInterval = 20f;
-    [SerializeField] private float pauseDuration = 10f; 
+
+
+    [SerializeField] private int numberOfBoltsInSingleAttack = 2;
+    [SerializeField] private float timeBetweenEachBoltInTheAttack = 5f;
+    [SerializeField] private float pauseDuration = 20f; 
     [SerializeField] private int numberOfAttacks = 1;  
     [SerializeField] private int numberOfMiniEnemies = 2;
     [SerializeField] private float timeToStayMiniEnemies = 40f;  
     [SerializeField] private int maxAttackLevel = 3;  
     [SerializeField] private float timeEnemyPrepareToAttack = 2f;
     [SerializeField] private float timeBetweenTargetToBolt = 2f; 
+    [SerializeField] private float timeUntilFirdtAttackStart = 5f;
     [SerializeField] private GameObject attackTargetPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject boltAttackPrefab;
@@ -75,14 +77,18 @@ public class AttacksController : MonoBehaviour
     private IEnumerator PrepareAndExecuteBoltAttack()
     {
         yield return new WaitForSeconds(timeEnemyPrepareToAttack);
-        GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity, GameObject.Find("Main").transform);
-        yield return new WaitForSeconds(timeBetweenTargetToBolt);
-        GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
-        Destroy(attackTarget);
-        float boltAnimationTime =  boltAttack.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-        yield return new WaitForSeconds(boltAnimationTime);
-        Destroy(boltAttack);
-        currentAttack = -1;
+        for (int i = 0; i < numberOfBoltsInSingleAttack; i++)
+        {
+            GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity, GameObject.Find("Main").transform);
+            yield return new WaitForSeconds(timeBetweenTargetToBolt);
+            GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
+            Destroy(attackTarget);
+            float boltAnimationTime =  boltAttack.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            yield return new WaitForSeconds(boltAnimationTime);
+            Destroy(boltAttack);
+            yield return new WaitForSeconds(timeBetweenEachBoltInTheAttack);
+        }
+        currentAttack = -1; 
         _animator.SetInteger("numberOfAttack", currentAttack);
     }
 
@@ -103,7 +109,7 @@ public class AttacksController : MonoBehaviour
     
     private IEnumerator SwitchAttacks()
     {
-        yield return new WaitForSeconds(pauseDuration);  // Initial pause
+        yield return new WaitForSeconds(timeUntilFirdtAttackStart);  // Initial pause
     
         while (true)
         {
@@ -113,8 +119,6 @@ public class AttacksController : MonoBehaviour
                 attacks[i].Invoke();
                 _animator.SetInteger("numberOfAttack", currentAttack);
                 Debug.Log($"Switching to Attack {currentAttack}");
-    
-                yield return new WaitForSeconds(switchInterval);
             }
     
             currentAttack = -1;

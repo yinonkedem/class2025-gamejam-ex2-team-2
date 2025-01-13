@@ -24,36 +24,6 @@ public class PlayerAwarenessController : MonoBehaviour
         }
     }
     
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     Transform closestPlayer = null;
-    //     float closestDistance = _playerAwarenessDistance;
-    //
-    //     foreach (Transform player in _players)
-    //     {
-    //         if(player!=null)
-    //         {
-    //             Vector2 enemyToPlayerVector = player.position - transform.position;
-    //             float distanceToPlayer = enemyToPlayerVector.magnitude;
-    //
-    //             if (distanceToPlayer <= closestDistance)
-    //             {
-    //                 Debug.Log("enemy is close");
-    //                 GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
-    //                 ink.SetActive(true);
-    //                 closestDistance = distanceToPlayer;
-    //                 closestPlayer = player;
-    //                 DirectionToPlayer = enemyToPlayerVector.normalized;
-    //             }
-    //         }
-    //
-    //     }
-    //
-    //     AwareOfPlayer = closestPlayer != null;
-    // }
-    
     
     void Update()
     {
