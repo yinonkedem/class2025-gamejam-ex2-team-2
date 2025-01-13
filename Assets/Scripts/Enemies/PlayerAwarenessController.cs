@@ -24,40 +24,51 @@ public class PlayerAwarenessController : MonoBehaviour
         }
     }
     
-
-    // Update is called once per frame
+    
     void Update()
     {
         Transform closestPlayer = null;
         float closestDistance = _playerAwarenessDistance;
+        bool isPlayerClose = false;
 
         foreach (Transform player in _players)
         {
-            if(player!=null)
+            if (player != null)
             {
                 Vector2 enemyToPlayerVector = player.position - transform.position;
                 float distanceToPlayer = enemyToPlayerVector.magnitude;
 
                 if (distanceToPlayer <= closestDistance)
                 {
-                    Debug.Log("enemy is close");
-                    GameObject ink = Utils.Instance.FindInactiveObjectByName("Ink");
-                    ink.SetActive(true);
+                    Debug.Log("Enemy is close");
+                    GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
+                    if (ink != null)
+                    {
+                        ink.SetActive(true);
+                    }
                     closestDistance = distanceToPlayer;
                     closestPlayer = player;
                     DirectionToPlayer = enemyToPlayerVector.normalized;
-                }
-                else
-                {
-                    GameObject ink = Utils.Instance.FindInactiveObjectByName("Ink");
-                    ink.SetActive(false);
+                    isPlayerClose = true;
                 }
             }
+        }
 
+        // If no players are close, deactivate the ink
+        if (!isPlayerClose)
+        {
+            GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
+            if (ink != null)
+            {
+                ink.SetActive(false);
+            }
         }
 
         AwareOfPlayer = closestPlayer != null;
     }
+
+    
+    
 }
 
 

@@ -14,16 +14,12 @@ public class EnemyMovement : MonoBehaviour
     private PlayerAwarenessController _playerAwarenessController;
     private Vector2 _targetDirection;
     private float _changeDirectionCooldown;
-    private BoxCollider2D _boxCollider;
-    private bool isAllowoedToMove = true;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerAwarenessController = GetComponent<PlayerAwarenessController>();
         _targetDirection = transform.up;
-        _boxCollider = GetComponent<BoxCollider2D>();
-
     }
 
     private void FixedUpdate()
@@ -35,10 +31,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void UpdateTargetDirection()
     {
-        if(!isAllowoedToMove)
-        {
-            return;
-        }
         HandleRandomDirectionChange();
         HandlePlayerTargeting();
     }
@@ -77,10 +69,11 @@ public class EnemyMovement : MonoBehaviour
     {
         _rigidbody.velocity = transform.up * _speed;
     }
-
+    
+    
     private void HandleEnemyOffScreen(string wallKind)
     {
-
+    
         if (wallKind.Equals("Left Wall") || wallKind.Equals("Right Wall"))
         {
             if (wallKind.Equals("Left Wall"))
@@ -99,8 +92,8 @@ public class EnemyMovement : MonoBehaviour
             }
             _targetDirection = new Vector2(-_targetDirection.x, _targetDirection.y);
         }
-
-        if (wallKind.Equals("Bottom Wall") || wallKind.Equals("Up Wall"))
+    
+        else if (wallKind.Equals("Bottom Wall") || wallKind.Equals("Up Wall"))
         {
             if(wallKind.Equals("Bottom Wall"))
             {
@@ -119,30 +112,15 @@ public class EnemyMovement : MonoBehaviour
             _targetDirection = new Vector2(_targetDirection.x, -_targetDirection.y);
         }
     }
-
-
-
+    
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        HandleEnemyOffScreen(collision.gameObject.tag);
         if (collision.gameObject.tag.Contains("Wall"))
         {
-            HandleEnemyOffScreen(collision.gameObject.tag);
+            HandleEnemyOffScreen(collision.tag);
         }
     }
-    
-
-    //function that stop the movement for X seconds
-    public IEnumerator StopMovement(float time)
-    {
-        float originSpeed = _speed;
-        _speed = 0;
-        isAllowoedToMove = false;
-        yield return new WaitForSeconds(time);
-        _speed = originSpeed;
-        isAllowoedToMove = true;
-    }
-    
 
 }
 

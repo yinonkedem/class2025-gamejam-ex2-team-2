@@ -58,4 +58,26 @@ public class Utils : Singleton<Utils>
         }
         return null;
     }
+    
+    public GameObject FindUnderParentInactiveObjectByName(string name, GameObject parent)
+    {
+        if (parent == null)
+            return null;
+
+        // Get all child transforms of the parent, including inactive ones
+        Transform[] childTransforms = parent.GetComponentsInChildren<Transform>(true);
+
+        // Iterate through the child transforms and find the one with the matching name
+        foreach (Transform child in childTransforms)
+        {
+            if (child.name == name)
+            {
+                return child.gameObject;
+            }
+        }
+
+        // Return null if no matching object is found
+        return null;
+    }
+
 }
