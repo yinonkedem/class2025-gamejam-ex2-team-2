@@ -49,16 +49,5 @@ public class GameManager : Singleton<GameManager>
     {
         return timeOfAttack;
     }
- 
-    public void HitEnemiesInTheWater()
-    {
-        //TODO : add enmy animation 
 
-        Debug.Log("Hit Enemies In The Water");
-        GameObject enemies = GameObject.Find("Enemies");
-        foreach (Transform enemy in enemies.transform)
-        {
-            StartCoroutine(enemy.GetComponent<EnemyMovement>().StopMovement(timeOfAttack));
-        }
-    }
 }
