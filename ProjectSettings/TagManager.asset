@@ -22,7 +22,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -57,4 +57,7 @@ TagManager:
     locked: 0
   - name: SortingTexture
     uniqueID: 1786878683
+    locked: 0
+  - name: Background
+    uniqueID: 4031719719
     locked: 0
