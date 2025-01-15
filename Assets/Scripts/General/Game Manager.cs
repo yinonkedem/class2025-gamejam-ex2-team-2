@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
     public void CheckGameOver()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("Players Length: " + players.Length);
+        // Debug.Log("Players Length: " + players.Length);
         // if there is not object with tag Player
         if (players.Length == 0)
         {
