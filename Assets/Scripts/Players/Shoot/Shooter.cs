@@ -1,25 +1,35 @@
 using UnityEngine;
 
-namespace Players.Shoot
+public class Shooter : MonoBehaviour
 {
-    public class Shooter : MonoBehaviour
+    public GameObject boomerangPrefab;
+    private bool boomerangActive = false;
+    private InputManager inputManager;
+    
+    private void Awake()
     {
-        [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private Transform target;
-        [SerializeField] private float shootRate;
-        [SerializeField] private float projectileMoveSpeed;
-        private float shootTimer;
+        inputManager = GetComponent<InputManager>();
+        // _rb = GetComponent<Rigidbody2D>();
+    }
 
-        private void Update()
+    void Update()
+    {
+        if (inputManager.AttackWasPressed && !boomerangActive)
         {
-            shootTimer -= Time.deltaTime;
-            if (shootTimer <= 0)
-            {
-                shootTimer = shootRate;
-                Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
-                projectile.InitializeProjectile(target, projectileMoveSpeed);
-            }
+            ThrowBoomerang();
+            boomerangActive = true;  // Ensure only one boomerang is active
         }
+    }
 
+    void ThrowBoomerang()
+    {
+        GameObject boomerang = Instantiate(boomerangPrefab, transform.position, Quaternion.identity);
+        boomerang.GetComponent<Boomerang>().shooter = transform;
+        boomerang.transform.forward = transform.forward; // Align forward direction
+    }
+
+    public void OnBoomerangReturn()
+    {
+        boomerangActive = false; // Allow throwing another boomerang
     }
 }
