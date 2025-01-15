@@ -5809,7 +5809,11 @@ PrefabInstance:
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      objectReference: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
+    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: numberOfAttacks
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar
       value: 
@@ -5820,7 +5824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2251939802842896412, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -615.6
+      value: -617.45
       objectReference: {fileID: 0}
     - target: {fileID: 2251939802842896412, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_LocalPosition.z
