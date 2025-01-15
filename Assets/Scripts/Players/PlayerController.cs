@@ -35,14 +35,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsAboveObjectWithTag("Water Ending"))
-        {
-            Debug.Log("Player is above the water!");
-            isAboveWater = true;
-        }else
-        {
-            isAboveWater = false;
-        }
+        // if (IsAboveObjectWithTag("Water Ending"))
+        // {
+        //     Debug.Log("Player is above the water!");
+        //     isAboveWater = true;
+        // }else
+        // {
+        //     isAboveWater = false;
+        // }
         UpdateOxygenBarPosition();
         if (Input.GetKeyDown(attackKeyCode))
         {
@@ -65,7 +65,14 @@ public class PlayerController : MonoBehaviour
         Debug.Log("PinkPlayer attacked!");
     }
 
-    
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Oxygen grounp"))
+        {
+            currentOxygenValue += oxygenAddedAfterSecondInTheAir;
+            oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
+        }
+    }
     
     
     private void UpdateOxygenBarPosition()
@@ -125,6 +132,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // a function that check if the player is on an object with tag oxygen group
+    
+    
+    
+    
+
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Oxygen grounp"))
+        {
+            Debug.Log("Player is above the water!");
+            currentOxygenValue += oxygenAddedAfterSecondInTheAir;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
+    }
+
     private void UpdateOxygen()
     {
         if (currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
@@ -135,9 +159,10 @@ public class PlayerController : MonoBehaviour
         {
             currentOxygenValue -= 1f;
         }
-        else if (isAboveWater)
+        if (isAboveWater)
         {
             currentOxygenValue += oxygenAddedAfterSecondInTheAir;
+            Debug.Log("current oxygen value: " + currentOxygenValue);
         }
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
 

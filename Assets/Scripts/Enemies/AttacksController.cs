@@ -119,6 +119,8 @@ public class AttacksController : MonoBehaviour
                 attacks[i].Invoke();
                 _animator.SetInteger("numberOfAttack", currentAttack);
                 Debug.Log($"Switching to Attack {currentAttack}");
+                yield return new WaitForSeconds(pauseDuration);
+
             }
     
             currentAttack = -1;

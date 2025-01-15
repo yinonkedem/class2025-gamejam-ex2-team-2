@@ -18,6 +18,7 @@ TagManager:
   - Ink
   - Mini Enemy
   - Water
+  - Oxygen grounp
   layers:
   - Default
   - TransparentFX
