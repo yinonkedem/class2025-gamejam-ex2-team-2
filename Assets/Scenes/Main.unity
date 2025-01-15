@@ -516,6 +516,7 @@ MonoBehaviour:
   JumpWasReleased: 0
   RunIsHeld: 0
   DashWasPressed: 0
+  AttackWasPressed: 0
 --- !u!114 &107901573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2304,6 +2305,7 @@ MonoBehaviour:
   JumpWasReleased: 0
   RunIsHeld: 0
   DashWasPressed: 0
+  AttackWasPressed: 0
 --- !u!114 &751664191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,10 +2318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9407d9a8ac1e484da540bc5dfd99b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3973229584154920070, guid: c08647f289acd7e4dbc1f4a39edbc735, type: 3}
-  target: {fileID: 1011435140}
-  shootRate: 1
-  projectileMoveSpeed: 10
+  boomerangPrefab: {fileID: 3973229584154920070, guid: c08647f289acd7e4dbc1f4a39edbc735, type: 3}
 --- !u!1 &783652924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3239,7 +3238,7 @@ GameObject:
   - component: {fileID: 1011435141}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3253,7 +3252,7 @@ Transform:
   m_GameObject: {fileID: 1011435139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.23, y: -9.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6359,6 +6358,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5664050583028284529, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6169489325177279053, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar
       value: 
@@ -6374,6 +6377,14 @@ PrefabInstance:
     - target: {fileID: 7943950854325254591, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_Size.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481143988867675853, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481143988867675853, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
