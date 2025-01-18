@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Movement Stats
   m_EditorClassIdentifier: 
   moveThreshold: 0.25
-  maxWalkSpeed: 12.5
+  maxWalkSpeed: 8
   groundAcceleration: 25
   groundDeceleration: 20
   airAcceleration: 5
@@ -21,7 +21,7 @@ MonoBehaviour:
   friction: 8
   wallJumpMoveAcceleration: 5
   wallJumpMoveDeceleration: 5
-  maxRunSpeed: 20
+  maxRunSpeed: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -30,30 +30,30 @@ MonoBehaviour:
   headWidth: 0.75
   wallDetectionRayLength: 0.125
   wallDetectionRayHeightMultiplier: 0.9
-  JumpHeight: 6.5
+  JumpHeight: 2
   JumpHeightCompensationFactor: 1.054
   TimeTillJumpApex: 0.35
   GravityOnReleaseMultiplier: 2
-  MaxFallSpeed: 26
-  NumberOfJumpsAllowed: 2
+  MaxFallSpeed: 1.5
+  NumberOfJumpsAllowed: 5
   ResetJumpsOnWallSlide: 1
   TimeForUpwardsCancel: 0.027
   ApexThreshold: 0.97
   ApexHangTime: 0.075
   JumpBufferTime: 0.125
   JumpCoyoteTime: 0.1
-  WallSlideSpeed: 5
+  WallSlideSpeed: 1.5
   WallSlideDecelerationSpeed: 50
-  WallJumpDirection: {x: -20, y: 6.5}
+  WallJumpDirection: {x: -20, y: 2}
   WallJumpPostBufferTime: 0.125
   WallJumpGravityOnReleaseMultiplier: 1
   DashTime: 0.11
-  DashSpeed: 40
+  DashSpeed: 20
   TimeBtwDashesOnGround: 0.225
   ResetDashOnWallSlide: 1
   NumberOfDashes: 2
   DashDiagonallyBias: 0.4
-  DashGravityOnReleaseMultiplier: 1
+  DashGravityOnReleaseMultiplier: 2
   DashTimeForUpwardsCancel: 0.027
   DebugShowIsGroundedBox: 0
   DebugShowHeadBumpBox: 0
@@ -64,3 +64,9 @@ MonoBehaviour:
   DrawRight: 1
   ArcResolution: 20
   VisualizationSteps: 90
+  swimAcceleration: 5
+  swimDeceleration: 5
+  swimMaxSpeed: 3
+  swimVerticalSpeed: 10
+  waterGravityScale: 0.5
+  defaultGravityScale: 3

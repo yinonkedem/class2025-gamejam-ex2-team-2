@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerMovment1 : MonoBehaviour
 {
-    [Header("References")] public PlayerMovementStats MoveStats;
+    [Header("References")]
+    public PlayerMovementStats MoveStats;
     [SerializeField] private Collider2D _feetColl;
     [SerializeField] private Collider2D _bodyColl;
 
@@ -77,13 +78,15 @@ public class PlayerMovment1 : MonoBehaviour
     // Input manager
     private InputManager inputManager;
     
-    // 
-
-
+    // Swimming vars
+    private float _swimmingSpeedMultiplier = 1f;
+    private float _swimmingVerticalSpeed = 0f;
+    private bool _isSwimming = false;
+    
     private void Update()
     {
         CountTimers();
-        JunpCheck();
+        JumpCheck();
         LandCheck();
         WallJumpCheck();
         
@@ -100,25 +103,31 @@ public class PlayerMovment1 : MonoBehaviour
         WallJump();
         Dash();
         
-        if (_isGrounded)
+        if (_isSwimming)
         {
-            Move(MoveStats.groundAcceleration, MoveStats.groundDeceleration, inputManager.Movement);
+            SwimMovement();
         }
         else
         {
-            // Wall jumping
-            if (_useWallJumpMoveStats)
+            if (_isGrounded)
             {
-                Move(MoveStats.wallJumpMoveAcceleration, MoveStats.wallJumpMoveDeceleration, inputManager.Movement);
+                Move(MoveStats.groundAcceleration, MoveStats.groundDeceleration, inputManager.Movement);
             }
-            // Airborne
             else
             {
-                Move(MoveStats.airAcceleration, MoveStats.airDeceleration, inputManager.Movement);
+                // Wall jumping
+                if (_useWallJumpMoveStats)
+                {
+                    Move(MoveStats.wallJumpMoveAcceleration, MoveStats.wallJumpMoveDeceleration, inputManager.Movement);
+                }
+                // Airborne
+                else
+                {
+                    Move(MoveStats.airAcceleration, MoveStats.airDeceleration, inputManager.Movement);
+                }
             }
         }
 
-        
         ApplyVelocity();
     }
     
@@ -202,6 +211,78 @@ public class PlayerMovment1 : MonoBehaviour
     
     #endregion
     
+    #region Swimming
+
+    private void SwimMovement()
+    {
+        Vector2 moveInput = inputManager.Movement;
+
+        // Horizontal Swimming (based on Move logic)
+        if (Mathf.Abs(moveInput.x) >= MoveStats.moveThreshold)
+        {
+            TurnCheck(moveInput);
+
+            float targetSwimSpeed = moveInput.x * MoveStats.swimMaxSpeed;
+            horizontalVelocity = Mathf.Lerp(horizontalVelocity, targetSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            horizontalVelocity = Mathf.Lerp(horizontalVelocity, 0f, MoveStats.swimDeceleration * Time.fixedDeltaTime);
+        }
+
+        // Vertical Swimming (based on Move logic)
+        if (Mathf.Abs(moveInput.y) >= MoveStats.moveThreshold)
+        {
+            float targetVerticalSwimSpeed = moveInput.y * MoveStats.swimVerticalSpeed;
+            VerticalVelocity = Mathf.Lerp(VerticalVelocity, targetVerticalSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            VerticalVelocity = Mathf.Lerp(VerticalVelocity, 0f, MoveStats.swimDeceleration * Time.fixedDeltaTime);
+        }
+
+        // Adjust gravity for swimming
+        _rb.gravityScale = MoveStats.waterGravityScale;
+    }
+
+
+
+    public void OnEnterWater(float verticalSpeed, float speedMultiplier)
+    {
+        _isSwimming = true;
+        _swimmingVerticalSpeed = verticalSpeed;
+        _swimmingSpeedMultiplier = speedMultiplier;
+        _rb.gravityScale = MoveStats.waterGravityScale;
+        Debug.Log("Player entered swimming mode.");
+    }
+
+    public void OnExitWater()
+    {
+        _isSwimming = false;
+        _rb.gravityScale = MoveStats.defaultGravityScale; // Restore normal gravity
+        _isJumping = false;
+        _isFastFalling = false;
+        Debug.Log("Exited swimming mode. Regular jump restored.");
+    }
+
+    private IEnumerator SmoothGravityChange(float targetGravity)
+    {
+        float duration = 0.5f; // Duration of the transition
+        float elapsed = 0f;
+        float initialGravity = _rb.gravityScale;
+
+        while (elapsed < duration)
+        {
+            _rb.gravityScale = Mathf.Lerp(initialGravity, targetGravity, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _rb.gravityScale = targetGravity;
+    }
+
+    #endregion
+    
     #region Land/Fall
 
     private void LandCheck()
@@ -254,11 +335,17 @@ public class PlayerMovment1 : MonoBehaviour
         // _numberOfJumpsUsed = 0;
     }
     
-    private void JunpCheck()
+    private void JumpCheck()
     {
         // WHEN WE PRESS THE JUMP BUTTON
         if (inputManager.JumpWasPressed)
         {
+            if (_isSwimming)
+            {
+                PerformSwimmingJump();
+                return;
+            }
+            
             if (_isWallSlideFalling && _wallJumpPostBufferTimer >= 0f)
             {
                 return;
@@ -345,10 +432,24 @@ public class PlayerMovment1 : MonoBehaviour
         VerticalVelocity = MoveStats.InitialJumpVelocity;
     }
     
+    private void PerformSwimmingJump()
+    {
+        VerticalVelocity = MoveStats.swimVerticalSpeed; // Use swimming-specific speed
+        _isJumping = false; // Reset jump state immediately
+        Debug.Log("Swimming Jump Performed");
+    }
+
+    
     private void Jump()
     {
-        // APPLY GRAVITY WHILE JUMPING
-        if (_isJumping)
+    if (_isJumping)
+    {
+        // Swimming Gravity Adjustment
+        if (_isSwimming)
+        {
+            VerticalVelocity -= MoveStats.waterGravityScale * Time.fixedDeltaTime;
+        }
+        else
         {
             // CHECK FOR HEAD BUMP
             if (_bumpedHead)
@@ -359,7 +460,6 @@ public class PlayerMovment1 : MonoBehaviour
             // GRAVITY ON ASCENDING
             if (VerticalVelocity >= 0f)
             {
-                // APEX CONTROLS
                 _apexPoint = Mathf.InverseLerp(MoveStats.InitialJumpVelocity, 0f, VerticalVelocity);
 
                 if (_apexPoint > MoveStats.ApexThreshold)
@@ -383,7 +483,6 @@ public class PlayerMovment1 : MonoBehaviour
                         }
                     }
                 }
-                // GRAVITY ON ASCENDING BUT NOT PAST APEX THRESHOLD
                 else if (!_isFastFalling)
                 {
                     VerticalVelocity += MoveStats.Gravity * Time.fixedDeltaTime;
@@ -398,32 +497,31 @@ public class PlayerMovment1 : MonoBehaviour
             {
                 VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
             }
-
-            else if (VerticalVelocity < 0f)
-            {
-                if (!_isFalling)
-                {
-                    _isFalling = true;
-                }
-            }
         }
-        
-        // JUMP CUT
-        if (_isFastFalling)
+
+        // FALLING STATE
+        if (VerticalVelocity < 0f && !_isSwimming)
         {
-            if (_fastFallTime >= MoveStats.TimeForUpwardsCancel)
-            {
-                VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
-            }
-            else if (_fastFallTime < MoveStats.TimeForUpwardsCancel)
-            {
-                VerticalVelocity = Mathf.Lerp(_fastFallReleaseSpeed, 0f, (_fastFallTime / MoveStats.TimeForUpwardsCancel));
-            }
+            _isFalling = true;
+        }
+    }
 
-            _fastFallTime += Time.fixedDeltaTime;
+    // JUMP CUT
+    if (_isFastFalling)
+    {
+        if (_fastFallTime >= MoveStats.TimeForUpwardsCancel)
+        {
+            VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
+        }
+        else if (_fastFallTime < MoveStats.TimeForUpwardsCancel)
+        {
+            VerticalVelocity = Mathf.Lerp(_fastFallReleaseSpeed, 0f, (_fastFallTime / MoveStats.TimeForUpwardsCancel));
         }
 
+        _fastFallTime += Time.fixedDeltaTime;
     }
+}
+
     
     #endregion
     

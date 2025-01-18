@@ -87,6 +87,16 @@ public class PlayerMovementStats : ScriptableObject
     [Range(5, 100)] public int ArcResolution = 20;
     [Range(0, 500)] public int VisualizationSteps = 90;
     
+    [Header("Swimming Settings")]
+    public float swimAcceleration = 5f;
+    public float swimDeceleration = 5f;
+    public float swimMaxSpeed = 3f;
+    public float swimVerticalSpeed = 3f;
+    public float waterGravityScale = 0.5f;
+    
+    [Header("Gravity")]
+    public float defaultGravityScale = 3f; // Added this line for swimming
+    
     public readonly Vector2[] DashDirections = new Vector2[]
     {
         new Vector2(0, 0), // Nothing
