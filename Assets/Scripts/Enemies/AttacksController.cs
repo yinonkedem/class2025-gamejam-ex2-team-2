@@ -11,7 +11,6 @@ public class AttacksController : MonoBehaviour
 
     [SerializeField] private int numberOfBoltsInSingleAttack = 2;
     [SerializeField] private float timeBetweenEachBoltAttackRound = 10f;
-    [SerializeField] private float pauseDuration = 20f; 
     [SerializeField] private int numberOfAttacks = 1;  
     [SerializeField] private int numberOfMiniEnemies = 2;
     [SerializeField] private float timeToStayMiniEnemies = 40f;  
@@ -40,8 +39,8 @@ public class AttacksController : MonoBehaviour
         _animator = GetComponent<Animator>();
         Invoke("StartCoroutineDelayed", 5f);
         attacks.Add(-1, StartSwimmingWithoutAttacks);
-        attacks.Add(1, StartBoltAttack);
         attacks.Add(2, StartExtraMiniEnemiesAttack);
+        attacks.Add(1, StartBoltAttack);
     }
     
     private void StartSwimmingWithoutAttacks()
@@ -52,7 +51,7 @@ public class AttacksController : MonoBehaviour
     
     private IEnumerator WaitForSwimmingWithoutAttacks()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(10f);
         isAttackOver = true;
 
     }

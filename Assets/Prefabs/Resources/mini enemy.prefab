@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1886686825995266493}
   - component: {fileID: 3176086163554356397}
   - component: {fileID: 3364079987936431621}
+  - component: {fileID: 2647955438191311755}
   - component: {fileID: 6169294747997095769}
   - component: {fileID: 4834175942524755113}
   m_Layer: 0
@@ -375,6 +376,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAwarenessDistance: 8
+--- !u!114 &2647955438191311755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830948160091841947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d46ab5fcfabe24d91f0ebcfb245a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniEnemyLifePrefab: {fileID: 7151953685306747655, guid: 124ad0674966b2d4f920780c36df4019, type: 3}
+  lifeParent: {fileID: 0}
 --- !u!50 &6169294747997095769
 Rigidbody2D:
   serializedVersion: 4
