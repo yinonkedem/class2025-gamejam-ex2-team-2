@@ -35,14 +35,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (IsAboveObjectWithTag("Water Ending"))
-        // {
-        //     Debug.Log("Player is above the water!");
-        //     isAboveWater = true;
-        // }else
-        // {
-        //     isAboveWater = false;
-        // }
         UpdateOxygenBarPosition();
         if (Input.GetKeyDown(attackKeyCode))
         {

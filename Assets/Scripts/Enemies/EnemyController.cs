@@ -20,12 +20,12 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        UpdateLifeBarPosition();
-
-    }
-    
+    // private void Update()
+    // {
+    //     UpdateLifeBarPosition();
+    //
+    // }
+    //
     private void UpdateLifeBarPosition()
     {
         // Set the oxygen bar's position relative to the player
