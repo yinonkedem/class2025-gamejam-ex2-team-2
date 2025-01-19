@@ -133,11 +133,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // a function that check if the player is on an object with tag oxygen group
-    
-    
-    
-    
-
 
     private void OnCollisionStay(Collision other)
     {

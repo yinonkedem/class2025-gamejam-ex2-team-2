@@ -74,6 +74,7 @@ public class PlayerMovment1 : MonoBehaviour
     private bool _isDashFastFalling;
     private float _dashFastFallTime;
     private float _dashFastFallReleaseSpeed;
+    private bool _hasDashedInWater = false; // Tracks if the player has dashed in water
     
     // Input manager
     private InputManager inputManager;
@@ -133,6 +134,12 @@ public class PlayerMovment1 : MonoBehaviour
     
     private void ApplyVelocity()
     {
+        if (_isSwimming)
+        {
+            _rb.velocity = new Vector2(horizontalVelocity, VerticalVelocity);
+            return;
+        }
+        
         // CLAMP FALL SPEED
         if (!_isDashing)
         {
@@ -217,11 +224,10 @@ public class PlayerMovment1 : MonoBehaviour
     {
         Vector2 moveInput = inputManager.Movement;
 
-        // Horizontal Swimming (based on Move logic)
+        // Horizontal Swimming
         if (Mathf.Abs(moveInput.x) >= MoveStats.moveThreshold)
         {
             TurnCheck(moveInput);
-
             float targetSwimSpeed = moveInput.x * MoveStats.swimMaxSpeed;
             horizontalVelocity = Mathf.Lerp(horizontalVelocity, targetSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
         }
@@ -230,22 +236,28 @@ public class PlayerMovment1 : MonoBehaviour
             horizontalVelocity = Mathf.Lerp(horizontalVelocity, 0f, MoveStats.swimDeceleration * Time.fixedDeltaTime);
         }
 
-        // Vertical Swimming (based on Move logic)
+        // Vertical Swimming
+        float targetVerticalSwimSpeed = 0f;
+
         if (Mathf.Abs(moveInput.y) >= MoveStats.moveThreshold)
         {
-            float targetVerticalSwimSpeed = moveInput.y * MoveStats.swimVerticalSpeed;
-            VerticalVelocity = Mathf.Lerp(VerticalVelocity, targetVerticalSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
-        }
-        else
-        {
-            VerticalVelocity = Mathf.Lerp(VerticalVelocity, 0f, MoveStats.swimDeceleration * Time.fixedDeltaTime);
+            targetVerticalSwimSpeed = moveInput.y * MoveStats.swimVerticalSpeed;
+
+            // Apply additional boost for downward movement
+            if (moveInput.y < 0)
+            {
+                targetVerticalSwimSpeed += Physics2D.gravity.y * MoveStats.waterGravityScale * 1.5f;
+            }
         }
 
-        // Adjust gravity for swimming
+        // Smoothly update VerticalVelocity
+        VerticalVelocity = Mathf.Lerp(VerticalVelocity, targetVerticalSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
+
+        Debug.Log($"Swim Movement - Vertical Input: {moveInput.y}, Target Speed: {targetVerticalSwimSpeed}, Vertical Velocity: {VerticalVelocity}");
+
+        // Keep gravity active
         _rb.gravityScale = MoveStats.waterGravityScale;
     }
-
-
 
     public void OnEnterWater(float verticalSpeed, float speedMultiplier)
     {
@@ -260,6 +272,7 @@ public class PlayerMovment1 : MonoBehaviour
     {
         _isSwimming = false;
         _rb.gravityScale = MoveStats.defaultGravityScale; // Restore normal gravity
+        _hasDashedInWater = false; // Reset water dash state
         _isJumping = false;
         _isFastFalling = false;
         Debug.Log("Exited swimming mode. Regular jump restored.");
@@ -771,7 +784,16 @@ public class PlayerMovment1 : MonoBehaviour
     {
         if (inputManager.DashWasPressed)
         {
-            if (_isGrounded && _dashOnGroundTimer < 0f && !_isDashing)
+            if (_isSwimming)
+            {
+                // Restrict to one dash in water
+                if (!_hasDashedInWater)
+                {
+                    _hasDashedInWater = true;
+                    InitiateDash();
+                }
+            }
+            else if (_isGrounded && _dashOnGroundTimer < 0f && !_isDashing)
             {
                 InitiateDash();
             }
@@ -841,7 +863,17 @@ public class PlayerMovment1 : MonoBehaviour
         _dashDirection = closestDirection;
         _isDashing = true;
         _dashTimer = 0f;
-        _numberOfDashesUsed++;
+        
+        // Reset dashes used based on state
+        if (_isSwimming)
+        {
+            _hasDashedInWater = true; // Mark the water dash as used
+        }
+        else
+        {
+            _numberOfDashesUsed++;
+        }
+        
         _dashOnGroundTimer = MoveStats.TimeBtwDashesOnGround;
         
         ResetJumpValues();
@@ -879,11 +911,20 @@ public class PlayerMovment1 : MonoBehaviour
                 return;
             }
 
-            horizontalVelocity = MoveStats.DashSpeed * _dashDirection.x;
-
-            if (_dashDirection.y != 0f || _isAirDashing)
+            // Allow vertical movement during dash in water
+            if (_isSwimming)
             {
-                VerticalVelocity = MoveStats.DashSpeed * _dashDirection.y;
+                horizontalVelocity = MoveStats.DashSpeed * _dashDirection.x;
+                VerticalVelocity = MoveStats.DashSpeed * _dashDirection.y; // Vertical movement during dash
+            }
+            else
+            {
+                horizontalVelocity = MoveStats.DashSpeed * _dashDirection.x;
+
+                if (_dashDirection.y != 0f || _isAirDashing)
+                {
+                    VerticalVelocity = MoveStats.DashSpeed * _dashDirection.y;
+                }
             }
         }
         
@@ -922,11 +963,21 @@ public class PlayerMovment1 : MonoBehaviour
     {
         _isDashFastFalling = false;
         _dashOnGroundTimer = -0.01f;
+
+        if (_isSwimming)
+        {
+            _hasDashedInWater = false; // Reset water dash on state reset
+        }
     }
 
     private void ResetDashes()
     {
         _numberOfDashesUsed = 0;
+
+        if (_isSwimming)
+        {
+            _hasDashedInWater = false; // Allow dashing again in water
+        }
     }
 
     #endregion
