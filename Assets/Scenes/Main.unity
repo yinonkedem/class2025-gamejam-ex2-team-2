@@ -3515,7 +3515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b53e449142984744a2904ed2f1e63b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 751664182}
   waterSpeedMultiplier: 0.5
   swimmingVerticalSpeed: 3
 --- !u!1 &929996173
@@ -4356,19 +4355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad075749d8fd44a44975a5952f7c85b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springConstant: 1.4
-  damping: 2
-  spread: 3
-  speedMult: 1.1
-  wavePropagationIterations: 8
-  forceMultiplier: 0.2
-  MaxForce: 5
-  playerCollisionRadiusMult: 4.15
-  numOfXVertices: 70
-  height: 16.545506
-  width: 34.128174
-  waterMaterial: {fileID: 2100000, guid: 6c726a565cb2bc0498db462974c50bcf, type: 2}
-  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1344796220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4381,10 +4367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e0ce8d7a1581045b162f6274b33f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterMask:
-    serializedVersion: 2
-    m_Bits: 17
-  _splashParticles: {fileID: 446011647336956888, guid: 51a9c71b93fbc3d49869744cbfa822cb, type: 3}
 --- !u!68 &1344796221
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -6389,11 +6371,19 @@ PrefabInstance:
       objectReference: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: pauseDuration
-      value: 30
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: numberOfAttacks
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: timeBetweenTargetToBolt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: numberOfBoltsInSingleAttack
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar

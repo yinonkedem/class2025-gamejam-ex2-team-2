@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -9,7 +10,7 @@ public class AttacksController : MonoBehaviour
 
 
     [SerializeField] private int numberOfBoltsInSingleAttack = 2;
-    [SerializeField] private float timeBetweenEachBoltInTheAttack = 5f;
+    [SerializeField] private float timeBetweenEachBoltAttackRound = 10f;
     [SerializeField] private float pauseDuration = 20f; 
     [SerializeField] private int numberOfAttacks = 1;  
     [SerializeField] private int numberOfMiniEnemies = 2;
@@ -21,6 +22,7 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private GameObject attackTargetPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject boltAttackPrefab;
+    [SerializeField] private int numberOfBoltsAttackRounded = 4;
 
     
     private Dictionary<int, System.Action> attacks = new Dictionary<int, System.Action>();
@@ -28,6 +30,8 @@ public class AttacksController : MonoBehaviour
     private int currentAttack = -1;
     private bool isSeAttackApplied = false;
     private Animator _animator;
+
+    private bool isAttackOver = false;
     //private int attackLevel =1;
     
     // Start is called before the first frame update
@@ -35,8 +39,22 @@ public class AttacksController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         Invoke("StartCoroutineDelayed", 5f);
+        attacks.Add(-1, StartSwimmingWithoutAttacks);
         attacks.Add(1, StartBoltAttack);
         attacks.Add(2, StartExtraMiniEnemiesAttack);
+    }
+    
+    private void StartSwimmingWithoutAttacks()
+    {
+        //wait for 20 seconds
+        StartCoroutine(WaitForSwimmingWithoutAttacks());
+    }
+    
+    private IEnumerator WaitForSwimmingWithoutAttacks()
+    {
+        yield return new WaitForSeconds(20f);
+        isAttackOver = true;
+
     }
     
     private void StartExtraMiniEnemiesAttack()
@@ -59,13 +77,13 @@ public class AttacksController : MonoBehaviour
             miniEnemies[i] = miniEnemy;
             GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(miniEnemy.transform);
         }
-
         
         yield return new WaitForSeconds(timeToStayMiniEnemies) ;
         foreach (GameObject miniEnemy in miniEnemies)
         {
             Destroy(miniEnemy);
         }
+        isAttackOver = true;
     }
 
     
@@ -74,24 +92,81 @@ public class AttacksController : MonoBehaviour
         StartCoroutine(PrepareAndExecuteBoltAttack());
     }
 
-    private IEnumerator PrepareAndExecuteBoltAttack()
-    {
-        yield return new WaitForSeconds(timeEnemyPrepareToAttack);
-        for (int i = 0; i < numberOfBoltsInSingleAttack; i++)
-        {
-            GameObject attackTarget = Instantiate(attackTargetPrefab, GetRandomPlayerPosition(), Quaternion.identity, GameObject.Find("Main").transform);
-            yield return new WaitForSeconds(timeBetweenTargetToBolt);
-            GameObject boltAttack = Instantiate(boltAttackPrefab, attackTarget.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
-            Destroy(attackTarget);
-            float boltAnimationTime =  boltAttack.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-            yield return new WaitForSeconds(boltAnimationTime);
-            Destroy(boltAttack);
-            yield return new WaitForSeconds(timeBetweenEachBoltInTheAttack);
-        }
-        currentAttack = -1; 
-        _animator.SetInteger("numberOfAttack", currentAttack);
-    }
 
+    
+private IEnumerator PrepareAndExecuteBoltAttack()
+{
+    yield return new WaitForSeconds(timeEnemyPrepareToAttack);
+    
+    //get game object with tag Right  Wwall position
+    
+    float rightWallPosition = GameObject.FindGameObjectWithTag("Right Wall").transform.position.x;
+    float leftWallPosition = GameObject.FindGameObjectWithTag("Left Wall").transform.position.x;
+    float groundPosition = GameObject.FindGameObjectWithTag("Bottom Wall").transform.position.y;
+    float waterEndingPosition = GameObject.FindGameObjectWithTag("Water Ending").transform.position.y;
+
+
+
+    // Get references to both players
+    GameObject[] players;
+
+    for (int i = 0; i < numberOfBoltsAttackRounded; i++)
+    {
+        List<GameObject> attackTargets = new List<GameObject>();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        // Create 1 bolt on each player's position
+        foreach (GameObject player in players)
+        {
+            Vector3 playerPosition = player.transform.position;
+            GameObject playerTarget = Instantiate(attackTargetPrefab, playerPosition, Quaternion.identity, GameObject.Find("Main").transform);
+            attackTargets.Add(playerTarget);
+
+            // Create 3 additional random targets near each player within the specified range
+            for (int j = 0; j < (numberOfBoltsInSingleAttack-1)/2; j++)
+            {
+                // Ensure random position is within the range
+                float randomX = Mathf.Clamp(Random.Range(leftWallPosition, rightWallPosition), leftWallPosition, rightWallPosition);
+                float randomY = Mathf.Clamp(Random.Range(groundPosition, waterEndingPosition), groundPosition, waterEndingPosition);
+
+                Vector3 randomPosition = new Vector3(randomX, randomY, playerPosition.z); // Maintain Z position
+                GameObject additionalTarget = Instantiate(attackTargetPrefab, randomPosition, Quaternion.identity, GameObject.Find("Main").transform);
+                attackTargets.Add(additionalTarget);
+            }
+        }
+
+        yield return new WaitForSeconds(timeBetweenTargetToBolt);
+
+        // Create bolts for all targets simultaneously
+        List<GameObject> bolts = new List<GameObject>();
+        foreach (GameObject target in attackTargets)
+        {
+            GameObject boltAttack = Instantiate(boltAttackPrefab, target.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
+            bolts.Add(boltAttack);
+            Destroy(target); // Destroy the target after creating the bolt
+        }
+
+        // Wait for bolt animations to complete
+        float boltAnimationTime = bolts[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+        yield return new WaitForSeconds(boltAnimationTime);
+
+        // Destroy all bolts
+        foreach (GameObject bolt in bolts)
+        {
+            Destroy(bolt);
+        }
+
+        yield return new WaitForSeconds(timeBetweenEachBoltAttackRound);
+    }
+    
+    currentAttack = -1;
+    _animator.SetInteger("numberOfAttack", currentAttack);
+    isAttackOver = true;
+}
+
+
+
+
+    
     private Vector3 GetRandomPlayerPosition()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -113,21 +188,20 @@ public class AttacksController : MonoBehaviour
     
         while (true)
         {
-            for (int i = 1; i <= numberOfAttacks; i++)
+            
+            foreach (int attackIndex in attacks.Keys)
             {
-                currentAttack = i;
-                attacks[i].Invoke();
+                currentAttack = attackIndex;
+                attacks[attackIndex].Invoke();
                 _animator.SetInteger("numberOfAttack", currentAttack);
                 Debug.Log($"Switching to Attack {currentAttack}");
-                yield return new WaitForSeconds(pauseDuration);
-
+                //not continue until isAttackOver is true
+                while (!isAttackOver)
+                {
+                    yield return null;
+                }
+                isAttackOver = false;
             }
-    
-            currentAttack = -1;
-            _animator.SetInteger("numberOfAttack", currentAttack);
-            Debug.Log("Attack paused.");
-    
-            yield return new WaitForSeconds(pauseDuration);
         }
     }
 }
