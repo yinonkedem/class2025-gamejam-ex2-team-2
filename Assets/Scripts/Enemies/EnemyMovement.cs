@@ -121,6 +121,13 @@ public class EnemyMovement : MonoBehaviour
             HandleEnemyOffScreen(collision.tag);
         }
     }
+    
+    //Add to speed function
+    public void AddToSpeed(float speedToAdd)
+    {
+        _speed += speedToAdd;
+    }
+
 
 }
 

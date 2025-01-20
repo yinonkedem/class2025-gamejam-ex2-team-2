@@ -3608,7 +3608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 131.5, y: 492.3}
+  m_AnchoredPosition: {x: 9.4, y: 492.3}
   m_SizeDelta: {x: 300, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &945888712
@@ -6481,7 +6481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: numberOfAttacks
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: timeBetweenTargetToBolt
@@ -6489,7 +6489,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: numberOfBoltsInSingleAttack
-      value: 8
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 917084272788214856, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: sizeAddedEachLevel
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: speedAddedEachLevel
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: numberOfBoltsInSingleAttack
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar

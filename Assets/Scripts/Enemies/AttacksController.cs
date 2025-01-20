@@ -20,11 +20,15 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject boltAttackPrefab;
     [SerializeField] private int numberOfBoltsAttackRounded = 4;
+    [SerializeField] private int numberOfAttacks = 3;
+    [SerializeField] private float speedAddedEachLevel = 0.7f;
+    [SerializeField] private float sizeAddedEachLevel = 0.7f;
 
     
     private Dictionary<int, System.Action> attacks = new Dictionary<int, System.Action>();
     private int currentAttack = -1;
     private Animator _animator;
+    private int level=-1;
 
     private bool isAttackOver = false;
     //private int attackLevel =1;
@@ -47,7 +51,7 @@ public class AttacksController : MonoBehaviour
     
     private IEnumerator WaitForSwimmingWithoutAttacks()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         isAttackOver = true;
 
     }
@@ -65,6 +69,10 @@ public class AttacksController : MonoBehaviour
     private IEnumerator PrepareAndExecuteExtraMiniEnemiesAttack()
     {
         //create list of gameobject of sixe numberOfMiniEnemies
+        if (level > numberOfAttacks)
+        {
+            numberOfMiniEnemies += level/numberOfAttacks;
+        }
         GameObject[] miniEnemies = new GameObject[numberOfMiniEnemies];
         for (int i = 0; i < numberOfMiniEnemies; i++)
         {
@@ -186,6 +194,14 @@ private IEnumerator PrepareAndExecuteBoltAttack()
             
             foreach (int attackIndex in attacks.Keys)
             {
+                level++;
+                //increase enemy size and speed according to the level
+                if (level % 3 == 0 && level != 0)
+                {
+                    transform.localScale += new Vector3(0.3f, 0.3f, 0.3f);
+                    GetComponent<EnemyMovement>().AddToSpeed(0.3f);
+                }
+
                 currentAttack = attackIndex;
                 attacks[attackIndex].Invoke();
                 _animator.SetInteger("numberOfAttack", currentAttack);
