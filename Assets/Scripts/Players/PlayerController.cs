@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,19 +9,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
+    [SerializeField] private float oxygenDecreasedNumberFromInkCollision = 5f;
+    [SerializeField] private float oxygenDecreasedNumberWhenShooting = 1f;
     [SerializeField] private GameObject oxygenBar;
     [SerializeField] private float attackSpeed = 10f;
     [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
     [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
 
     private BarController oxygenBarController;
+    private bool isTouchingOxygenGroup = false;
 
 
     private GameObject currentAttack; 
-    private bool isUnderAttack = false;
-    private bool isAttacking = false;
-    private bool isHaveAnAttack = false;
-    private bool isAboveWater = false;
     private float currentOxygenValue;
     
     // Start is called before the first frame update
@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0f, attackSpeed); // Adjust the speed and direction as needed
         }
+        
+        currentOxygenValue -= oxygenDecreasedNumberWhenShooting;
+        oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
 
         Debug.Log("PinkPlayer attacked!");
     }
@@ -61,8 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.CompareTag("Oxygen grounp"))
         {
-            currentOxygenValue += oxygenAddedAfterSecondInTheAir;
-            oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
+            if (currentOxygenValue <= maxTimeWithoutOxygen)
+            {
+                currentOxygenValue += oxygenAddedAfterSecondInTheAir;
+                oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
+            }
         }
     }
     
@@ -114,17 +120,25 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Ink"))
         {
             Debug.Log("Player is hit by ink attack");
-            Die();
-        }
-        if(other.CompareTag("Enemy"))
-        {
-            Debug.Log("Player is hit by enemy");
-            currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
+            currentOxygenValue -= oxygenDecreasedNumberFromInkCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
-    }
+        if (other.CompareTag("Oxygen grounp"))
+        {
+            isTouchingOxygenGroup = true;
+        }
 
-    // a function that check if the player is on an object with tag oxygen group
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Oxygen grounp"))
+        {
+            isTouchingOxygenGroup = false;
+        }
+    }
+    
+    
 
     private void OnCollisionStay(Collision other)
     {
@@ -135,6 +149,7 @@ public class PlayerController : MonoBehaviour
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
     }
+    
 
     private void UpdateOxygen()
     {
@@ -142,15 +157,14 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        if (!isAboveWater && currentOxygenValue > 0)
+        if (currentOxygenValue > 0&& !isTouchingOxygenGroup)
         {
+            // if player is not touching gameobject with tag "Oxygen grounp" decrease the oxygen value by 1
+            
             currentOxygenValue -= 1f;
+            Debug.Log("current oxygen value is: " + currentOxygenValue);
         }
-        if (isAboveWater)
-        {
-            currentOxygenValue += oxygenAddedAfterSecondInTheAir;
-            Debug.Log("current oxygen value: " + currentOxygenValue);
-        }
+
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
 
     }

@@ -253,7 +253,7 @@ public class PlayerMovment1 : MonoBehaviour
         // Smoothly update VerticalVelocity
         VerticalVelocity = Mathf.Lerp(VerticalVelocity, targetVerticalSwimSpeed, MoveStats.swimAcceleration * Time.fixedDeltaTime);
 
-        Debug.Log($"Swim Movement - Vertical Input: {moveInput.y}, Target Speed: {targetVerticalSwimSpeed}, Vertical Velocity: {VerticalVelocity}");
+        //Debug.Log($"Swim Movement - Vertical Input: {moveInput.y}, Target Speed: {targetVerticalSwimSpeed}, Vertical Velocity: {VerticalVelocity}");
 
         // Keep gravity active
         _rb.gravityScale = MoveStats.waterGravityScale;

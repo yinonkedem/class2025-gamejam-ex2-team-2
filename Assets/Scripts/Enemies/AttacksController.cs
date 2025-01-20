@@ -11,10 +11,8 @@ public class AttacksController : MonoBehaviour
 
     [SerializeField] private int numberOfBoltsInSingleAttack = 2;
     [SerializeField] private float timeBetweenEachBoltAttackRound = 10f;
-    [SerializeField] private int numberOfAttacks = 1;  
     [SerializeField] private int numberOfMiniEnemies = 2;
     [SerializeField] private float timeToStayMiniEnemies = 40f;  
-    [SerializeField] private int maxAttackLevel = 3;  
     [SerializeField] private float timeEnemyPrepareToAttack = 2f;
     [SerializeField] private float timeBetweenTargetToBolt = 2f; 
     [SerializeField] private float timeUntilFirdtAttackStart = 5f;
@@ -25,9 +23,7 @@ public class AttacksController : MonoBehaviour
 
     
     private Dictionary<int, System.Action> attacks = new Dictionary<int, System.Action>();
-    private bool isPaused = false;
     private int currentAttack = -1;
-    private bool isSeAttackApplied = false;
     private Animator _animator;
 
     private bool isAttackOver = false;
