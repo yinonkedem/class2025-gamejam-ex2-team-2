@@ -6471,50 +6471,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 622732848}
     m_Modifications:
-    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: enemyPrefab
-      value: 
-      objectReference: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
-    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: pauseDuration
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: numberOfAttacks
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: timeBetweenTargetToBolt
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 865787296282379837, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: numberOfBoltsInSingleAttack
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 917084272788214856, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: sizeAddedEachLevel
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: speedAddedEachLevel
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: numberOfBoltsInSingleAttack
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar
       value: 
       objectReference: {fileID: 945888710}
-    - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: maxLife
-      value: 170
-      objectReference: {fileID: 0}
     - target: {fileID: 2251939802842896412, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -787.42
@@ -6555,20 +6515,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3519452901771486989, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: m_TagString
-      value: Ink
-      objectReference: {fileID: 0}
     - target: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4591605874670512689, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
