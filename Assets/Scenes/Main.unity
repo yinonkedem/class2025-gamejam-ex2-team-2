@@ -434,7 +434,10 @@ MonoBehaviour:
   oxygenBar: {fileID: 783652924}
   attackSpeed: 10
   attackKeyCode: 279
+  passOxygenKeyCode: 111
   oxygenDecreasedNumberFromBoltAttack: 5
+  oxygenTransferRate: 3
+  otherPlayer: {fileID: 751664180}
 --- !u!61 &107901568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2772,7 +2775,10 @@ MonoBehaviour:
   oxygenBar: {fileID: 929996173}
   attackSpeed: 10
   attackKeyCode: 101
+  passOxygenKeyCode: 116
   oxygenDecreasedNumberFromBoltAttack: 5
+  oxygenTransferRate: 3
+  otherPlayer: {fileID: 107901565}
 --- !u!114 &751664189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6475,6 +6481,10 @@ PrefabInstance:
       propertyPath: lifeBar
       value: 
       objectReference: {fileID: 945888710}
+    - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: maxLife
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2251939802842896412, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -787.42
@@ -6518,6 +6528,10 @@ PrefabInstance:
     - target: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622399222926310414, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: _speed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

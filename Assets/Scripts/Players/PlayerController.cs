@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject oxygenBar;
     [SerializeField] private float attackSpeed = 10f;
     [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
+    [SerializeField] private KeyCode passOxygenKeyCode;
     [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
-
+    [SerializeField] private float oxygenTransferRate = 3f;
+    [SerializeField] GameObject otherPlayer;
+    
     private BarController oxygenBarController;
     private bool isTouchingOxygenGroup = false;
-
-
+    private bool isTouchingPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
     
@@ -40,6 +42,40 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+        if (Input.GetKeyDown(passOxygenKeyCode))
+        {
+            if (Input.GetKey(passOxygenKeyCode) && isTouchingPlayer && otherPlayer != null)
+            {
+                PassOxygen();
+            }
+            
+        }
+    }
+    
+    private void PassOxygen()
+    {
+        if (currentOxygenValue - oxygenTransferRate >= 0)
+        {
+            currentOxygenValue -= oxygenTransferRate;
+            PlayerController otherPlayerController = otherPlayer.GetComponent<PlayerController>();
+            if (otherPlayerController != null)
+            {
+                otherPlayerController.AddToOxygen(oxygenTransferRate);
+            }
+        }
+    }
+    
+    public void AddToOxygen(float amount)
+    {
+        if(currentOxygenValue + amount > maxTimeWithoutOxygen)
+        {
+            currentOxygenValue = maxTimeWithoutOxygen;
+        }
+        else
+        {
+            currentOxygenValue += amount;
+        }
+        oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
     }
 
     private void Attack()
@@ -70,6 +106,12 @@ public class PlayerController : MonoBehaviour
                 oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
             }
         }
+
+        if (collider.CompareTag("Player"))
+        {
+            isTouchingPlayer = true;
+        }
+        
     }
     
     
@@ -135,6 +177,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Oxygen grounp"))
         {
             isTouchingOxygenGroup = false;
+        }
+        if (other.CompareTag("Player"))
+        {
+            isTouchingPlayer = false;
         }
     }
     
