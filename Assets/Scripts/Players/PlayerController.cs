@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.CompareTag("Oxygen grounp"))
+        if (collider.CompareTag("Oxygen Platform"))
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
             currentOxygenValue -= oxygenDecreasedNumberFromInkCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
-        if (other.CompareTag("Oxygen grounp"))
+        if (other.CompareTag("Oxygen Platform"))
         {
             isTouchingOxygenGroup = true;
         }
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Oxygen grounp"))
+        if (other.CompareTag("Oxygen Platform"))
         {
             isTouchingOxygenGroup = false;
         }
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.CompareTag("Oxygen grounp"))
+        if (other.gameObject.CompareTag("Oxygen Platform"))
         {
             Debug.Log("Player is above the water!");
             currentOxygenValue += oxygenAddedAfterSecondInTheAir;
@@ -205,8 +205,6 @@ public class PlayerController : MonoBehaviour
         }
         if (currentOxygenValue > 0&& !isTouchingOxygenGroup)
         {
-            // if player is not touching gameobject with tag "Oxygen grounp" decrease the oxygen value by 1
-            
             currentOxygenValue -= 1f;
             Debug.Log("current oxygen value is: " + currentOxygenValue);
         }

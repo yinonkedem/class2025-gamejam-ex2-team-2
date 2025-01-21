@@ -101,15 +101,6 @@ private IEnumerator PrepareAndExecuteBoltAttack()
 {
     yield return new WaitForSeconds(timeEnemyPrepareToAttack);
     
-    //get game object with tag Right  Wwall position
-    
-    float rightWallPosition = GameObject.FindGameObjectWithTag("Right Wall").transform.position.x;
-    float leftWallPosition = GameObject.FindGameObjectWithTag("Left Wall").transform.position.x;
-    float groundPosition = GameObject.FindGameObjectWithTag("Bottom Wall").transform.position.y;
-    float waterEndingPosition = GameObject.FindGameObjectWithTag("Water Ending").transform.position.y;
-
-
-
     // Get references to both players
     GameObject[] players;
 
@@ -128,8 +119,10 @@ private IEnumerator PrepareAndExecuteBoltAttack()
             for (int j = 0; j < (numberOfBoltsInSingleAttack-1)/2; j++)
             {
                 // Ensure random position is within the range
-                float randomX = Mathf.Clamp(Random.Range(leftWallPosition, rightWallPosition), leftWallPosition, rightWallPosition);
-                float randomY = Mathf.Clamp(Random.Range(groundPosition, waterEndingPosition), groundPosition, waterEndingPosition);
+                float randomX = Mathf.Clamp(Random.Range(GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition),
+                    GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition);
+                float randomY = Mathf.Clamp(Random.Range(GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition),
+                    GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition);
 
                 Vector3 randomPosition = new Vector3(randomX, randomY, playerPosition.z); // Maintain Z position
                 GameObject additionalTarget = Instantiate(attackTargetPrefab, randomPosition, Quaternion.identity, GameObject.Find("Main").transform);
