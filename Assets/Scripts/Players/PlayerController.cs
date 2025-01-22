@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private GameObject currentAttack; 
     private float currentOxygenValue;
     
+    private InputManager inputManager;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +36,16 @@ public class PlayerController : MonoBehaviour
         InvokeRepeating("UpdateOxygen", 0f, 1f);  
     }
 
+    private void Awake()
+    {
+        inputManager = GetComponent<InputManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         UpdateOxygenBarPosition();
-        if (Input.GetKeyDown(attackKeyCode))
+        if (inputManager.AttackWasPressed)
         {
             Attack();
         }
