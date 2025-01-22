@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WallType
+{
+    LeftWall,
+    RightWall,
+    UpWall,
+    BottomStones
+}
+
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
@@ -9,6 +17,12 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField]
     private float _rotationSpeed;
+
+    [SerializeField]
+    private float minSpeed = 1f;
+
+    [SerializeField]
+    private float maxSpeed = 10f;
 
     private Rigidbody2D _rigidbody;
     private PlayerAwarenessController _playerAwarenessController;
@@ -41,9 +55,9 @@ public class EnemyMovement : MonoBehaviour
 
         if (_changeDirectionCooldown <= 0)
         {
-            float angleChange = Random.Range(-90f, 90f);
-            Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
-            _targetDirection = rotation * _targetDirection;
+            float angleChange = Random.Range(-45f, 45f); // Reduced angle range for smoother changes
+            _targetDirection = Quaternion.Euler(0, 0, angleChange) * _targetDirection;
+            _targetDirection.Normalize();
 
             _changeDirectionCooldown = Random.Range(1f, 5f);
         }
@@ -53,86 +67,93 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_playerAwarenessController.AwareOfPlayer)
         {
-            _targetDirection = _playerAwarenessController.DirectionToPlayer;
+            Vector2 directionToPlayer = _playerAwarenessController.DirectionToPlayer.normalized;
+            _targetDirection = Vector2.Lerp(_targetDirection, directionToPlayer, Time.deltaTime * 2f);
+            _targetDirection.Normalize();
         }
     }
 
     private void RotateTowardsTarget()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _targetDirection);
-        Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        // Calculate the desired angle in degrees
+        float desiredAngle = Mathf.Atan2(_targetDirection.y, _targetDirection.x) * Mathf.Rad2Deg - 90f;
 
-        _rigidbody.SetRotation(rotation);
+        // Get the current rotation angle of the Rigidbody2D
+        float currentAngle = _rigidbody.rotation;
+
+        // Smoothly rotate towards the desired angle using MoveTowardsAngle
+        float newAngle = Mathf.MoveTowardsAngle(currentAngle, desiredAngle, _rotationSpeed * Time.deltaTime);
+
+        // Apply the new rotation angle to the Rigidbody2D
+        _rigidbody.MoveRotation(newAngle);
     }
 
     private void SetVelocity()
     {
-        _rigidbody.velocity = transform.up * _speed;
+        _rigidbody.velocity = _targetDirection * _speed;
     }
-    
-    
-    private void HandleEnemyOffScreen(string wallKind)
+
+    private void HandleEnemyOffScreen(WallType wallType)
     {
-    
-        if (wallKind.Equals("Left Wall") || wallKind.Equals("Right Wall"))
+        switch (wallType)
         {
-            if (wallKind.Equals("Left Wall"))
-            {
-                if (_targetDirection.x > 0)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (_targetDirection.x < 0)
-                {
-                    return;
-                }
-            }
-            _targetDirection = new Vector2(-_targetDirection.x, _targetDirection.y);
+            case WallType.LeftWall:
+                if (_targetDirection.x > 0) return;
+                _targetDirection = new Vector2(-_targetDirection.x, _targetDirection.y);
+                break;
+            case WallType.RightWall:
+                if (_targetDirection.x < 0) return;
+                _targetDirection = new Vector2(-_targetDirection.x, _targetDirection.y);
+                break;
+            case WallType.BottomStones:
+                if (_targetDirection.y > 0) return;
+                _targetDirection = new Vector2(_targetDirection.x, -_targetDirection.y);
+                break;
+            case WallType.UpWall:
+                if (_targetDirection.y < 0) return;
+                _targetDirection = new Vector2(_targetDirection.x, -_targetDirection.y);
+                break;
         }
-    
-        else if (wallKind.Equals("Bottom Stones") || wallKind.Equals("Up Wall"))
-        {
-            if(wallKind.Equals("Bottom Stones"))
-            {
-                if(_targetDirection.y>0)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (_targetDirection.y < 0)
-                {
-                    return;
-                }
-            }
-            _targetDirection = new Vector2(_targetDirection.x, -_targetDirection.y);
-        }
+
+        _targetDirection.Normalize();
     }
-    
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Up Wall") || collision.gameObject.tag.Contains("Stones"))
+        WallType? wallType = GetWallTypeFromTag(collision.tag);
+        if (wallType.HasValue)
         {
-            HandleEnemyOffScreen(collision.tag);
+            HandleEnemyOffScreen(wallType.Value);
         }
     }
-    
-    //Add to speed function
-    public void AddToSpeed(float speedToAdd)
+
+    private WallType? GetWallTypeFromTag(string tag)
     {
-        _speed += speedToAdd;
+        switch (tag)
+        {
+            case "Left Wall":
+                return WallType.LeftWall;
+            case "Right Wall":
+                return WallType.RightWall;
+            case "Up Wall":
+                return WallType.UpWall;
+            case "Bottom Stones":
+                return WallType.BottomStones;
+            default:
+                return null;
+        }
     }
 
+    // Add to speed function with clamping
+    public void AddToSpeed(float speedToAdd)
+    {
+        _speed = Mathf.Clamp(_speed + speedToAdd, minSpeed, maxSpeed);
+    }
 
+    // Debugging aid
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)_targetDirection * 2f);
+    }
 }
-
-
-
-
-
-
