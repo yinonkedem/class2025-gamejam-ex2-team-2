@@ -30,11 +30,11 @@ MonoBehaviour:
   headWidth: 0.75
   wallDetectionRayLength: 0.125
   wallDetectionRayHeightMultiplier: 0.9
-  JumpHeight: 2
+  JumpHeight: 3
   JumpHeightCompensationFactor: 1.054
   TimeTillJumpApex: 0.35
   GravityOnReleaseMultiplier: 2
-  MaxFallSpeed: 6
+  MaxFallSpeed: 4
   NumberOfJumpsAllowed: 2
   ResetJumpsOnWallSlide: 1
   TimeForUpwardsCancel: 0.027
@@ -64,8 +64,8 @@ MonoBehaviour:
   DrawRight: 1
   ArcResolution: 20
   VisualizationSteps: 90
-  swimAcceleration: 5
-  swimDeceleration: 5
+  swimAcceleration: 9
+  swimDeceleration: 4
   swimMaxSpeed: 8
   swimVerticalSpeed: 10
   waterGravityScale: 0.5
