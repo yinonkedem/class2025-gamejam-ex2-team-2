@@ -45,10 +45,10 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionStrength: 1
-    - _Transparency: 0.77
+    - _Transparency: 0.26
     - _WaterSpeed: 0.05
     m_Colors:
-    - _Color: {r: 0, g: 0.1510554, b: 0.3660378, a: 1}
+    - _Color: {r: 0, g: 0.09100652, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6581607819866062798
 MonoBehaviour:

@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
-        if (Input.GetKeyDown(passOxygenKeyCode))
+        if (inputManager.Oxygen)
         {
-            if (Input.GetKey(passOxygenKeyCode) && isTouchingPlayer && otherPlayer != null)
+            if (isTouchingPlayer && otherPlayer != null)
             {
                 PassOxygen();
             }

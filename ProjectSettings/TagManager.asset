@@ -19,6 +19,9 @@ TagManager:
   - Mini Enemy
   - Water
   - Oxygen Platform
+  - Left Stones
+  - Right Stones
+  - Bottom Stones
   layers:
   - Default
   - TransparentFX
@@ -26,7 +29,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

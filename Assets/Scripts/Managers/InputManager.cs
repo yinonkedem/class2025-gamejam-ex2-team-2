@@ -12,12 +12,14 @@ public class InputManager : MonoBehaviour
     public bool RunIsHeld;
     public bool DashWasPressed;
     public bool AttackWasPressed;
+    public bool Oxygen;
 
     private InputAction _moveAction;
     private InputAction _jumpAction;
     private InputAction _runAction;
     private InputAction _dashAction;
     private InputAction _attackAction;
+    private InputAction _oxygenAction;
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class InputManager : MonoBehaviour
         _runAction = playerInput.actions["Run"];
         _dashAction = playerInput.actions["Dash"];
         _attackAction = playerInput.actions["Attack"];
+        _oxygenAction = playerInput.actions["PassOxygen"];
     }
 
     private void Update()
@@ -42,6 +45,8 @@ public class InputManager : MonoBehaviour
         DashWasPressed = _dashAction.WasPressedThisFrame();
         
         AttackWasPressed = _attackAction.WasPressedThisFrame();
+        
+        Oxygen = _oxygenAction.WasPressedThisFrame();
         
         // Debug.Log("Movement Input: " + Movement);
     }

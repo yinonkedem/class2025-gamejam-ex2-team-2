@@ -93,9 +93,9 @@ public class EnemyMovement : MonoBehaviour
             _targetDirection = new Vector2(-_targetDirection.x, _targetDirection.y);
         }
     
-        else if (wallKind.Equals("Bottom Wall") || wallKind.Equals("Up Wall"))
+        else if (wallKind.Equals("Bottom Stones") || wallKind.Equals("Up Wall"))
         {
-            if(wallKind.Equals("Bottom Wall"))
+            if(wallKind.Equals("Bottom Stones"))
             {
                 if(_targetDirection.y>0)
                 {
@@ -116,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Contains("Wall"))
+        if (collision.gameObject.CompareTag("Up Wall") || collision.gameObject.tag.Contains("Stones"))
         {
             HandleEnemyOffScreen(collision.tag);
         }

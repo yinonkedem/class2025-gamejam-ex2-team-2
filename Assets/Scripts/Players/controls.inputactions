@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PassOxygen",
+                    "type": "Button",
+                    "id": "b9627554-7d99-4b24-8e93-6e08df699f9d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -164,17 +173,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b082a341-7d7d-4564-802e-e7ec3e4b65d1",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "12536226-bcbf-4616-a37b-64694879afba",
                     "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
@@ -238,6 +236,17 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60c65975-5816-4769-9e9f-639b8f9a11c0",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PassOxygen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -285,6 +294,15 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "e320b318-4044-41a9-a1e0-97056aa3b275",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PassOxygen",
+                    "type": "Button",
+                    "id": "7895ad0d-1b47-4d76-9e47-924aa32b77fc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -350,7 +368,7 @@
                 {
                     "name": "",
                     "id": "b42713d7-7626-48c5-b2c5-3dd9cca4a374",
-                    "path": "<Keyboard>/comma",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -372,7 +390,7 @@
                 {
                     "name": "",
                     "id": "cba103be-51ad-4a20-bb4e-78487c7c1904",
-                    "path": "<Keyboard>/m",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -383,11 +401,22 @@
                 {
                     "name": "",
                     "id": "32a675c6-c0aa-4e6e-9885-7933b7d32b04",
-                    "path": "<Keyboard>/period",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec854a67-0aad-4942-9ce8-a3899783faed",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PassOxygen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
