@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     private BarController lifeBarController;
     private bool isDead = false; 
     private Animator _animator;
-    
+    private bool isHit;
     private void Start()
     {
         currentLife = maxLife;
@@ -37,11 +37,13 @@ public class EnemyController : MonoBehaviour
         // if the othertag is with tag shot socall to decrease life function
         if (collision.gameObject.CompareTag("Shot"))
         {
+            StartCoroutine(WaitForHitAnimation());
             //desrtroy the shot
             Destroy(collision.gameObject);
             DecreaseLife();
         }
     }
+    
 
     private void DecreaseLife()
     {
@@ -49,8 +51,6 @@ public class EnemyController : MonoBehaviour
         lifeBarController.updateBar(currentLife,maxLife);
         if (currentLife <=0)
         {
-            isDead = true;
-            _animator.SetBool("isDead", isDead);
             StartCoroutine(WaitForDeathAnimation());
         }
         Debug.Log("Enemy life decreased");
@@ -59,12 +59,26 @@ public class EnemyController : MonoBehaviour
     // function that wait until call Die() for Animation clip death time
     private IEnumerator WaitForDeathAnimation()
     {
+        isDead = true;
+        _animator.SetBool("isDead", isDead);
         Destroy(Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject));
         // Wait for the length of the death animation clip
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
         
         // Call the Die method after the animation finishes
         Die();
+    }
+    
+    private IEnumerator WaitForHitAnimation()
+    {
+        isHit = true;
+        _animator.SetBool("isHit", isHit);
+//        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(0.2f);
+
+        isHit = false;
+        _animator.SetBool("isHit", isHit);
+
     }
     
 
