@@ -11,6 +11,7 @@ public class PlayerAwarenessController : MonoBehaviour
     private float _playerAwarenessDistance;
 
     private Transform[] _players;
+    private Animator _animator;
 
 
     private void Awake()
@@ -22,6 +23,7 @@ public class PlayerAwarenessController : MonoBehaviour
         {
             _players[i] = players[i].transform;
         }
+        _animator = GetComponent<Animator>();
     }
     
     
@@ -41,6 +43,7 @@ public class PlayerAwarenessController : MonoBehaviour
                 if (distanceToPlayer <= closestDistance)
                 {
                     Debug.Log("Enemy is close");
+                    _animator.SetBool("isInkActive", true);
                     GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
                     if (ink != null)
                     {
@@ -61,6 +64,8 @@ public class PlayerAwarenessController : MonoBehaviour
             if (ink != null)
             {
                 ink.SetActive(false);
+                _animator.SetBool("isInkActive", false);
+
             }
         }
 
