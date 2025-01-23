@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
     [SerializeField] private float oxygenTransferRate = 3f;
     [SerializeField] GameObject otherPlayer;
+    [SerializeField] private float oxygenDecreasedNumberFromMiniEnemyExplosion = 7f;
     
     private BarController oxygenBarController;
     private bool isTouchingOxygenGroup = false;
@@ -33,7 +34,9 @@ public class PlayerController : MonoBehaviour
         currentOxygenValue = maxTimeWithoutOxygen;
         oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
-        InvokeRepeating("UpdateOxygen", 0f, 1f);  
+        InvokeRepeating("UpdateOxygen", 0f, 1f); 
+        EventManager.Instance.StartListening(EventManager.EVENT_DECREASE_PLAYER_LIFE,DecreasePlayerLifeAfterTouchMiniEnemyExplosion );
+
     }
 
     private void Awake()
@@ -57,6 +60,11 @@ public class PlayerController : MonoBehaviour
             }
             
         }
+    }
+    private void DecreasePlayerLifeAfterTouchMiniEnemyExplosion(GameObject data)
+    {
+        currentOxygenValue -= oxygenDecreasedNumberFromMiniEnemyExplosion;
+        oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
     }
     
     private void PassOxygen()
@@ -222,7 +230,6 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        GameManager.Instance.ArePlayersDefeated = true;
         Debug.Log("Player is dead");
         Destroy(gameObject);
         Destroy(oxygenBar);

@@ -11,21 +11,18 @@ public class EnemyController : MonoBehaviour
 
     private int currentLife;
     private BarController lifeBarController;
-
+    private bool isDead = false; 
+    private Animator _animator;
+    
     private void Start()
     {
         currentLife = maxLife;
         lifeBarController = lifeBar.GetComponent<BarController>();
         lifeBarController.updateBar(currentLife,maxLife);
-
+        _animator = GetComponent<Animator>();
     }
 
-    // private void Update()
-    // {
-    //     UpdateLifeBarPosition();
-    //
-    // }
-    //
+
     private void UpdateLifeBarPosition()
     {
         // Set the oxygen bar's position relative to the player
@@ -50,12 +47,26 @@ public class EnemyController : MonoBehaviour
     {
         currentLife -= decreaseLifeCountWhenGetHit;
         lifeBarController.updateBar(currentLife,maxLife);
-        if (currentLife <= 0 && !GameManager.Instance.ArePlayersDefeated)
+        if (currentLife <=0)
         {
-            Die();
+            isDead = true;
+            _animator.SetBool("isDead", isDead);
+            StartCoroutine(WaitForDeathAnimation());
         }
         Debug.Log("Enemy life decreased");
     }
+    
+    // function that wait until call Die() for Animation clip death time
+    private IEnumerator WaitForDeathAnimation()
+    {
+        Destroy(Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject));
+        // Wait for the length of the death animation clip
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
+        
+        // Call the Die method after the animation finishes
+        Die();
+    }
+    
 
     private void Die()
     {

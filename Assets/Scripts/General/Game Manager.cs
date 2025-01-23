@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float timeOfAttack = 10f;
     
     private bool arePlayerWon = false;
-    private bool arePlayersDefeated = false;
     private float rightWallPosition;
     private float leftWallPosition;
     private float groundPosition;
@@ -21,7 +20,6 @@ public class GameManager : Singleton<GameManager>
     public float LeftWallPosition => leftWallPosition;
     public float GroundPosition => groundPosition;
     public float WaterEndingPosition => waterEndingPosition;
-    public float TimeToAllowPlayerToAttack => timeToAllowPlayerToAttack;
 
     //create getter and setters for the private variables
 
@@ -40,11 +38,6 @@ public class GameManager : Singleton<GameManager>
         set => arePlayerWon = value;
     }
     
-    public bool ArePlayersDefeated
-    {
-        get => arePlayersDefeated;
-        set => arePlayersDefeated = value;
-    }
     
     private void Update()
     {
@@ -58,7 +51,6 @@ public class GameManager : Singleton<GameManager>
         // if there is not object with tag Player
         if (players.Length == 0)
         {
-            arePlayersDefeated = true;
             Debug.Log("Game Over");
             ScreenChanger.Instance.ActivateGameOver();
         }

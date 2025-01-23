@@ -12,10 +12,7 @@ public class EventManager : Singleton<EventManager>
     }
     private class Event : UnityEvent<GameObject> { } //empty class; just needs to exist
     private Dictionary<string, Event> eventDictionary;
-    public const string EVENT_GREY_PLAYER_HIT_FROM_ATTACK = "Event: hit logic when grey player get hit";
-    public const string EVENT_PINK_PLAYER_HIT_FROM_ATTACK = "Event: hit logic when pink player get hit";
-    public const string EVENT_PINK_PLAYER_DIE = "Event: pink player die";
-    public const string EVENT_GREY_PLAYER_DIE = "Event: grey player die";
+    public const string EVENT_DECREASE_PLAYER_LIFE = "Event: decrese the player's life";
 
 
 

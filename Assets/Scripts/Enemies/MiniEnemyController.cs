@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,9 @@ public class MiniEnemyController : MonoBehaviour
     [SerializeField] private int lifeCount = 2; // Number of lives
 
     private GameObject[] lives; // To keep track of instantiated life objects
-
+    private bool isDead = false;
+    private Animator _animator;
+    
     void Start()
     {
         // Initialize lives
@@ -18,6 +21,7 @@ public class MiniEnemyController : MonoBehaviour
             Vector3 offset = new Vector3(i * 0.5f, -1, 0); // Slight offset for visualization
             lives[i] = Instantiate(miniEnemyLifePrefab, transform.position + offset, Quaternion.identity, transform);
         }
+        _animator = GetComponent<Animator>();
     }
 
 
@@ -29,6 +33,19 @@ public class MiniEnemyController : MonoBehaviour
             //desrtroy the shot
             Destroy(collision.gameObject);
             DestroyLife();
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {                
+            EventManager.Instance.TriggerEvent(EventManager.EVENT_DECREASE_PLAYER_LIFE, gameObject);
+
+            if (!isDead)
+            {
+                // call even of dicrease life for player
+                isDead = true;
+                _animator.SetBool("isDead", isDead);
+                StartCoroutine(WaitForDeathAnimation());
+            }
         }
     }
 
@@ -45,10 +62,29 @@ public class MiniEnemyController : MonoBehaviour
             }
         }
 
-        // If no lives remain, destroy the MiniEnemy
         if (lifeCount <= 0)
         {
-            Destroy(gameObject);
+            isDead = true;
+            _animator.SetBool("isDead", isDead);
+            StartCoroutine(WaitForDeathAnimation());
+
         }
+    }
+    
+    private IEnumerator WaitForDeathAnimation()
+    {
+        Destroy(Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject));
+        // Wait for the length of the death animation clip
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
+        
+        // Call the Die method after the animation finishes
+        Die();
+    }
+    
+
+    private void Die()
+    {
+        Debug.Log("Mini Enemy is dead");
+        Destroy(gameObject);
     }
 }
