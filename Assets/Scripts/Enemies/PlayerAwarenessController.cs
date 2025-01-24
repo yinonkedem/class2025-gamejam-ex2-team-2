@@ -71,6 +71,10 @@ public class PlayerAwarenessController : MonoBehaviour
 
         AwareOfPlayer = closestPlayer != null;
     }
+    public void AddAwarenessDistance(float distanceToAdd)
+    {
+        _playerAwarenessDistance += distanceToAdd;
+    }
 
     
     

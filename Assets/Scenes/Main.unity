@@ -434,8 +434,6 @@ MonoBehaviour:
   oxygenDecreasedNumberWhenShooting: 1
   oxygenBar: {fileID: 783652924}
   attackSpeed: 10
-  attackKeyCode: 279
-  passOxygenKeyCode: 111
   oxygenDecreasedNumberFromBoltAttack: 7
   oxygenTransferRate: 3
   otherPlayer: {fileID: 751664180}
@@ -2490,8 +2488,6 @@ MonoBehaviour:
   oxygenDecreasedNumberWhenShooting: 1
   oxygenBar: {fileID: 929996173}
   attackSpeed: 10
-  attackKeyCode: 101
-  passOxygenKeyCode: 116
   oxygenDecreasedNumberFromBoltAttack: 7
   oxygenTransferRate: 3
   otherPlayer: {fileID: 107901565}
@@ -6290,6 +6286,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
     - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: increaseEnemySpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: timeBetweenTargetToBolt
       value: 0.8
       objectReference: {fileID: 0}
@@ -6297,13 +6297,17 @@ PrefabInstance:
       propertyPath: numberOfBoltsInSingleAttack
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: timeBetweenEachBoltAttackRound
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: lifeBar
       value: 
       objectReference: {fileID: 945888710}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: maxLife
-      value: 20
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2251939802842896412, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_LocalPosition.x

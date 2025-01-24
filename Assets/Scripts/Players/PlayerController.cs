@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float oxygenDecreasedNumberWhenShooting = 1f;
     [SerializeField] private GameObject oxygenBar;
     [SerializeField] private float attackSpeed = 10f;
-    [SerializeField] private KeyCode attackKeyCode = KeyCode.End;
-    [SerializeField] private KeyCode passOxygenKeyCode;
     [SerializeField] private float oxygenDecreasedNumberFromBoltAttack = 5f;
     [SerializeField] private float oxygenTransferRate = 3f;
     [SerializeField] GameObject otherPlayer;

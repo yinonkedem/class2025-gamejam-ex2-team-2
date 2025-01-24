@@ -11,22 +11,16 @@ public class AttacksController : MonoBehaviour
 
     [SerializeField] private int numberOfBoltsInSingleAttack = 2;
     [SerializeField] private float timeBetweenEachBoltAttackRound = 10f;
-    [SerializeField] private int numberOfMiniEnemies = 2;
-    [SerializeField] private float timeToStayMiniEnemies = 40f;  
     [SerializeField] private float timeEnemyPrepareToAttack = 3f;
     [SerializeField] private float timeBetweenTargetToBolt = 2f; 
-    [SerializeField] private float timeUntilFirdtAttackStart = 5f;
     [SerializeField] private GameObject attackTargetPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject enemyPrefabType2;
     [SerializeField] private GameObject boltAttackPrefab;
-    [SerializeField] private int numberOfBoltsAttackRounded = 4;
-    [SerializeField] private int numberOfAttacks = 3;
-    [SerializeField] private float speedAddedEachLevel = 0.7f;
-    [SerializeField] private float sizeAddedEachLevel = 0.7f;
     [SerializeField] private float increaseEnemySpeed = 0.5f;
     [SerializeField] private float increaseEnemySize = 0.4f;
     [SerializeField] private float timeBetweenEachCreationOfMiniEnemies = 15f;
+    [SerializeField] private float awarenessToAddInStage3 = 2f;
     
     private Animator _animator;
     
@@ -50,7 +44,9 @@ public class AttacksController : MonoBehaviour
     private IEnumerator PrepareAndExecuteExtraMiniEnemiesAttack()
     {
         transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
-        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
+        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed-0.3f);
+        GetComponent<PlayerAwarenessController>().AddAwarenessDistance(awarenessToAddInStage3);
+
         while (true)
         {
             _animator.SetBool("isPrepareToAttack", true);
