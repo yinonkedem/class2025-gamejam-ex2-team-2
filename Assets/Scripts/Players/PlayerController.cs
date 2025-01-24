@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float oxygenTransferRate = 3f;
     [SerializeField] GameObject otherPlayer;
     [SerializeField] private float oxygenDecreasedNumberFromMiniEnemyExplosion = 7f;
-    
+    [SerializeField] private float oxygenDecreasedNumberFromEnemyCollision = 3f;
     private BarController oxygenBarController;
     private bool isTouchingOxygenGroup = false;
     private bool isTouchingPlayer = false;
@@ -127,6 +127,15 @@ public class PlayerController : MonoBehaviour
             isTouchingPlayer = true;
         }
         
+
+
+        if (collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Player is hit by enemy");
+            currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
+        
     }
     
     
@@ -185,7 +194,18 @@ public class PlayerController : MonoBehaviour
             isTouchingOxygenGroup = true;
         }
 
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Player is hit by enemy");
+            currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
+
     }
+    
+   
+
+
     
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -221,7 +241,6 @@ public class PlayerController : MonoBehaviour
         if (currentOxygenValue > 0&& !isTouchingOxygenGroup)
         {
             currentOxygenValue -= 1f;
-            Debug.Log("current oxygen value is: " + currentOxygenValue);
         }
 
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);

@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false; 
     private Animator _animator;
     private bool isHit;
+    private int currentStage = 1;
+    
     private void Start()
     {
         currentLife = maxLife;
@@ -22,15 +24,35 @@ public class EnemyController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-
-    private void UpdateLifeBarPosition()
+    private void Update()
     {
-        // Set the oxygen bar's position relative to the player
-        Vector3 lifeBarPosition = transform.position; // Get the player's position
-        lifeBarPosition.y += 2f;  // Offset to place it above the player
-        lifeBar.transform.position = lifeBarPosition;  // Update oxygen bar's position
-    }
+        Debug.Log("Current Life: " + currentLife);
+        if (currentLife < maxLife * 2 / 3 && currentLife > maxLife * 1/3)
+        {
+            if (currentStage != 2)
+            {
+                currentStage = 2;
+                
+               //change life bar fill color A to be 200
+                lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
+                GetComponent<AttacksController>().StartBoltAttack();
 
+            }
+        }
+        else if (currentLife <= maxLife * 1 / 3)
+        {
+            if (currentStage != 3)
+            {
+                currentStage = 3;
+                //change life bar fill color A to be 255
+                lifeBarController.updateBarColor(new Color(1,0,0,1));
+
+                GetComponent<AttacksController>().StartMiniEnemiesAttack();
+            }
+        }
+    }
+    
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,7 +82,8 @@ public class EnemyController : MonoBehaviour
     private IEnumerator WaitForDeathAnimation()
     {
         isDead = true;
-        _animator.SetBool("isDead", isDead);
+        _animator.SetBool("isDead", isDead);    
+        
         Destroy(Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject));
         // Wait for the length of the death animation clip
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
@@ -88,4 +111,6 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Enemy is dead");
         ScreenChanger.Instance.ActivateWinningGame();
     }
+    
+    
 }

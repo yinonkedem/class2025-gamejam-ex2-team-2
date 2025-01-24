@@ -5,15 +5,14 @@ using UnityEngine;
 public class MiniEnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject miniEnemyLifePrefab; // Prefab for the MiniEnemyLife
-    [SerializeField] private int lifeCount = 2; // Number of lives
-
     private GameObject[] lives; // To keep track of instantiated life objects
     private bool isDead = false;
     private Animator _animator;
-    
+    [SerializeField] private int lifeCount; // Number of lives
+    [SerializeField] private int miniEnemyType;
+
     void Start()
     {
-        // Initialize lives
         lives = new GameObject[lifeCount];
         for (int i = 0; i < lifeCount; i++)
         {
@@ -27,31 +26,31 @@ public class MiniEnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if the othertag is with tag shot socall to decrease life function
         if (collision.gameObject.CompareTag("Shot"))
         {
-            //desrtroy the shot
             Destroy(collision.gameObject);
             DestroyLife();
         }
 
         if (collision.gameObject.CompareTag("Player"))
-        {                
-            EventManager.Instance.TriggerEvent(EventManager.EVENT_DECREASE_PLAYER_LIFE, gameObject);
-
-            if (!isDead)
+        {
+            if (miniEnemyType == 1)
             {
-                // call even of dicrease life for player
-                isDead = true;
-                _animator.SetBool("isDead", isDead);
-                StartCoroutine(WaitForDeathAnimation());
+                EventManager.Instance.TriggerEvent(EventManager.EVENT_DECREASE_PLAYER_LIFE, gameObject);
+
+                if (!isDead)
+                {
+                    // call even of dicrease life for player
+                    isDead = true;
+                    _animator.SetBool("isDead", isDead);
+                    StartCoroutine(WaitForDeathAnimation());
+                }
             }
         }
     }
 
     private void DestroyLife()
     {
-        // Reduce life count and destroy the last life prefab if it exists
         if (lifeCount > 0)
         {
             lifeCount--;
@@ -64,8 +63,11 @@ public class MiniEnemyController : MonoBehaviour
 
         if (lifeCount <= 0)
         {
-            isDead = true;
-            _animator.SetBool("isDead", isDead);
+            if (miniEnemyType == 1)
+            {
+                isDead = true;
+                _animator.SetBool("isDead", isDead);    
+            }
             StartCoroutine(WaitForDeathAnimation());
 
         }
@@ -75,7 +77,11 @@ public class MiniEnemyController : MonoBehaviour
     {
         Destroy(Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject));
         // Wait for the length of the death animation clip
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
+        if (miniEnemyType == 1)
+        {
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
+            
+        }
         
         // Call the Die method after the animation finishes
         Die();

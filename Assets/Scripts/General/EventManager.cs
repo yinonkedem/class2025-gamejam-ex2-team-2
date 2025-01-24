@@ -13,8 +13,9 @@ public class EventManager : Singleton<EventManager>
     private class Event : UnityEvent<GameObject> { } //empty class; just needs to exist
     private Dictionary<string, Event> eventDictionary;
     public const string EVENT_DECREASE_PLAYER_LIFE = "Event: decrese the player's life";
-
-
+    public const string EVENT_START_STAGE2_ENEMY_ATTACK = "Event: start enemy attack of stage2";
+    public const string EVENT_START_STAGE3_ENEMY_ATTACK = "Event: start enemy attack of stage2";
+    
 
 
     private void Init()

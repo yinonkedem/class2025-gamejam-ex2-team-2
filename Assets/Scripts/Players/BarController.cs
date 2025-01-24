@@ -14,12 +14,9 @@ public class BarController : MonoBehaviour
         slider.value = currentOxygen / maxOxygen;
     }
     
-    public void PreventFlip()
+    public void updateBarColor(Color color)
     {
-        // Ensure the oxygen bar's x-scale is always positive
-        Vector3 localScale = transform.localScale;
-        localScale.x = Mathf.Abs(localScale.x); // Force x scale to be positive
-        transform.localScale = localScale;
+        slider.fillRect.GetComponent<Image>().color = color;
     }
     
     

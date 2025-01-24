@@ -13,199 +13,134 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private float timeBetweenEachBoltAttackRound = 10f;
     [SerializeField] private int numberOfMiniEnemies = 2;
     [SerializeField] private float timeToStayMiniEnemies = 40f;  
-    [SerializeField] private float timeEnemyPrepareToAttack = 2f;
+    [SerializeField] private float timeEnemyPrepareToAttack = 3f;
     [SerializeField] private float timeBetweenTargetToBolt = 2f; 
     [SerializeField] private float timeUntilFirdtAttackStart = 5f;
     [SerializeField] private GameObject attackTargetPrefab;
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefabType2;
     [SerializeField] private GameObject boltAttackPrefab;
     [SerializeField] private int numberOfBoltsAttackRounded = 4;
     [SerializeField] private int numberOfAttacks = 3;
     [SerializeField] private float speedAddedEachLevel = 0.7f;
     [SerializeField] private float sizeAddedEachLevel = 0.7f;
-
+    [SerializeField] private float increaseEnemySpeed = 0.5f;
+    [SerializeField] private float increaseEnemySize = 0.4f;
+    [SerializeField] private float timeBetweenEachCreationOfMiniEnemies = 15f;
     
-    private Dictionary<int, System.Action> attacks = new Dictionary<int, System.Action>();
-    private int currentAttack = -1;
     private Animator _animator;
-    private int level=-1;
-
-    private bool isAttackOver = false;
-    //private int attackLevel =1;
+    
     
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
         Invoke("StartCoroutineDelayed", 5f);
-        attacks.Add(-1, StartSwimmingWithoutAttacks);
-        attacks.Add(2, StartExtraMiniEnemiesAttack);
-        attacks.Add(1, StartBoltAttack);
     }
     
-    private void StartSwimmingWithoutAttacks()
-    {
-        //wait for 20 seconds
-        StartCoroutine(WaitForSwimmingWithoutAttacks());
-    }
     
-    private IEnumerator WaitForSwimmingWithoutAttacks()
-    {
-        yield return new WaitForSeconds(5f);
-        isAttackOver = true;
 
-    }
-    
-    private void StartExtraMiniEnemiesAttack()
+    public void StartMiniEnemiesAttack()
     {
-        //check if there exists more than 1 gameobjects with tag Mini Enemy
-        if (GameObject.FindGameObjectsWithTag("Mini Enemy").Length >= numberOfMiniEnemies)
-        {
-            return;
-        }
+        Debug.Log("Start Mini Enemies Attack");
         StartCoroutine(PrepareAndExecuteExtraMiniEnemiesAttack());
     }
 
+    
     private IEnumerator PrepareAndExecuteExtraMiniEnemiesAttack()
     {
-        //create list of gameobject of sixe numberOfMiniEnemies
-        if (level > numberOfAttacks)
+        transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
+        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
+        while (true)
         {
-            numberOfMiniEnemies += level/numberOfAttacks;
-        }
-        GameObject[] miniEnemies = new GameObject[numberOfMiniEnemies];
-        for (int i = 0; i < numberOfMiniEnemies; i++)
-        {
+            _animator.SetBool("isPrepareToAttack", true);
+            yield return new WaitForSeconds(timeEnemyPrepareToAttack);
+
             GameObject miniEnemy=Instantiate(enemyPrefab, transform.position, Quaternion.identity, GameObject.Find("Enemies").transform);
-            miniEnemies[i] = miniEnemy;
             GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(miniEnemy.transform);
+            
+            GameObject miniEnemyType2=Instantiate(enemyPrefabType2, transform.position, Quaternion.identity, GameObject.Find("Enemies").transform);
+            GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(miniEnemyType2.transform);
+            
+            _animator.SetBool("isPrepareToAttack", false);
+            yield return new WaitForSeconds(timeBetweenEachCreationOfMiniEnemies);
         }
-        
-        yield return new WaitForSeconds(timeToStayMiniEnemies) ;
-        foreach (GameObject miniEnemy in miniEnemies)
-        {
-            Destroy(miniEnemy);
-        }
-        isAttackOver = true;
+
     }
 
     
-    private void StartBoltAttack()
+    public void StartBoltAttack()
     {
+        Debug.Log("Start Bolt Attack");
+        _animator.SetBool("isPrepareToAttack", true);
         StartCoroutine(PrepareAndExecuteBoltAttack());
     }
 
 
     
-private IEnumerator PrepareAndExecuteBoltAttack()
-{
-    yield return new WaitForSeconds(timeEnemyPrepareToAttack);
-    
-    // Get references to both players
-    GameObject[] players;
-
-    for (int i = 0; i < numberOfBoltsAttackRounded; i++)
+    private IEnumerator PrepareAndExecuteBoltAttack()
     {
-        List<GameObject> attackTargets = new List<GameObject>();
-        players = GameObject.FindGameObjectsWithTag("Player");
-        // Create 1 bolt on each player's position
-        foreach (GameObject player in players)
-        {
-            Vector3 playerPosition = player.transform.position;
-            GameObject playerTarget = Instantiate(attackTargetPrefab, playerPosition, Quaternion.identity, GameObject.Find("Main").transform);
-            attackTargets.Add(playerTarget);
+        transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
+        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
+        yield return new WaitForSeconds(timeEnemyPrepareToAttack);
 
-            // Create 3 additional random targets near each player within the specified range
-            for (int j = 0; j < (numberOfBoltsInSingleAttack-1)/2; j++)
-            {
-                // Ensure random position is within the range
-                float randomX = Mathf.Clamp(Random.Range(GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition),
-                    GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition);
-                float randomY = Mathf.Clamp(Random.Range(GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition),
-                    GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition);
+        
+        // Get references to both players
+        GameObject[] players;
 
-                Vector3 randomPosition = new Vector3(randomX, randomY, playerPosition.z); // Maintain Z position
-                GameObject additionalTarget = Instantiate(attackTargetPrefab, randomPosition, Quaternion.identity, GameObject.Find("Main").transform);
-                attackTargets.Add(additionalTarget);
-            }
-        }
-
-        yield return new WaitForSeconds(timeBetweenTargetToBolt);
-
-        // Create bolts for all targets simultaneously
-        List<GameObject> bolts = new List<GameObject>();
-        foreach (GameObject target in attackTargets)
-        {
-            GameObject boltAttack = Instantiate(boltAttackPrefab, target.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
-            bolts.Add(boltAttack);
-            Destroy(target); // Destroy the target after creating the bolt
-        }
-
-        // Wait for bolt animations to complete
-        float boltAnimationTime = bolts[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-        yield return new WaitForSeconds(boltAnimationTime);
-
-        // Destroy all bolts
-        foreach (GameObject bolt in bolts)
-        {
-            Destroy(bolt);
-        }
-
-        yield return new WaitForSeconds(timeBetweenEachBoltAttackRound);
-    }
-    
-    currentAttack = -1;
-    _animator.SetInteger("numberOfAttack", currentAttack);
-    isAttackOver = true;
-}
-
-
-
-
-    
-    private Vector3 GetRandomPlayerPosition()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject randomPlayer = players[Random.Range(0, players.Length)];
-        return randomPlayer.transform.position;
-    }
-
-
-    void StartCoroutineDelayed()
-    {
-        _animator.SetInteger("numberOfAttack", currentAttack);
-        StartCoroutine(SwitchAttacks());
-    }
-
-    
-    private IEnumerator SwitchAttacks()
-    {
-        yield return new WaitForSeconds(timeUntilFirdtAttackStart);  // Initial pause
-    
         while (true)
         {
-            
-            foreach (int attackIndex in attacks.Keys)
+            _animator.SetBool("isPrepareToAttack", false);
+            List<GameObject> attackTargets = new List<GameObject>();
+            players = GameObject.FindGameObjectsWithTag("Player");
+            // Create 1 bolt on each player's position
+            foreach (GameObject player in players)
             {
-                level++;
-                //increase enemy size and speed according to the level
-                if (level % 3 == 0 && level != 0)
-                {
-                    transform.localScale += new Vector3(0.3f, 0.3f, 0.3f);
-                    GetComponent<EnemyMovement>().AddToSpeed(0.3f);
-                }
+                Vector3 playerPosition = player.transform.position;
+                GameObject playerTarget = Instantiate(attackTargetPrefab, playerPosition, Quaternion.identity, GameObject.Find("Main").transform);
+                attackTargets.Add(playerTarget);
 
-                currentAttack = attackIndex;
-                attacks[attackIndex].Invoke();
-                _animator.SetInteger("numberOfAttack", currentAttack);
-                Debug.Log($"Switching to Attack {currentAttack}");
-                //not continue until isAttackOver is true
-                while (!isAttackOver)
+                // Create 3 additional random targets near each player within the specified range
+                for (int j = 0; j < (numberOfBoltsInSingleAttack-1)/2; j++)
                 {
-                    yield return null;
+                    // Ensure random position is within the range
+                    float randomX = Mathf.Clamp(Random.Range(GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition),
+                        GameManager.Instance.LeftWallPosition, GameManager.Instance.RightWallPosition);
+                    float randomY = Mathf.Clamp(Random.Range(GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition),
+                        GameManager.Instance.GroundPosition, GameManager.Instance.WaterEndingPosition);
+
+                    Vector3 randomPosition = new Vector3(randomX, randomY, playerPosition.z); // Maintain Z position
+                    GameObject additionalTarget = Instantiate(attackTargetPrefab, randomPosition, Quaternion.identity, GameObject.Find("Main").transform);
+                    attackTargets.Add(additionalTarget);
                 }
-                isAttackOver = false;
             }
+
+            yield return new WaitForSeconds(timeBetweenTargetToBolt);
+
+            _animator.SetBool("isPrepareToAttack", false);
+
+            // Create bolts for all targets simultaneously
+            List<GameObject> bolts = new List<GameObject>();
+            foreach (GameObject target in attackTargets)
+            {
+                GameObject boltAttack = Instantiate(boltAttackPrefab, target.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
+                bolts.Add(boltAttack);
+                Destroy(target); // Destroy the target after creating the bolt
+            }
+
+            // Wait for bolt animations to complete
+            float boltAnimationTime = bolts[0].GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            yield return new WaitForSeconds(boltAnimationTime);
+
+            // Destroy all bolts
+            foreach (GameObject bolt in bolts)
+            {
+                Destroy(bolt);
+            }
+
+            yield return new WaitForSeconds(timeBetweenEachBoltAttackRound);
         }
+        
     }
+
 }
