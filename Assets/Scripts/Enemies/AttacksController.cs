@@ -20,7 +20,6 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private float increaseEnemySpeed = 0.5f;
     [SerializeField] private float increaseEnemySize = 0.4f;
     [SerializeField] private float timeBetweenEachCreationOfMiniEnemies = 15f;
-    [SerializeField] private float awarenessToAddInStage3 = 2f;
     
     private Animator _animator;
     
@@ -43,9 +42,6 @@ public class AttacksController : MonoBehaviour
     
     private IEnumerator PrepareAndExecuteExtraMiniEnemiesAttack()
     {
-        transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
-        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed-0.3f);
-        GetComponent<PlayerAwarenessController>().AddAwarenessDistance(awarenessToAddInStage3);
 
         while (true)
         {
@@ -68,7 +64,6 @@ public class AttacksController : MonoBehaviour
     public void StartBoltAttack()
     {
         Debug.Log("Start Bolt Attack");
-        _animator.SetBool("isPrepareToAttack", true);
         StartCoroutine(PrepareAndExecuteBoltAttack());
     }
 
@@ -78,7 +73,7 @@ public class AttacksController : MonoBehaviour
     {
         transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
         GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
-        yield return new WaitForSeconds(timeEnemyPrepareToAttack);
+
 
         
         // Get references to both players
@@ -86,7 +81,8 @@ public class AttacksController : MonoBehaviour
 
         while (true)
         {
-            _animator.SetBool("isPrepareToAttack", false);
+            _animator.SetBool("isPrepareToAttack", true);
+            yield return new WaitForSeconds(timeEnemyPrepareToAttack);
             List<GameObject> attackTargets = new List<GameObject>();
             players = GameObject.FindGameObjectsWithTag("Player");
             // Create 1 bolt on each player's position

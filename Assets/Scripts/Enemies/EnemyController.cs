@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         Debug.Log("Current Life: " + currentLife);
-        if (currentLife < maxLife * 2 / 3 && currentLife > maxLife * 1/3)
+        if (currentLife < (maxLife * 2 / 3 + 17) && currentLife > (maxLife * 1/3 + 17))
         {
             if (currentStage != 2)
             {
@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
 
             }
         }
-        else if (currentLife <= maxLife * 1 / 3)
+        else if (currentLife <=(maxLife * 1 / 3 + 17))
         {
             if (currentStage != 3)
             {
