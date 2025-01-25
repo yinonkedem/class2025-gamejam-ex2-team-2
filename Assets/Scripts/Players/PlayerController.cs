@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float oxygenDecreasedNumberFromMiniEnemyExplosion = 7f;
     [SerializeField] private float oxygenDecreasedNumberFromEnemyCollision = 3f;
     private BarController oxygenBarController;
-    private bool isTouchingOxygenGroup = false;
+    private bool isTouchingWaterEnding = false;
     private bool isTouchingPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.CompareTag("Oxygen Platform"))
+        if (collider.CompareTag("Water Ending"))
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
@@ -187,16 +187,17 @@ public class PlayerController : MonoBehaviour
             currentOxygenValue -= oxygenDecreasedNumberFromInkCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
-        if (other.CompareTag("Oxygen Platform"))
-        {
-            isTouchingOxygenGroup = true;
-        }
 
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Player is hit by enemy");
             currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+        }
+        
+        if(other.CompareTag("Water Ending"))
+        {
+            isTouchingWaterEnding = true;
         }
 
     }
@@ -207,27 +208,16 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Oxygen Platform"))
-        {
-            isTouchingOxygenGroup = false;
-        }
         if (other.CompareTag("Player"))
         {
             isTouchingPlayer = false;
         }
-    }
-    
-    
-
-    private void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.CompareTag("Oxygen Platform"))
+        if(other.CompareTag("Water Ending"))
         {
-            Debug.Log("Player is above the water!");
-            currentOxygenValue += oxygenAddedAfterSecondInTheAir;
-            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+            isTouchingWaterEnding = false;
         }
     }
+    
     
 
     private void UpdateOxygen()
@@ -236,7 +226,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        if (currentOxygenValue > 0&& !isTouchingOxygenGroup)
+        if (currentOxygenValue > 0&& !isTouchingWaterEnding)
         {
             currentOxygenValue -= 1f;
         }
