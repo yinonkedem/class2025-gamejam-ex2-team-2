@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 107901573}
   - component: {fileID: 107901572}
   - component: {fileID: 107901574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player 2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1829,7 +1829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638103876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collaiders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2162,7 +2162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692227420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collaiders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2307,7 +2307,7 @@ GameObject:
   - component: {fileID: 751664189}
   - component: {fileID: 751664190}
   - component: {fileID: 751664191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4856,7 +4856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1665570694}
   - component: {fileID: 1665570695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5605,7 +5605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963450585}
   - component: {fileID: 1963450586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5859,7 +5859,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030182455}
   - component: {fileID: 2030182454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5926,7 +5926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2075265765}
   - component: {fileID: 2075265766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
