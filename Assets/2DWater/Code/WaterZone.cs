@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,35 +6,31 @@ public class WaterZone : MonoBehaviour
     [SerializeField] private float waterSpeedMultiplier = 0.5f; // Speed multiplier for swimming
     [SerializeField] private float swimmingVerticalSpeed = 3f;  // Vertical speed for swimming
 
-    private List<PlayerMovment1> players = new List<PlayerMovment1>(); // List of players in the game
+    private HashSet<PlayerMovment1> playersInWater = new HashSet<PlayerMovment1>(); // Track players currently in water
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Find all players in the game and add them to the list
-        PlayerMovment1[] foundPlayers = FindObjectsOfType<PlayerMovment1>();
-        players.AddRange(foundPlayers);
-
-        if (players.Count == 0)
+        PlayerMovment1 playerMovement = other.GetComponent<PlayerMovment1>();
+        if (playerMovement != null)
         {
-            Debug.LogWarning("No players found in the scene.");
+            // Player enters the water
+            if (!playersInWater.Contains(playerMovement))
+            {
+                playersInWater.Add(playerMovement);
+                playerMovement.OnEnterWater(swimmingVerticalSpeed, waterSpeedMultiplier);
+            }
         }
     }
 
-    private void Update()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        foreach (PlayerMovment1 playerMovement in players)
+        PlayerMovment1 playerMovement = other.GetComponent<PlayerMovment1>();
+        if (playerMovement != null)
         {
-            if (playerMovement == null) continue;
-
-            Transform playerTransform = playerMovement.transform;
-
-            // Check if the player is below the water zone
-            if (playerTransform.position.y < transform.position.y)
+            // Player exits the water
+            if (playersInWater.Contains(playerMovement))
             {
-                playerMovement.OnEnterWater(swimmingVerticalSpeed, waterSpeedMultiplier);
-            }
-            else
-            {
+                playersInWater.Remove(playerMovement);
                 playerMovement.OnExitWater();
             }
         }

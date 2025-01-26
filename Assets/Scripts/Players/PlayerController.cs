@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         AudioController.Instance.PlayShooting();
-        Vector3 attackPosition = transform.position + new Vector3(1f, 0f, 0f); // Position it slightly in front of the player
+        Vector3 attackPosition = transform.position + new Vector3(0f, 1f, 0f); // Position it slightly in front of the player
         GameObject attackObject = Instantiate(attackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
 
         // Add velocity to the attack

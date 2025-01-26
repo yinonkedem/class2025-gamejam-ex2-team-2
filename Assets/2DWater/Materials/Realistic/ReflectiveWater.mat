@@ -44,7 +44,7 @@ Material:
     - _NoiseScale: 15
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionStrength: 1
+    - _RefractionStrength: 0
     - _Transparency: 0.26
     - _WaterSpeed: 0.05
     m_Colors:

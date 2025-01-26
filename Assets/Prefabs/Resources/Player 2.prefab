@@ -134,6 +134,7 @@ MonoBehaviour:
   MoveStats: {fileID: 11400000, guid: 09d9ac1777da7fa43b636582adfda65e, type: 2}
   _feetColl: {fileID: 3099123255634323660}
   _bodyColl: {fileID: 5473924951097227285}
+  _headColl: {fileID: 0}
 --- !u!61 &1190640989473443660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
   otherPlayerPrefab: {fileID: 0}
+  otherPlayerOxygenBar: {fileID: 0}
   maxTimeWithoutOxygen: 80
   oxygenAddedAfterSecondInTheAir: 0.07
   oxygenDecreasedNumberFromInkCollision: 5
@@ -208,6 +210,7 @@ MonoBehaviour:
   playerDeadSprite1: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite2: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite3: {fileID: -508659524, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  oxygenCountToReturnOtherPlayerToLife: 15
 --- !u!114 &3301061328876907731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,10 +254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 0}
-  JumpWasPressed: 0
-  JumpIsHeld: 0
-  JumpWasReleased: 0
-  RunIsHeld: 0
   DashWasPressed: 0
   AttackWasPressed: 0
   Oxygen: 0
@@ -385,10 +384,78 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3781611870167665930}
   - {fileID: 4881706468039693212}
   - {fileID: 3179017281663285849}
   m_Father: {fileID: 8632263258675486399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2346064900567497496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3781611870167665930}
+  - component: {fileID: 2286700600039269175}
+  m_Layer: 0
+  m_Name: head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3781611870167665930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2346064900567497496}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.10601807, y: 0.7949829, z: 0}
+  m_LocalScale: {x: 0.5546, y: 0.13, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5025648221610590151}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2286700600039269175
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2346064900567497496}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1 &9206530595854925299
 GameObject:
   m_ObjectHideFlags: 0

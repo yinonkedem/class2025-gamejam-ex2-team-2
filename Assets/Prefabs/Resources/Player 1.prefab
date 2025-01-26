@@ -134,6 +134,7 @@ MonoBehaviour:
   MoveStats: {fileID: 11400000, guid: 09d9ac1777da7fa43b636582adfda65e, type: 2}
   _feetColl: {fileID: 6335361546779570566}
   _bodyColl: {fileID: 2318352798384157625}
+  _headColl: {fileID: 0}
 --- !u!114 &7013595144912071861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
   otherPlayerPrefab: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-  otherPlayerOxygenBarPrefab: {fileID: 3036164080447846565, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
+  otherPlayerOxygenBar: {fileID: 0}
   maxTimeWithoutOxygen: 80
   oxygenAddedAfterSecondInTheAir: 0.07
   oxygenDecreasedNumberFromInkCollision: 5
@@ -164,6 +165,7 @@ MonoBehaviour:
   playerDeadSprite1: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite2: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite3: {fileID: -508659524, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  oxygenCountToReturnOtherPlayerToLife: 15
 --- !u!61 &819734176206870869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -252,10 +254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 0}
-  JumpWasPressed: 0
-  JumpIsHeld: 0
-  JumpWasReleased: 0
-  RunIsHeld: 0
   DashWasPressed: 0
   AttackWasPressed: 0
   Oxygen: 0
@@ -309,6 +307,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2982225872191933070}
   - {fileID: 2387945224422466112}
   - {fileID: 8478502704703611390}
   m_Father: {fileID: 8902724058010292734}
@@ -379,6 +378,73 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.02, y: 0.06}
   m_Size: {x: 0.56, y: 0.76}
+  m_Direction: 0
+--- !u!1 &8996169740858206646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2982225872191933070}
+  - component: {fileID: 2155107082235895261}
+  m_Layer: 0
+  m_Name: head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2982225872191933070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996169740858206646}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19500732, y: 0.7960205, z: 0}
+  m_LocalScale: {x: 0.53249997, y: 0.22204, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 126463670551952686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2155107082235895261
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996169740858206646}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
   m_Direction: 0
 --- !u!1 &9177126432672503511
 GameObject:
