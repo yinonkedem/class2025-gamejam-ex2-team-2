@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator startStage2()
     {
+        AudioController.Instance.PlaySwitchStage();
         _animator.SetBool("isChangingStage", true);
         currentStage = 2;
         lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
@@ -58,6 +59,7 @@ public class EnemyController : MonoBehaviour
     
     private IEnumerator startStage3()
     {
+        AudioController.Instance.PlaySwitchStage();
         _animator.SetBool("isChangingStage", true);
         currentStage = 3;
         lifeBarController.updateBarColor(new Color(1,0,0,1));
@@ -99,6 +101,7 @@ public class EnemyController : MonoBehaviour
     // function that wait until call Die() for Animation clip death time
     private IEnumerator WaitForDeathAnimation()
     {
+        AudioController.Instance.PlayExplosion();
         isDead = true;
         _animator.SetBool("isDead", isDead);    
         
@@ -113,6 +116,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator WaitForHitAnimation()
     {
         isHit = true;
+        AudioController.Instance.PlayEnemyHit();
         _animator.SetBool("isHit", isHit);
 //        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
         yield return new WaitForSeconds(0.2f);

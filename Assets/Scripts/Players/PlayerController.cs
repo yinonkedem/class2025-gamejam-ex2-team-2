@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        AudioController.Instance.PlayShooting();
         Vector3 attackPosition = transform.position + new Vector3(1f, 0f, 0f); // Position it slightly in front of the player
         GameObject attackObject = Instantiate(attackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
 
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
+                AudioController.Instance.PlayOxygenIncrease();
                 currentOxygenValue += oxygenAddedAfterSecondInTheAir;
                 oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
             }
@@ -125,11 +127,11 @@ public class PlayerController : MonoBehaviour
             isTouchingPlayer = true;
         }
         
-
-
+        
         if (collider.CompareTag("Enemy"))
         {
             Debug.Log("Player is hit by enemy");
+            AudioController.Instance.PlayOxygenDecrease();
             currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
@@ -145,45 +147,20 @@ public class PlayerController : MonoBehaviour
         oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
     }
     
-
-    private bool IsAboveObjectWithTag(string tag)
-    {
-        Vector2 playerCenter = GetComponent<Collider2D>().bounds.center;
-
-        // Start the ray slightly below the player's center for detection purposes
-        Vector2 rayOrigin = new Vector2(playerCenter.x, playerCenter.y - 1f);
-
-        // Draw the ray in the scene for debugging (only for visualization purposes)
-        Debug.DrawRay(rayOrigin, Vector2.down * 5f, Color.red, 1f);
-
-        // Cast the ray downward from just below the player's center
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity);
-
-        // Check if a collider was hit
-        if (hit.collider != null)
-        {
-            // Check if the object hit by the ray has the correct tag
-            if (hit.collider.CompareTag(tag))
-            {
-                Debug.Log("Player is above the water!");
-                return true;
-            }
-        }
-
-        return false;
-    }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bolt"))
         {
             Debug.Log("Player is hit by bolt attack");
+            AudioController.Instance.PlayOxygenDecrease();
             currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
         if(other.CompareTag("Ink"))
         {
             Debug.Log("Player is hit by ink attack");
+            AudioController.Instance.PlayOxygenDecrease();
             currentOxygenValue -= oxygenDecreasedNumberFromInkCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
@@ -191,6 +168,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Player is hit by enemy");
+            AudioController.Instance.PlayOxygenDecrease();
             currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }

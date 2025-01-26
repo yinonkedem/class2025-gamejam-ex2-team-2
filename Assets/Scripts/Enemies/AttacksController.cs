@@ -115,6 +115,7 @@ public class AttacksController : MonoBehaviour
             List<GameObject> bolts = new List<GameObject>();
             foreach (GameObject target in attackTargets)
             {
+                AudioController.Instance.PlayBoltAttack();
                 GameObject boltAttack = Instantiate(boltAttackPrefab, target.transform.position, Quaternion.identity, GameObject.Find("Main").transform);
                 bolts.Add(boltAttack);
                 Destroy(target); // Destroy the target after creating the bolt

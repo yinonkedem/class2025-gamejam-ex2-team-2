@@ -28,6 +28,7 @@ public class ScreenChanger : MonoBehaviour
 
     private void Start()
     {
+        AudioController.Instance.PlayOpenScreen();
         //Activate Start Game object
         GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
         startGame.SetActive(true);
@@ -39,6 +40,7 @@ public class ScreenChanger : MonoBehaviour
     
     public void ResetGame()
     {
+        AudioController.Instance.PlayBackground();
         Debug.Log("Resetting game...");
         StartCoroutine(ReloadSceneAndEnsureSingleInstance());
     }
@@ -87,6 +89,7 @@ public class ScreenChanger : MonoBehaviour
     
     public void ActivateWinningGame()
     {
+        AudioController.Instance.PlayWinning();
         GameObject winningObject = Utils.Instance.FindInactiveObjectByName(WINNING_SCREEN);
         winningObject.SetActive(true);
 
@@ -100,6 +103,7 @@ public class ScreenChanger : MonoBehaviour
 
     public void ActivateGameOver()
     {
+        AudioController.Instance.PlayLosing();
         GameObject gameOverObject = Utils.Instance.FindInactiveObjectByName(GAME_OVER_SCREEN);
         gameOverObject.SetActive(true);
 
@@ -114,7 +118,8 @@ public class ScreenChanger : MonoBehaviour
 
     public void StartTheGame()
     {
-
+        AudioController.Instance.PlayBackground();
+        
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(true);
 

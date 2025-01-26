@@ -40,6 +40,7 @@ public class MiniEnemyController : MonoBehaviour
 
                 if (!isDead)
                 {
+                    AudioController.Instance.PlayExplosion();
                     // call even of dicrease life for player
                     isDead = true;
                     _animator.SetBool("isDead", isDead);
@@ -59,12 +60,18 @@ public class MiniEnemyController : MonoBehaviour
                 Destroy(lives[lifeCount]);
                 lives[lifeCount] = null;
             }
+
+            if (miniEnemyType != 1)
+            {
+                AudioController.Instance.PlayEnemyHit();
+            }
         }
 
         if (lifeCount <= 0)
         {
             if (miniEnemyType == 1)
             {
+                AudioController.Instance.PlayExplosion();
                 isDead = true;
                 _animator.SetBool("isDead", isDead);    
             }

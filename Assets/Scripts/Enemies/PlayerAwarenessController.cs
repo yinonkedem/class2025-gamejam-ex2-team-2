@@ -60,6 +60,7 @@ public class PlayerAwarenessController : MonoBehaviour
         // If no players are close, deactivate the ink
         if (!isPlayerClose)
         {
+            AudioController.Instance.PlayInk();
             GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
             if (ink != null)
             {
