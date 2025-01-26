@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private Animator _animator;
     private bool isHit;
     private int currentStage = 1;
+    private int offsetStage = 10;
     
     private void Start()
     {
@@ -27,30 +28,47 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         Debug.Log("Current Life: " + currentLife);
-        if (currentLife < (maxLife * 2 / 3 + 17) && currentLife > (maxLife * 1/3 + 17))
+        if (currentLife < (maxLife * 2 / 3 + offsetStage) && currentLife > (maxLife * 1/3 + offsetStage))
         {
             if (currentStage != 2)
             {
-                currentStage = 2;
-                
-               //change life bar fill color A to be 200
-                lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
-                GetComponent<AttacksController>().StartBoltAttack();
-
+                StartCoroutine(startStage2());
             }
         }
-        else if (currentLife <=(maxLife * 1 / 3 + 17))
+        else if (currentLife <=(maxLife * 1 / 3 + offsetStage))
         {
             if (currentStage != 3)
             {
-                currentStage = 3;
-                //change life bar fill color A to be 255
-                lifeBarController.updateBarColor(new Color(1,0,0,1));
-
-                GetComponent<AttacksController>().StartMiniEnemiesAttack();
+                StartCoroutine(startStage3());
             }
         }
     }
+
+    private IEnumerator startStage2()
+    {
+        _animator.SetBool("isChangingStage", true);
+        currentStage = 2;
+        lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
+        // yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(1f); // TODO : Change this to the length of the animation
+        _animator.SetBool("isChangingStage", false);
+        yield return new WaitForSeconds(1f);
+        GetComponent<AttacksController>().StartBoltAttack();
+    }
+    
+    private IEnumerator startStage3()
+    {
+        _animator.SetBool("isChangingStage", true);
+        currentStage = 3;
+        lifeBarController.updateBarColor(new Color(1,0,0,1));
+        //yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(1f); // TODO : Change this to the length of the animation
+        _animator.SetBool("isChangingStage", false);
+        yield return new WaitForSeconds(1f);
+        GetComponent<AttacksController>().StartMiniEnemiesAttack();
+    }
+
+    
     
     
 
