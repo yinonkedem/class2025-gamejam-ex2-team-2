@@ -7,6 +7,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject attackPrefab;
+    [SerializeField] private GameObject otherPlayerPrefab;
+    [SerializeField] private GameObject otherPlayerOxygenBar;
     [SerializeField] private float maxTimeWithoutOxygen = 30f;
     [SerializeField] private float oxygenAddedAfterSecondInTheAir = 3f;
     [SerializeField] private float oxygenDecreasedNumberFromInkCollision = 5f;
@@ -18,11 +20,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject otherPlayer;
     [SerializeField] private float oxygenDecreasedNumberFromMiniEnemyExplosion = 7f;
     [SerializeField] private float oxygenDecreasedNumberFromEnemyCollision = 3f;
+    [SerializeField] private int numberOfTimesPlayerCanBackToLife = 2;
+    [SerializeField] private Sprite playerDeadSprite1;
+    [SerializeField] private Sprite playerDeadSprite2;
+    [SerializeField] private Sprite playerDeadSprite3;
+    [SerializeField] private float oxygenCountToReturnOtherPlayerToLife = 15f;
+
+    
     private BarController oxygenBarController;
     private bool isTouchingWaterEnding = false;
     private bool isTouchingPlayer = false;
+    private bool isTouchingDeadPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
+    private int numberOfTimePlaerDied = 0;
     
     private InputManager inputManager;
     
@@ -56,7 +67,13 @@ public class PlayerController : MonoBehaviour
             {
                 PassOxygen();
             }
-            
+            if(isTouchingDeadPlayer)
+            {
+                if (currentOxygenValue > oxygenCountToReturnOtherPlayerToLife)
+                {
+                    ReturnOtherPlayerToLife();
+                }
+            }
         }
     }
     private void DecreasePlayerLifeAfterTouchMiniEnemyExplosion(GameObject data)
@@ -126,8 +143,11 @@ public class PlayerController : MonoBehaviour
         {
             isTouchingPlayer = true;
         }
-        
-        
+
+        if (collider.CompareTag("Dead Player"))
+        {
+            isTouchingDeadPlayer = true;
+        }
         if (collider.CompareTag("Enemy"))
         {
             Debug.Log("Player is hit by enemy");
@@ -180,9 +200,6 @@ public class PlayerController : MonoBehaviour
 
     }
     
-   
-
-
     
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -190,10 +207,42 @@ public class PlayerController : MonoBehaviour
         {
             isTouchingPlayer = false;
         }
+        if (other.CompareTag("Dead Player"))
+        {
+            isTouchingDeadPlayer = false;
+        }
         if(other.CompareTag("Water Ending"))
         {
             isTouchingWaterEnding = false;
         }
+    }
+
+    private void TurnToDeadPlayer()
+    {
+        numberOfTimePlaerDied++;
+        GameManager.Instance.NumOfPlayersDead++;
+        GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
+        Sprite newSprite;
+        if (numberOfTimePlaerDied == 1)
+        {
+            newSprite = playerDeadSprite1;
+        }
+        else if (numberOfTimePlaerDied == 2)
+        {
+            newSprite = playerDeadSprite2;
+        }
+        else
+        {
+            newSprite = playerDeadSprite3;
+        }
+                
+        SpriteRenderer spriteRenderer = playerDead.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = newSprite;
+        playerDead.SetActive(true);
+        
+        Destroy(gameObject);
+        oxygenBar.SetActive(false);
+        
     }
     
     
@@ -202,7 +251,14 @@ public class PlayerController : MonoBehaviour
     {
         if (currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
         {
-            Die();
+            if (numberOfTimePlaerDied >= numberOfTimesPlayerCanBackToLife || GameManager.Instance.NumOfPlayersDead >= 1)
+            {
+                Die();
+            }
+            else
+            {
+                TurnToDeadPlayer();
+            }
         }
         if (currentOxygenValue > 0&& !isTouchingWaterEnding)
         {
@@ -220,5 +276,24 @@ public class PlayerController : MonoBehaviour
         Destroy(oxygenBar);
     }
 
+    public void SetOxygenBar(GameObject newOxygenBar, float value)
+    {
+        oxygenBar = newOxygenBar;
+        currentOxygenValue = value;
+        oxygenBarController = oxygenBar.GetComponent<BarController>();
+        oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+    }
+
+    private void ReturnOtherPlayerToLife()
+    {
+        GameManager.Instance.NumOfPlayersDead--;
+        currentOxygenValue -= oxygenCountToReturnOtherPlayerToLife;
+        GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
+        playerDead.SetActive(false);
+        otherPlayer=Instantiate(otherPlayerPrefab, transform.position, Quaternion.identity, null);
+        GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(otherPlayer.transform);
+        otherPlayerOxygenBar.SetActive(true);
+        otherPlayer.GetComponent<PlayerController>().SetOxygenBar(otherPlayerOxygenBar, maxTimeWithoutOxygen/2);
+    }
 
 }

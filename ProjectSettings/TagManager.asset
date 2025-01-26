@@ -22,6 +22,7 @@ TagManager:
   - Left Stones
   - Right Stones
   - Bottom Stones
+  - Dead Player
   layers:
   - Default
   - TransparentFX
