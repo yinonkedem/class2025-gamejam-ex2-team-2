@@ -102,6 +102,50 @@ public class PlayerMovment1 : MonoBehaviour
 
     #region Swimming
 
+    // private void SwimMovement()
+    // {
+    //     Vector2 moveInput = inputManager.Movement;
+    //
+    //     // Horizontal Swimming
+    //     float targetSwimSpeed = moveInput.x * MoveStats.swimMaxSpeed;
+    //     horizontalVelocity = Mathf.Lerp(
+    //         horizontalVelocity,
+    //         targetSwimSpeed,
+    //         MoveStats.swimAcceleration * Time.fixedDeltaTime
+    //     );
+    //
+    //     // Vertical Swimming
+    //     float targetVerticalSwimSpeed;
+    //     if (moveInput.y > 0) // Moving up
+    //     {
+    //         targetVerticalSwimSpeed = moveInput.y * MoveStats.swimUpwardSpeed;
+    //     }
+    //     else if (moveInput.y < 0) // Moving down
+    //     {
+    //         targetVerticalSwimSpeed = moveInput.y * MoveStats.swimDownwardSpeed;
+    //     }
+    //     else
+    //     {
+    //         // No input -> apply gravity-like sinking
+    //         if (VerticalVelocity > 0)
+    //         {
+    //             VerticalVelocity = 0;
+    //         }
+    //         targetVerticalSwimSpeed = VerticalVelocity - (MoveStats.gravityFeeling * Time.fixedDeltaTime);
+    //         targetVerticalSwimSpeed = Mathf.Clamp(targetVerticalSwimSpeed, -MoveStats.maxSinkSpeed, 0);
+    //     }
+    //
+    //     // Smooth interpolation for vertical velocity
+    //     VerticalVelocity = Mathf.Lerp(
+    //         VerticalVelocity,
+    //         targetVerticalSwimSpeed,
+    //         MoveStats.swimAcceleration * Time.fixedDeltaTime
+    //     );
+    //
+    //     // Flip character based on input
+    //     TurnCheck(moveInput);
+    // }
+
     private void SwimMovement()
     {
         Vector2 moveInput = inputManager.Movement;
@@ -142,10 +186,18 @@ public class PlayerMovment1 : MonoBehaviour
             MoveStats.swimAcceleration * Time.fixedDeltaTime
         );
 
+        // Prevent the player from going above WaterWindingPosition
+        float maxY = GameManager.Instance.WaterEndingPosition;
+        float clampedY = Mathf.Min(transform.position.y + VerticalVelocity * Time.fixedDeltaTime, maxY);
+
+        // Apply the clamped Y position
+        transform.position = new Vector2(transform.position.x, clampedY);
+
         // Flip character based on input
         TurnCheck(moveInput);
     }
 
+    
     public void OnEnterWater(float verticalSpeed, float speedMultiplier)
     {
         _isSwimming = true;

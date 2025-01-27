@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>
         set => arePlayerWon = value;
     }
     
+    
     public int NumOfPlayersDead
     {
         get => numOfPlayersDead;

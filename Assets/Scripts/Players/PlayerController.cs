@@ -161,7 +161,6 @@ public class PlayerController : MonoBehaviour
         if (collider.CompareTag("Enemy"))
         {
             Debug.Log("Player is hit by enemy");
-            AudioController.Instance.PlayOxygenDecrease();
             currentOxygenValue -= oxygenDecreasedNumberFromEnemyCollision;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
@@ -311,6 +310,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReturnOtherPlayerToLife()
     {
+        StartCoroutine(WaitForPassOxygenSound());
         GameManager.Instance.NumOfPlayersDead--;
         currentOxygenValue -= oxygenCountToReturnOtherPlayerToLife;
         GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
@@ -319,6 +319,13 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(otherPlayer.transform);
         otherPlayerOxygenBar.SetActive(true);
         otherPlayer.GetComponent<PlayerController>().SetOxygenBar(otherPlayerOxygenBar, maxTimeWithoutOxygen/2);
+        AudioController.Instance.StopPlayOxygenIncreaseInLoop();
+    }
+    
+    private IEnumerator WaitForPassOxygenSound()
+    {
+        AudioController.Instance.StartPlayOxygenIncreaseInLoop();
+        yield return new WaitForSeconds(2f);
         AudioController.Instance.StopPlayOxygenIncreaseInLoop();
     }
 
