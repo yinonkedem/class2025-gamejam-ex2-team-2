@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     private float groundPosition;
     private float waterEndingPosition;
     private int numOfPlayersDead;
+    private int numOfPlayersDeadUntilNow;
     
     //getters for the private variables
     public float RightWallPosition => rightWallPosition;
@@ -47,6 +48,11 @@ public class GameManager : Singleton<GameManager>
     }
 
     
+    public int NumOfPlayersDeadUntilNow
+    {
+        get => numOfPlayersDeadUntilNow;
+        set => numOfPlayersDeadUntilNow = value;
+    }
     
     private void Update()
     {

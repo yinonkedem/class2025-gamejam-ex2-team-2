@@ -33,14 +33,12 @@ public class PlayerController : MonoBehaviour
     private bool isTouchingDeadPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
-    private int numberOfTimePlaerDied = 0;
     
     private InputManager inputManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        currentOxygenValue = maxTimeWithoutOxygen;
         oxygenBarController = oxygenBar.GetComponent<BarController>();
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         InvokeRepeating("UpdateOxygen", 0f, 1f); 
@@ -50,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        currentOxygenValue = maxTimeWithoutOxygen;
         inputManager = GetComponent<InputManager>();
     }
 
@@ -219,23 +218,19 @@ public class PlayerController : MonoBehaviour
 
     private void TurnToDeadPlayer()
     {
-        numberOfTimePlaerDied++;
+        GameManager.Instance.NumOfPlayersDeadUntilNow++;
         GameManager.Instance.NumOfPlayersDead++;
         GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
         Sprite newSprite;
-        if (numberOfTimePlaerDied == 1)
+        if (GameManager.Instance.NumOfPlayersDeadUntilNow == 1)
         {
             newSprite = playerDeadSprite1;
         }
-        else if (numberOfTimePlaerDied == 2)
-        {
-            newSprite = playerDeadSprite2;
-        }
         else
         {
-            newSprite = playerDeadSprite3;
+             newSprite = playerDeadSprite2; 
         }
-                
+     
         SpriteRenderer spriteRenderer = playerDead.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = newSprite;
         playerDead.SetActive(true);
@@ -251,9 +246,20 @@ public class PlayerController : MonoBehaviour
     {
         if (currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
         {
-            if (numberOfTimePlaerDied >= numberOfTimesPlayerCanBackToLife || GameManager.Instance.NumOfPlayersDead >= 1)
+            if ( GameManager.Instance.NumOfPlayersDeadUntilNow >= numberOfTimesPlayerCanBackToLife || GameManager.Instance.NumOfPlayersDead >= 1)
             {
+                if (GameManager.Instance.NumOfPlayersDead < 1)
+                {
+                    Sprite newSprite = playerDeadSprite3;
+                    GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
+                    SpriteRenderer spriteRenderer = playerDead.GetComponent<SpriteRenderer>();
+                    spriteRenderer.sprite = newSprite;
+                    playerDead.SetActive(true);
+                    //turn off playerDead box collider 2D
+                    playerDead.GetComponent<BoxCollider2D>().enabled = false;
+                }
                 Die();
+
             }
             else
             {
