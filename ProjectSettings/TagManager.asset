@@ -60,9 +60,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4031719719
+    locked: 0
   - name: SortingTexture
     uniqueID: 1786878683
     locked: 0
-  - name: Background
-    uniqueID: 4031719719
+  - name: fg
+    uniqueID: 2440600899
     locked: 0

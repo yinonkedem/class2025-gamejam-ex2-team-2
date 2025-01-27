@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0605acc90177f29428aa59e3d6ebdee3
+guid: 007b7ab66bca021448de14e4ba11c582
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 66, y: 50, z: 117, w: 35}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: platformgame2_0
+      name: almog_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 54
-        width: 149
-        height: 22
+        x: 42
+        y: 44
+        width: 270
+        height: 185
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8c05a7249fbb454d8dd15b4741e7b0e
-      internalID: 1611346537
+      spriteID: bf3285e3438e9934b8b5e897570aaf31
+      internalID: -1289956671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: almog_1
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 41
+        width: 278
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f764de8c47aa13b44b0eb86269765e13
+      internalID: 1860534325
       vertices: []
       indices: 
       edges: []
@@ -121,14 +142,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      platformgame2_0: 1611346537
+      almog_0: -1289956671
+      almog_1: 1860534325
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

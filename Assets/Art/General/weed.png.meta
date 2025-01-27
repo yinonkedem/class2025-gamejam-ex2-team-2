@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0605acc90177f29428aa59e3d6ebdee3
+guid: ca40d6b15ce177d4babceb1544ac66b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 66, y: 50, z: 117, w: 35}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: platformgame2_0
+      name: weed_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 54
-        width: 149
-        height: 22
+        x: 39
+        y: 29
+        width: 82
+        height: 217
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8c05a7249fbb454d8dd15b4741e7b0e
-      internalID: 1611346537
+      spriteID: 0e3466cfbf9f48f4ebb4d22ac8cabea8
+      internalID: 1539841121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weed_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 29
+        width: 56
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce4beef04853d3841a31cda58b5b435b
+      internalID: 1709482589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weed_2
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 29
+        width: 76
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78fb80033b2680d4e9742e4d4c596786
+      internalID: 400734874
       vertices: []
       indices: 
       edges: []
@@ -121,14 +163,16 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      platformgame2_0: 1611346537
+      weed_0: 1539841121
+      weed_1: 1709482589
+      weed_2: 400734874
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

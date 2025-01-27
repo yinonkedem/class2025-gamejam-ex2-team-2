@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0605acc90177f29428aa59e3d6ebdee3
+guid: 9771a33b0e1905344bcd9b86fb37621d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 66, y: 50, z: 117, w: 35}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: platformgame2_0
+      name: medoz_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 54
-        width: 149
-        height: 22
+        x: 40
+        y: 21
+        width: 182
+        height: 212
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8c05a7249fbb454d8dd15b4741e7b0e
-      internalID: 1611346537
+      spriteID: 6410627318002604d88a8746b19fafc7
+      internalID: -1704510867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: medoz_1
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 4
+        width: 204
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf2108b8a7731b448ce04bb6ff4c1d0
+      internalID: -521271415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: medoz_2
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 22
+        width: 215
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a390992290fe33549bc7e35fa982deea
+      internalID: -1149768364
       vertices: []
       indices: 
       edges: []
@@ -121,14 +163,16 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      platformgame2_0: 1611346537
+      medoz_0: -1704510867
+      medoz_1: -521271415
+      medoz_2: -1149768364
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

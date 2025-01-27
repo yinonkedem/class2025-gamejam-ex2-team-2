@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0605acc90177f29428aa59e3d6ebdee3
+guid: 38994ecd4c44cf144bbcaac6d60b43fa
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,8 +48,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 66, y: 50, z: 117, w: 35}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: platformgame2_0
+      name: phase_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 54
-        width: 149
-        height: 22
+        x: 26
+        y: 123
+        width: 474
+        height: 524
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8c05a7249fbb454d8dd15b4741e7b0e
-      internalID: 1611346537
+      spriteID: faad5586e2732404d880af598d5b75f5
+      internalID: -306090164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phase_1
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 133
+        width: 473
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b4a6026c527ed44db1c07dacfbc4e73
+      internalID: 1034326148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phase_2
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 0
+        width: 496
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4571fd459b1489347a8d0ba7eb0217e3
+      internalID: -1747741352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phase_3
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 463
+        width: 4
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0ea83f1e62897a41b5c23c7099a5966
+      internalID: 1608660668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phase_4
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 107
+        width: 501
+        height: 568
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c755339b666abb04fa6c3b7712a09991
+      internalID: 2123929224
       vertices: []
       indices: 
       edges: []
@@ -121,14 +205,18 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      platformgame2_0: 1611346537
+      phase_0: -306090164
+      phase_1: 1034326148
+      phase_2: -1747741352
+      phase_3: 1608660668
+      phase_4: 2123929224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
