@@ -7,6 +7,7 @@ public class AudioController : MonoBehaviour
    private bool _isMuted;
     [SerializeField] private AudioSource mAudioSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxSourceForLoop;
     [SerializeField] private AudioClip background;
     [SerializeField] private AudioClip losing;
     [SerializeField] private AudioClip winning;
@@ -17,8 +18,10 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioClip boltAttack;
     [SerializeField] private AudioClip switchStage;
     [SerializeField] private AudioClip ink;
-    [SerializeField] private AudioClip explosion;
+    [SerializeField] private AudioClip enemyDeath;
     [SerializeField] private AudioClip openScreen;
+    [SerializeField] private AudioClip miniEnemyExplosion;
+
     
    
    
@@ -39,20 +42,15 @@ public class AudioController : MonoBehaviour
        }
    }
 
-   public void Start()
-   {
-       PlayMusic(background);
-       // make the background be with littler volume
-   }
 
    public void StopMusic()
    {
        mAudioSource.Stop();
    }
 
-   private void PlayMusic(AudioClip clip)
+   public void PlayMusic()
    {
-       mAudioSource.clip = clip;
+       mAudioSource.clip = background;
        mAudioSource.loop = true;
        mAudioSource.Play();
        // Debug.Log("Start playing music");
@@ -95,22 +93,11 @@ public class AudioController : MonoBehaviour
        sfxSource.mute = false;
    }
    
-   public void PlayBackground()
-   {
-       PlaySfx(background);
-   }
-   public void PlayLosing()
-   {
-       PlaySfx(losing);
-   }
    public void PlayWinning()
    {
        PlaySfx(winning);
    }
-   public void PlayOpenScreen()
-   {
-       PlaySfx(openScreen);
-   }
+   
     public void PlayEnemyHit()
     {
          PlaySfx(enemyHit);
@@ -118,10 +105,6 @@ public class AudioController : MonoBehaviour
     public void PlayOxygenDecrease()
     {
          PlaySfx(oxygenDecrease);
-    }
-    public void PlayOxygenIncrease()
-    {
-         PlaySfx(oxygenIncrease);
     }
     public void PlayShooting()
     {
@@ -139,9 +122,81 @@ public class AudioController : MonoBehaviour
     {
          PlaySfx(ink);
     }
-
+    
+    public void StartPlayInkInLoop()
+    {
+        sfxSourceForLoop.clip = ink;
+        sfxSourceForLoop.loop = true;
+        sfxSourceForLoop.Play();
+    }
+    
+    public void StopPlayInkInLoop()
+    {
+        sfxSourceForLoop.loop = false;
+        sfxSourceForLoop.Stop();
+    }
+    
+    public void StartPlayOxygenIncreaseInLoop()
+    {
+        sfxSourceForLoop.clip = oxygenIncrease;
+        sfxSourceForLoop.loop = true;
+        sfxSourceForLoop.Play();
+    }
+    
+    public void StopPlayOxygenIncreaseInLoop()
+    {
+        sfxSourceForLoop.loop = false;
+        sfxSourceForLoop.Stop();
+    }
+    
+    public void StartLoosingInLoop()
+    {
+        sfxSourceForLoop.clip = losing;
+        sfxSourceForLoop.loop = true;
+        sfxSourceForLoop.Play();
+    }
+    
+    public void StopPLoosingInLoop()
+    {
+        sfxSourceForLoop.loop = false;
+        sfxSourceForLoop.Stop();
+    }
+    
+    public void StartWinningInLoop()
+    {
+        sfxSourceForLoop.clip = winning;
+        sfxSourceForLoop.loop = true;
+        sfxSourceForLoop.Play();
+    }
+    
+    public void StopWinningInLoop()
+    {
+        sfxSourceForLoop.loop = false;
+        sfxSourceForLoop.Stop();
+    }
+    
+    public void StartPlayOpenScreenInLoop()
+    {
+        sfxSourceForLoop.clip = openScreen;
+        sfxSourceForLoop.loop = true;
+        sfxSourceForLoop.Play();
+    }
+    
+    public void StopPlayOpenScreenInLoop()
+    {
+        sfxSourceForLoop.loop = false;
+        sfxSourceForLoop.Stop();
+    }
+    
+    
+    public void PlayEnemyDeath()
+    {
+         PlaySfx(enemyDeath);
+    }
+    
     public void PlayExplosion()
     {
-         PlaySfx(explosion);
+         PlaySfx(miniEnemyExplosion);
     }
+    
 }

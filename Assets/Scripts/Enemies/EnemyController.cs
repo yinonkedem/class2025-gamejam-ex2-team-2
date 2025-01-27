@@ -101,7 +101,7 @@ public class EnemyController : MonoBehaviour
     // function that wait until call Die() for Animation clip death time
     private IEnumerator WaitForDeathAnimation()
     {
-        AudioController.Instance.PlayExplosion();
+        AudioController.Instance.PlayEnemyDeath();
         isDead = true;
         _animator.SetBool("isDead", isDead);    
         
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length+0.4f);
         
         // Call the Die method after the animation finishes
-        Die();
+        StartCoroutine(Die());
     }
     
     private IEnumerator WaitForHitAnimation()
@@ -126,9 +126,12 @@ public class EnemyController : MonoBehaviour
 
     }
     
+    
 
-    private void Die()
+    private IEnumerator Die()
     {
+        AudioController.Instance.PlayEnemyDeath();
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length-0.2f);
         GameManager.Instance.ArePlayerWon = true;
         Debug.Log("Enemy is dead");
         ScreenChanger.Instance.ActivateWinningGame();

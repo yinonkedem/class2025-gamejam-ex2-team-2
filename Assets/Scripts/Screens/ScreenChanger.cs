@@ -28,7 +28,7 @@ public class ScreenChanger : MonoBehaviour
 
     private void Start()
     {
-        AudioController.Instance.PlayOpenScreen();
+        AudioController.Instance.StartPlayOpenScreenInLoop();
         //Activate Start Game object
         GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
         startGame.SetActive(true);
@@ -40,7 +40,9 @@ public class ScreenChanger : MonoBehaviour
     
     public void ResetGame()
     {
-        AudioController.Instance.PlayBackground();
+        AudioController.Instance.StopWinningInLoop();
+        AudioController.Instance.StopPLoosingInLoop();
+        AudioController.Instance.PlayMusic();
         Debug.Log("Resetting game...");
         StartCoroutine(ReloadSceneAndEnsureSingleInstance());
     }
@@ -89,7 +91,8 @@ public class ScreenChanger : MonoBehaviour
     
     public void ActivateWinningGame()
     {
-        AudioController.Instance.PlayWinning();
+        AudioController.Instance.StopMusic();
+        AudioController.Instance.StartWinningInLoop();
         GameObject winningObject = Utils.Instance.FindInactiveObjectByName(WINNING_SCREEN);
         winningObject.SetActive(true);
 
@@ -103,7 +106,8 @@ public class ScreenChanger : MonoBehaviour
 
     public void ActivateGameOver()
     {
-        AudioController.Instance.PlayLosing();
+        AudioController.Instance.StopMusic();
+        AudioController.Instance.StartLoosingInLoop();
         GameObject gameOverObject = Utils.Instance.FindInactiveObjectByName(GAME_OVER_SCREEN);
         gameOverObject.SetActive(true);
 
@@ -118,13 +122,15 @@ public class ScreenChanger : MonoBehaviour
 
     public void StartTheGame()
     {
-        AudioController.Instance.PlayBackground();
-        
+        AudioController.Instance.StopPlayOpenScreenInLoop();
+        AudioController.Instance.PlayMusic();
+
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(true);
 
         GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
         startGame.SetActive(false);
+
     }
 
 }

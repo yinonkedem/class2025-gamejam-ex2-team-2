@@ -9,7 +9,7 @@ public class PlayerAwarenessController : MonoBehaviour
 
     [SerializeField]
     private float _playerAwarenessDistance;
-
+    private bool inkSoundActive = false;
     private Transform[] _players;
     private Animator _animator;
 
@@ -43,6 +43,11 @@ public class PlayerAwarenessController : MonoBehaviour
                 if (distanceToPlayer <= closestDistance)
                 {
                     Debug.Log("Enemy is close");
+                    if (!inkSoundActive)
+                    {
+                        inkSoundActive = true;
+                        AudioController.Instance.StartPlayInkInLoop();
+                    }
                     _animator.SetBool("isInkActive", true);
                     GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
                     if (ink != null)
@@ -60,7 +65,8 @@ public class PlayerAwarenessController : MonoBehaviour
         // If no players are close, deactivate the ink
         if (!isPlayerClose)
         {
-            AudioController.Instance.PlayInk();
+            AudioController.Instance.StopPlayInkInLoop();
+            inkSoundActive = false;
             GameObject ink = Utils.Instance.FindUnderParentInactiveObjectByName("Ink", gameObject);
             if (ink != null)
             {

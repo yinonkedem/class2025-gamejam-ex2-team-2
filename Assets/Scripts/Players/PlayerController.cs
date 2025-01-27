@@ -144,7 +144,6 @@ public class PlayerController : MonoBehaviour
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
-                AudioController.Instance.PlayOxygenIncrease();
                 currentOxygenValue += oxygenAddedAfterSecondInTheAir;
                 oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
             }
@@ -207,6 +206,7 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Water Ending"))
         {
             isTouchingWaterEnding = true;
+            AudioController.Instance.StartPlayOxygenIncreaseInLoop();
         }
 
     }
@@ -225,6 +225,8 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Water Ending"))
         {
             isTouchingWaterEnding = false;
+            AudioController.Instance.StopPlayOxygenIncreaseInLoop();
+
         }
     }
 
@@ -273,7 +275,7 @@ public class PlayerController : MonoBehaviour
                 
                 StartCoroutine(Die());
                 Destroy(oxygenBar); 
-                
+                AudioController.Instance.StopPlayInkInLoop();
             }
             else
             {
@@ -317,6 +319,7 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(otherPlayer.transform);
         otherPlayerOxygenBar.SetActive(true);
         otherPlayer.GetComponent<PlayerController>().SetOxygenBar(otherPlayerOxygenBar, maxTimeWithoutOxygen/2);
+        AudioController.Instance.StopPlayOxygenIncreaseInLoop();
     }
 
 }
