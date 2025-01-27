@@ -110,6 +110,12 @@ public class AudioController : MonoBehaviour
     {
          PlaySfx(shooting);
     }
+    
+    public void PlayIncreaseOxygen()
+    {
+        PlaySfx(oxygenIncrease);
+    }
+    
     public void PlayBoltAttack()
     {
          PlaySfx(boltAttack);
@@ -136,18 +142,6 @@ public class AudioController : MonoBehaviour
         sfxSourceForLoop.Stop();
     }
     
-    public void StartPlayOxygenIncreaseInLoop()
-    {
-        sfxSourceForLoop.clip = oxygenIncrease;
-        sfxSourceForLoop.loop = true;
-        sfxSourceForLoop.Play();
-    }
-    
-    public void StopPlayOxygenIncreaseInLoop()
-    {
-        sfxSourceForLoop.loop = false;
-        sfxSourceForLoop.Stop();
-    }
     
     public void StartLoosingInLoop()
     {

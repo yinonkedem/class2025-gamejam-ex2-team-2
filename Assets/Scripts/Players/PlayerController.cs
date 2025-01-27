@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private bool isDead = false;
     private InputManager inputManager;
+    private int i = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
+                i++;
                 currentOxygenValue += oxygenAddedAfterSecondInTheAir;
                 oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
             }
@@ -205,7 +207,7 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Water Ending"))
         {
             isTouchingWaterEnding = true;
-            AudioController.Instance.StartPlayOxygenIncreaseInLoop();
+            AudioController.Instance.PlayIncreaseOxygen();
         }
 
     }
@@ -224,8 +226,6 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Water Ending"))
         {
             isTouchingWaterEnding = false;
-            AudioController.Instance.StopPlayOxygenIncreaseInLoop();
-
         }
     }
 
@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReturnOtherPlayerToLife()
     {
-        StartCoroutine(WaitForPassOxygenSound());
+        AudioController.Instance.PlayIncreaseOxygen();
         GameManager.Instance.NumOfPlayersDead--;
         currentOxygenValue -= oxygenCountToReturnOtherPlayerToLife;
         GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
@@ -319,14 +319,7 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(otherPlayer.transform);
         otherPlayerOxygenBar.SetActive(true);
         otherPlayer.GetComponent<PlayerController>().SetOxygenBar(otherPlayerOxygenBar, maxTimeWithoutOxygen/2);
-        AudioController.Instance.StopPlayOxygenIncreaseInLoop();
     }
     
-    private IEnumerator WaitForPassOxygenSound()
-    {
-        AudioController.Instance.StartPlayOxygenIncreaseInLoop();
-        yield return new WaitForSeconds(2f);
-        AudioController.Instance.StopPlayOxygenIncreaseInLoop();
-    }
 
 }

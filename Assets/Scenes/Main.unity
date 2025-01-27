@@ -1986,7 +1986,7 @@ MonoBehaviour:
   winning: {fileID: 8300000, guid: 078297b71f309a942912c743139413d2, type: 3}
   enemyHit: {fileID: 8300000, guid: c58aa0b6baafb304eb3d5d219f18458b, type: 3}
   oxygenDecrease: {fileID: 8300000, guid: 02d16ea995845004d8afe9955ae1e2c2, type: 3}
-  oxygenIncrease: {fileID: 8300000, guid: 87bf5daee0c06a643aeb4192b4034b4d, type: 3}
+  oxygenIncrease: {fileID: 8300000, guid: 5cd0c367a1633cd42b2e924aa4ec8728, type: 3}
   shooting: {fileID: 8300000, guid: a4cee6493851c3e42b4c36e61f6fd407, type: 3}
   boltAttack: {fileID: 8300000, guid: 01406785e351dbc4997c1e56c3a91649, type: 3}
   switchStage: {fileID: 8300000, guid: c3135bc44cbe44a4d9b021d56d2ec5d1, type: 3}
