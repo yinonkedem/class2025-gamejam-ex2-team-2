@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private bool isTouchingDeadPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
-    
+    private Animator _animator;
+    private bool isDead = false;
     private InputManager inputManager;
     
     // Start is called before the first frame update
@@ -43,7 +44,8 @@ public class PlayerController : MonoBehaviour
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         InvokeRepeating("UpdateOxygen", 0f, 1f); 
         EventManager.Instance.StartListening(EventManager.EVENT_DECREASE_PLAYER_LIFE,DecreasePlayerLifeAfterTouchMiniEnemyExplosion );
-
+        _animator = GetComponent<Animator>();
+        isDead = false;
     }
 
     private void Awake()
@@ -55,10 +57,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateOxygenBarPosition();
+        if (oxygenBar != null)
+        {
+            UpdateOxygenBarPosition();
+        }
         if (inputManager.AttackWasPressed)
         {
-            Attack();
+            StartCoroutine(Attack());
         }
         if (inputManager.Oxygen)
         {
@@ -106,25 +111,32 @@ public class PlayerController : MonoBehaviour
         }
         oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
     }
+    
 
-    private void Attack()
+    private IEnumerator Attack()
     {
-        AudioController.Instance.PlayShooting();
-        Vector3 attackPosition = transform.position + new Vector3(0f, 1f, 0f); // Position it slightly in front of the player
-        GameObject attackObject = Instantiate(attackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
-
-        // Add velocity to the attack
-        Rigidbody2D rb = attackObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (currentOxygenValue > 0)
         {
-            rb.velocity = new Vector2(0f, attackSpeed); // Adjust the speed and direction as needed
-        }
-        
-        currentOxygenValue -= oxygenDecreasedNumberWhenShooting;
-        oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+            _animator.SetBool("isShoot", true);
+            AudioController.Instance.PlayShooting();
+            Vector3 attackPosition = transform.position + new Vector3(0f, 1f, 0f); // Position it slightly in front of the player
+            GameObject attackObject = Instantiate(attackPrefab, attackPosition, Quaternion.identity, GameObject.Find("Main").transform);
 
-        Debug.Log("PinkPlayer attacked!");
+            // Add velocity to the attack
+            Rigidbody2D rb = attackObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = new Vector2(0f, attackSpeed); // Adjust the speed and direction as needed
+            }
+        
+            currentOxygenValue -= oxygenDecreasedNumberWhenShooting;
+            oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+            _animator.SetBool("isShoot", false);
+            Debug.Log("Player attacked!");
+        }
     }
+    
 
     private void OnTriggerStay2D(Collider2D collider)
     {
@@ -234,8 +246,8 @@ public class PlayerController : MonoBehaviour
         SpriteRenderer spriteRenderer = playerDead.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = newSprite;
         playerDead.SetActive(true);
-        
-        Destroy(gameObject);
+
+        StartCoroutine(Die());
         oxygenBar.SetActive(false);
         
     }
@@ -244,7 +256,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateOxygen()
     {
-        if (currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
+        if (!isDead && currentOxygenValue <= 0 && !GameManager.Instance.ArePlayerWon)
         {
             if ( GameManager.Instance.NumOfPlayersDeadUntilNow >= numberOfTimesPlayerCanBackToLife || GameManager.Instance.NumOfPlayersDead >= 1)
             {
@@ -258,8 +270,10 @@ public class PlayerController : MonoBehaviour
                     //turn off playerDead box collider 2D
                     playerDead.GetComponent<BoxCollider2D>().enabled = false;
                 }
-                Die();
-
+                
+                StartCoroutine(Die());
+                Destroy(oxygenBar); 
+                
             }
             else
             {
@@ -275,11 +289,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Die()
+
+    private IEnumerator Die()
     {
         Debug.Log("Player is dead");
+        isDead = true;
+        _animator.SetBool("isDead", true);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        Destroy(oxygenBar);
     }
 
     public void SetOxygenBar(GameObject newOxygenBar, float value)
