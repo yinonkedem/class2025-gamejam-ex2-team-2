@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite playerDeadSprite2;
     [SerializeField] private Sprite playerDeadSprite3;
     [SerializeField] private float oxygenCountToReturnOtherPlayerToLife = 15f;
+    [SerializeField]private float attackCooldown = 0.4f;
 
     
     private BarController oxygenBarController;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private bool isDead = false;
     private InputManager inputManager;
     private int i = 1;
+    private float lastAttackTime = -Mathf.Infinity; // Initialize to a very low value
+
     
     // Start is called before the first frame update
     void Start()
@@ -62,9 +65,10 @@ public class PlayerController : MonoBehaviour
         {
             UpdateOxygenBarPosition();
         }
-        if (inputManager.AttackWasPressed)
+        if (inputManager.AttackWasPressed && Time.time >= lastAttackTime + attackCooldown)
         {
             StartCoroutine(Attack());
+            lastAttackTime = Time.time; // Update the last attack time
         }
         if (inputManager.Oxygen)
         {
