@@ -15,9 +15,9 @@ public class OpeningScreenController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(nextScreenKey))
-        {
-            ScreenChanger.Instance.StartTheGame();
-        }
+        // if (Input.GetKeyDown(nextScreenKey))
+        // {
+        //     ScreenChanger.Instance.StartTheGame();
+        // }
     }
 }
