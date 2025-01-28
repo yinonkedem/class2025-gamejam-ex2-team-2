@@ -58,8 +58,7 @@ public class EnemyController : MonoBehaviour
         _animator.SetBool("isChangingStage", true);
         yield return new WaitForSeconds(3.9f);
         _animator.SetBool("isChangingStage", false);
-        
-        lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
+        lifeBarController.updateBarColor(new Color(1,0,0,0.9f));
         yield return new WaitForSeconds(1f);
        GetComponent<AttacksController>().StartBoltAttack();
     }
