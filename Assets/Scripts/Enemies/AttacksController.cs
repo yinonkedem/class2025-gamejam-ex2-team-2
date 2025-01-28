@@ -17,8 +17,6 @@ public class AttacksController : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject enemyPrefabType2;
     [SerializeField] private GameObject boltAttackPrefab;
-    [SerializeField] private float increaseEnemySpeed = 0.5f;
-    [SerializeField] private float increaseEnemySize = 0.4f;
     [SerializeField] private float timeBetweenEachCreationOfMiniEnemies = 15f;
     
     private Animator _animator;
@@ -71,10 +69,6 @@ public class AttacksController : MonoBehaviour
     
     private IEnumerator PrepareAndExecuteBoltAttack()
     {
-        transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
-        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
-
-
         
         // Get references to both players
         GameObject[] players;

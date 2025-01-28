@@ -8,7 +8,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int maxLife = 3;
     [SerializeField] private int decreaseLifeCountWhenGetHit = 1;
     [SerializeField] private GameObject lifeBar;
-
+    [SerializeField] private float increaseEnemySpeed = 1.5f;
+    [SerializeField] private float increaseEnemySize = 0.7f;
+    
     private int currentLife;
     private BarController lifeBarController;
     private bool isDead = false; 
@@ -32,6 +34,7 @@ public class EnemyController : MonoBehaviour
         {
             if (currentStage != 2)
             {
+                currentStage = 2;
                 StartCoroutine(startStage2());
             }
         }
@@ -39,6 +42,7 @@ public class EnemyController : MonoBehaviour
         {
             if (currentStage != 3)
             {
+                currentStage = 3;
                 StartCoroutine(startStage3());
             }
         }
@@ -47,25 +51,27 @@ public class EnemyController : MonoBehaviour
     private IEnumerator startStage2()
     {
         AudioController.Instance.PlaySwitchStage();
+        
+        transform.localScale += new Vector3(increaseEnemySize, increaseEnemySize, increaseEnemySize);
+        GetComponent<EnemyMovement>().AddToSpeed(increaseEnemySpeed);
+        
         _animator.SetBool("isChangingStage", true);
-        currentStage = 2;
-        lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
-        // yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
-        yield return new WaitForSeconds(1f); // TODO : Change this to the length of the animation
+        yield return new WaitForSeconds(3.9f);
         _animator.SetBool("isChangingStage", false);
+        
+        lifeBarController.updateBarColor(new Color(1,0,0,0.8f));
         yield return new WaitForSeconds(1f);
-        GetComponent<AttacksController>().StartBoltAttack();
+       GetComponent<AttacksController>().StartBoltAttack();
     }
     
     private IEnumerator startStage3()
     {
         AudioController.Instance.PlaySwitchStage();
         _animator.SetBool("isChangingStage", true);
-        currentStage = 3;
-        lifeBarController.updateBarColor(new Color(1,0,0,1));
-        //yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
-        yield return new WaitForSeconds(1f); // TODO : Change this to the length of the animation
+        yield return new WaitForSeconds(3.9f);
         _animator.SetBool("isChangingStage", false);
+
+        lifeBarController.updateBarColor(new Color(1,0,0,1));
         yield return new WaitForSeconds(1f);
         GetComponent<AttacksController>().StartMiniEnemiesAttack();
     }
