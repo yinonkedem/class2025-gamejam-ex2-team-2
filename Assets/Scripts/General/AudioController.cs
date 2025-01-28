@@ -98,6 +98,11 @@ public class AudioController : MonoBehaviour
        PlaySfx(winning);
    }
    
+   public void PlayLoosing()
+   {
+       PlaySfx(losing);
+   }
+   
     public void PlayEnemyHit()
     {
          PlaySfx(enemyHit);
@@ -124,10 +129,6 @@ public class AudioController : MonoBehaviour
     {
          PlaySfx(switchStage);
     }
-    public void PlayInk()
-    {
-         PlaySfx(ink);
-    }
     
     public void StartPlayInkInLoop()
     {
@@ -137,33 +138,6 @@ public class AudioController : MonoBehaviour
     }
     
     public void StopPlayInkInLoop()
-    {
-        sfxSourceForLoop.loop = false;
-        sfxSourceForLoop.Stop();
-    }
-    
-    
-    public void StartLoosingInLoop()
-    {
-        sfxSourceForLoop.clip = losing;
-        sfxSourceForLoop.loop = true;
-        sfxSourceForLoop.Play();
-    }
-    
-    public void StopPLoosingInLoop()
-    {
-        sfxSourceForLoop.loop = false;
-        sfxSourceForLoop.Stop();
-    }
-    
-    public void StartWinningInLoop()
-    {
-        sfxSourceForLoop.clip = winning;
-        sfxSourceForLoop.loop = true;
-        sfxSourceForLoop.Play();
-    }
-    
-    public void StopWinningInLoop()
     {
         sfxSourceForLoop.loop = false;
         sfxSourceForLoop.Stop();

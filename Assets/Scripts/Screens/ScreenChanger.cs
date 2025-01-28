@@ -40,8 +40,6 @@ public class ScreenChanger : MonoBehaviour
     
     public void ResetGame()
     {
-        AudioController.Instance.StopWinningInLoop();
-        AudioController.Instance.StopPLoosingInLoop();
         AudioController.Instance.PlayMusic();
         Debug.Log("Resetting game...");
         StartCoroutine(ReloadSceneAndEnsureSingleInstance());
@@ -92,7 +90,7 @@ public class ScreenChanger : MonoBehaviour
     public void ActivateWinningGame()
     {
         AudioController.Instance.StopMusic();
-        AudioController.Instance.StartWinningInLoop();
+        AudioController.Instance.PlayWinning();
         GameObject winningObject = Utils.Instance.FindInactiveObjectByName(WINNING_SCREEN);
         winningObject.SetActive(true);
 
@@ -107,7 +105,7 @@ public class ScreenChanger : MonoBehaviour
     public void ActivateGameOver()
     {
         AudioController.Instance.StopMusic();
-        AudioController.Instance.StartLoosingInLoop();
+        AudioController.Instance.PlayLoosing();
         GameObject gameOverObject = Utils.Instance.FindInactiveObjectByName(GAME_OVER_SCREEN);
         gameOverObject.SetActive(true);
 

@@ -271,10 +271,10 @@ public class PlayerController : MonoBehaviour
                     //turn off playerDead box collider 2D
                     playerDead.GetComponent<BoxCollider2D>().enabled = false;
                 }
-                
+                AudioController.Instance.StopPlayInkInLoop();
                 StartCoroutine(Die());
                 Destroy(oxygenBar); 
-                AudioController.Instance.StopPlayInkInLoop();
+
             }
             else
             {
