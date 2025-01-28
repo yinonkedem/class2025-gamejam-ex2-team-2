@@ -12,9 +12,9 @@ public class PlayerAwarenessController : MonoBehaviour
     private bool inkSoundActive = false;
     private Transform[] _players;
     private Animator _animator;
+    
 
-
-    private void Awake()
+    private void UpdatePlayers()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -29,6 +29,7 @@ public class PlayerAwarenessController : MonoBehaviour
     
     void Update()
     {
+        UpdatePlayers();
         Transform closestPlayer = null;
         float closestDistance = _playerAwarenessDistance;
         bool isPlayerClose = false;

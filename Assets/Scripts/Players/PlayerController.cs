@@ -24,11 +24,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite playerDeadSprite1;
     [SerializeField] private Sprite playerDeadSprite2;
     [SerializeField] private Sprite playerDeadSprite3;
-    [SerializeField] private float oxygenCountToReturnOtherPlayerToLife = 15f;
     [SerializeField]private float attackCooldown = 0.4f;
     [SerializeField] private GameObject airPrefab; // Assign the "Air" prefab in the inspector
     [SerializeField] private float airSpeed = 5f;
-    
+    [SerializeField] private int playerType;
     
     private BarController oxygenBarController;
     private bool isTouchingWaterEnding = false;
@@ -82,11 +81,8 @@ public class PlayerController : MonoBehaviour
             }
 
             if(isTouchingDeadPlayer)
-            {
-                if (currentOxygenValue > oxygenCountToReturnOtherPlayerToLife)
-                {
-                    ReturnOtherPlayerToLife();
-                }
+            { 
+                ReturnOtherPlayerToLife();
             }
         }
     }
@@ -360,14 +356,25 @@ public class PlayerController : MonoBehaviour
     {
         AudioController.Instance.PlayIncreaseOxygen();
         GameManager.Instance.NumOfPlayersDead--;
-        currentOxygenValue -= oxygenCountToReturnOtherPlayerToLife;
+        currentOxygenValue /= 2;
         GameObject playerDead = Utils.Instance.FindInactiveObjectByName("Player Dead");
         playerDead.SetActive(false);
         otherPlayer=Instantiate(otherPlayerPrefab, transform.position, Quaternion.identity, null);
+        otherPlayer.layer = LayerMask.NameToLayer("Player"+(3-playerType));
+        otherPlayer.GetComponent<PlayerController>().SetOtherPlayer(gameObject);
+        otherPlayer.GetComponent<PlayerController>().SetOtherPlayerOxygenBar(oxygenBar);
         GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(otherPlayer.transform);
         otherPlayerOxygenBar.SetActive(true);
         otherPlayer.GetComponent<PlayerController>().SetOxygenBar(otherPlayerOxygenBar, maxTimeWithoutOxygen/2);
     }
     
-
+    public void SetOtherPlayer(GameObject player)
+    {
+        otherPlayer = player;
+    }
+    
+    public void SetOtherPlayerOxygenBar(GameObject oxygenBar)
+    {
+        otherPlayerOxygenBar = oxygenBar;
+    }
 }

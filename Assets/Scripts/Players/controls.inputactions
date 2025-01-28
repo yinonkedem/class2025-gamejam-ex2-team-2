@@ -247,6 +247,17 @@
                     "action": "PassOxygen",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a976cc69-f7d2-40c9-9988-9977c723f3ff",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PassOxygen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

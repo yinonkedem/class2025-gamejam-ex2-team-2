@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248817673054280099}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -797.2, y: -626.48, z: 9.903821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -134,7 +134,9 @@ MonoBehaviour:
   MoveStats: {fileID: 11400000, guid: 09d9ac1777da7fa43b636582adfda65e, type: 2}
   _feetColl: {fileID: 3099123255634323660}
   _bodyColl: {fileID: 5473924951097227285}
-  _headColl: {fileID: 0}
+  _headColl: {fileID: 2286700600039269175}
+  waterline: {fileID: 0}
+  dashCooldown: 1
 --- !u!61 &1190640989473443660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,16 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
-  otherPlayerPrefab: {fileID: 0}
+  otherPlayerPrefab: {fileID: 636896145114848259, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
   otherPlayerOxygenBar: {fileID: 0}
   maxTimeWithoutOxygen: 80
   oxygenAddedAfterSecondInTheAir: 0.07
   oxygenDecreasedNumberFromInkCollision: 5
-  oxygenDecreasedNumberWhenShooting: 1
+  oxygenDecreasedNumberWhenShooting: 0.5
   oxygenBar: {fileID: 0}
   attackSpeed: 10
   oxygenDecreasedNumberFromBoltAttack: 7
-  oxygenTransferRate: 3
+  oxygenTransferRate: 10
   otherPlayer: {fileID: 0}
   oxygenDecreasedNumberFromMiniEnemyExplosion: 20
   oxygenDecreasedNumberFromEnemyCollision: 0.02
@@ -211,6 +213,10 @@ MonoBehaviour:
   playerDeadSprite2: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite3: {fileID: -508659524, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   oxygenCountToReturnOtherPlayerToLife: 15
+  attackCooldown: 0.25
+  airPrefab: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
+  airSpeed: 10
+  playerType: 2
 --- !u!114 &3301061328876907731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3781611870167665930}
   - component: {fileID: 2286700600039269175}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

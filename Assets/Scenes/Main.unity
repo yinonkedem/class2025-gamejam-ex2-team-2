@@ -934,11 +934,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScreenKey: 13
---- !u!70 &249963691 stripped
-CapsuleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 2286700600039269175, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-  m_PrefabInstance: {fileID: 1111542312677883418}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &282025974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &622732848
 Transform:
   m_ObjectHideFlags: 0
@@ -4950,11 +4945,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1289372002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 29.572}
---- !u!70 &1691643055 stripped
-CapsuleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 2155107082235895261, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-  m_PrefabInstance: {fileID: 6266935539975936346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1731984666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6357,46 +6347,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1458929733}
     m_Modifications:
-    - target: {fileID: 1190640989473443660, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1458028842497418217, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907937848513514021, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2346064900567497496, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5231773110507992992, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: _headColl
-      value: 
-      objectReference: {fileID: 249963691}
     - target: {fileID: 5231773110507992992, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: waterline
       value: 
       objectReference: {fileID: 900011953}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: airSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: airPrefab
-      value: 
-      objectReference: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: oxygenBar
       value: 
@@ -6406,29 +6364,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 751664180}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: attackCooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: otherPlayerPrefab
-      value: 
-      objectReference: {fileID: 636896145114848259, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: oxygenTransferRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: otherPlayerOxygenBar
       value: 
       objectReference: {fileID: 929996173}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: otherPlayerOxygenBarPrefab
-      value: 
-      objectReference: {fileID: 3036164080447846565, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
-    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: oxygenDecreasedNumberWhenShooting
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8632263258675486399, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -797.2
@@ -6468,10 +6406,6 @@ PrefabInstance:
     - target: {fileID: 8632263258675486399, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9206530595854925299, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6599,30 +6533,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 636896145114848259, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 819734176206870869, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 860400377916795573, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6758833034049956315, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: airSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: airPrefab
-      value: 
-      objectReference: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: oxygenBar
       value: 
@@ -6632,45 +6542,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 107901565}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: attackCooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: otherPlayerPrefab
-      value: 
-      objectReference: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: oxygenTransferRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: otherPlayerOxygenBar
       value: 
       objectReference: {fileID: 783652924}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: otherPlayerOxygenBarPrefab
-      value: 
-      objectReference: {fileID: 8865656672764147210, guid: e72018b906cf1b843b791685b3cd83b0, type: 3}
-    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: oxygenDecreasedNumberWhenShooting
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223954527988604415, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: _headColl
-      value: 
-      objectReference: {fileID: 1691643055}
     - target: {fileID: 7223954527988604415, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: waterline
       value: 
       objectReference: {fileID: 900011953}
-    - target: {fileID: 7223954527988604415, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: dashCooldown
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8902724058010292734, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: m_LocalPosition.x
       value: -799.9
@@ -6710,14 +6588,6 @@ PrefabInstance:
     - target: {fileID: 8902724058010292734, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8996169740858206646, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9177126432672503511, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
