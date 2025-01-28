@@ -1882,7 +1882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &622732848
 Transform:
   m_ObjectHideFlags: 0
@@ -6390,6 +6390,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 900011953}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: airSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: airPrefab
+      value: 
+      objectReference: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: oxygenBar
       value: 
       objectReference: {fileID: 783652924}
@@ -6405,6 +6413,10 @@ PrefabInstance:
       propertyPath: otherPlayerPrefab
       value: 
       objectReference: {fileID: 636896145114848259, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: oxygenTransferRate
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: otherPlayerOxygenBar
       value: 
@@ -6604,6 +6616,14 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: airSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: airPrefab
+      value: 
+      objectReference: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: oxygenBar
       value: 
       objectReference: {fileID: 929996173}
@@ -6619,6 +6639,10 @@ PrefabInstance:
       propertyPath: otherPlayerPrefab
       value: 
       objectReference: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: oxygenTransferRate
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: timeBetweenAttacks
       value: 0.01
@@ -6839,6 +6863,10 @@ PrefabInstance:
     - target: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: m_Name
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326621631015463947, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5622399222926310414, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: _speed

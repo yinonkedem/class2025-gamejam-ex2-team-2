@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite playerDeadSprite3;
     [SerializeField] private float oxygenCountToReturnOtherPlayerToLife = 15f;
     [SerializeField]private float attackCooldown = 0.4f;
-
+    [SerializeField] private GameObject airPrefab; // Assign the "Air" prefab in the inspector
+    [SerializeField] private float airSpeed = 5f;
+    
     
     private BarController oxygenBarController;
     private bool isTouchingWaterEnding = false;
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private InputManager inputManager;
     private int i = 1;
     private float lastAttackTime = -Mathf.Infinity; // Initialize to a very low value
+    private bool sendAir = false;
 
     
     // Start is called before the first frame update
@@ -72,10 +75,12 @@ public class PlayerController : MonoBehaviour
         }
         if (inputManager.Oxygen)
         {
-            if (isTouchingPlayer && otherPlayer != null)
+            if(otherPlayer != null && isTouchingWaterEnding)
             {
+                sendAir = true;
                 PassOxygen();
             }
+
             if(isTouchingDeadPlayer)
             {
                 if (currentOxygenValue > oxygenCountToReturnOtherPlayerToLife)
@@ -99,7 +104,7 @@ public class PlayerController : MonoBehaviour
             PlayerController otherPlayerController = otherPlayer.GetComponent<PlayerController>();
             if (otherPlayerController != null)
             {
-                otherPlayerController.AddToOxygen(oxygenTransferRate);
+                SpawnAndMoveAir();
             }
         }
     }
@@ -214,6 +219,15 @@ public class PlayerController : MonoBehaviour
             AudioController.Instance.PlayIncreaseOxygen();
         }
 
+        if (other.CompareTag("Air"))
+        {
+            if (!sendAir)
+            {
+                AudioController.Instance.PlayIncreaseOxygen();
+                AddToOxygen(oxygenTransferRate);    
+            }
+        }
+
     }
     
     
@@ -257,6 +271,36 @@ public class PlayerController : MonoBehaviour
         
     }
     
+    
+    private void SpawnAndMoveAir()
+    {
+        // Instantiate the "Air" prefab at the current player's position
+        Vector3 spawnPosition = transform.position;
+        GameObject airObject = Instantiate(airPrefab, spawnPosition, Quaternion.identity);
+
+        // Move the "Air" toward the other player
+        StartCoroutine(MoveAirToOtherPlayer(airObject));
+    }
+
+    private IEnumerator MoveAirToOtherPlayer(GameObject airObject)
+    {
+        Vector3 startPosition = airObject.transform.position;
+        Vector3 targetPosition = otherPlayer.transform.position;
+
+        float journey = 0f; 
+        while (journey < 1f)
+        {
+            journey += Time.deltaTime * airSpeed / Vector3.Distance(startPosition, targetPosition);
+            airObject.transform.position = Vector3.Lerp(startPosition, targetPosition, journey);
+
+            yield return null; 
+        }
+
+        airObject.transform.position = targetPosition;
+
+        Destroy(airObject);
+        sendAir = false;
+    }
     
 
     private void UpdateOxygen()

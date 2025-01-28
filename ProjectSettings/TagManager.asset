@@ -23,6 +23,7 @@ TagManager:
   - Right Stones
   - Bottom Stones
   - Dead Player
+  - Air
   layers:
   - Default
   - TransparentFX
