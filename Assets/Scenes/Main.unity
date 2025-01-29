@@ -7322,6 +7322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 900011953}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: airSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: oxygenBar
       value: 
       objectReference: {fileID: 789470854}
@@ -7330,9 +7334,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 751664180}
     - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: maxTimeWithoutOxygen
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: otherPlayerOxygenBar
       value: 
       objectReference: {fileID: 929996173}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: oxygenDecreasedNumberFromInkCollision
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: oxygenDecreasedNumberFromEnemyCollision
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034273505394850455, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
+      propertyPath: oxygenDecreasedNumberFromMiniEnemyExplosion
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8632263258675486399, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -797.2
@@ -7391,6 +7411,10 @@ PrefabInstance:
       value: Player 1
       objectReference: {fileID: 0}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: airSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: oxygenBar
       value: 
       objectReference: {fileID: 929996173}
@@ -7399,9 +7423,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 107901565}
     - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: maxTimeWithoutOxygen
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: otherPlayerOxygenBar
       value: 
       objectReference: {fileID: 789470854}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: oxygenDecreasedNumberFromInkCollision
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: oxygenDecreasedNumberFromEnemyCollision
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013595144912071861, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
+      propertyPath: oxygenDecreasedNumberFromMiniEnemyExplosion
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7223954527988604415, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
       propertyPath: waterline
       value: 
@@ -7485,7 +7525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: numberOfBoltsInSingleAttack
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1618817764371940112, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: timeBetweenEachBoltAttackRound
@@ -7501,7 +7541,7 @@ PrefabInstance:
       objectReference: {fileID: 945888710}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: maxLife
-      value: 110
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 1892964226454945987, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: increaseEnemySize
@@ -7601,7 +7641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6153521653335145395, guid: 4f4cb72dcfe9a8b40bdc9049e7d5e5f9, type: 3}
       propertyPath: _playerAwarenessDistance
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
