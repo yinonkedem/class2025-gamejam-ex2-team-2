@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 628209333, guid: 4d1cb2fe2569dc2468899605dfa94486, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   _bodyColl: {fileID: 5473924951097227285}
   _headColl: {fileID: 2286700600039269175}
   waterline: {fileID: 0}
-  dashCooldown: 1
+  dashCooldown: 2
 --- !u!61 &1190640989473443660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,25 +197,24 @@ MonoBehaviour:
   attackPrefab: {fileID: 1585688561699880644, guid: 8b78da502d8883f49b36f4e40a04d8a0, type: 3}
   otherPlayerPrefab: {fileID: 636896145114848259, guid: 35b494041e5fb334d82077f6c8597a98, type: 3}
   otherPlayerOxygenBar: {fileID: 0}
-  maxTimeWithoutOxygen: 80
+  maxTimeWithoutOxygen: 60
   oxygenAddedAfterSecondInTheAir: 0.07
   oxygenDecreasedNumberFromInkCollision: 5
   oxygenDecreasedNumberWhenShooting: 0.5
   oxygenBar: {fileID: 0}
   attackSpeed: 10
   oxygenDecreasedNumberFromBoltAttack: 7
-  oxygenTransferRate: 10
+  oxygenTransferRate: 5
   otherPlayer: {fileID: 0}
-  oxygenDecreasedNumberFromMiniEnemyExplosion: 20
-  oxygenDecreasedNumberFromEnemyCollision: 0.02
+  oxygenDecreasedNumberFromMiniEnemyExplosion: 12
+  oxygenDecreasedNumberFromEnemyCollision: 8
   numberOfTimesPlayerCanBackToLife: 2
-  playerDeadSprite1: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
-  playerDeadSprite2: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  playerDeadSprite1: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  playerDeadSprite2: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite3: {fileID: -508659524, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
-  oxygenCountToReturnOtherPlayerToLife: 15
   attackCooldown: 0.25
   airPrefab: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
-  airSpeed: 10
+  airSpeed: 14
   playerType: 2
 --- !u!114 &3301061328876907731
 MonoBehaviour:

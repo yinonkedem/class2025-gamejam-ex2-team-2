@@ -45,10 +45,10 @@ public class AttacksController : MonoBehaviour
         {
             _animator.SetBool("isPrepareToAttack", true);
             yield return new WaitForSeconds(timeEnemyPrepareToAttack);
-
-            GameObject miniEnemy=Instantiate(enemyPrefab, transform.position, Quaternion.identity, GameObject.Find("Enemies").transform);
+            GameObject miniEnemy=Instantiate(enemyPrefab, transform.position, Quaternion.identity, GameObject.Find("Enemies").transform); 
             GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(miniEnemy.transform);
             
+                     
             GameObject miniEnemyType2=Instantiate(enemyPrefabType2, transform.position, Quaternion.identity, GameObject.Find("Enemies").transform);
             GameObject.Find("Main Camera").GetComponent<MultipleTargetCamera>().UpdateTargets(miniEnemyType2.transform);
             

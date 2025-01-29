@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!sendAir)
             {
+                
                 AudioController.Instance.PlayIncreaseOxygen();
                 AddToOxygen(oxygenTransferRate);    
             }

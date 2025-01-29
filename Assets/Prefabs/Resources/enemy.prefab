@@ -211,9 +211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8476b12d271518444a48dff87e054f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 170
+  maxLife: 220
   decreaseLifeCountWhenGetHit: 1
   lifeBar: {fileID: 0}
+  increaseEnemySpeed: 1.5
+  increaseEnemySize: 0.35
 --- !u!114 &6153521653335145395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa4149273a6d7f46b01fadf6035f1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAwarenessDistance: 8
+  _playerAwarenessDistance: 12
 --- !u!114 &5622399222926310414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1122ac67bd3644c9f4460e1a9eed87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 4
   _rotationSpeed: 100
   minSpeed: 1
   maxSpeed: 10
@@ -255,23 +257,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6737c6a7ee827374ba422e2f4c36c373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfBoltsInSingleAttack: 7
-  timeBetweenEachBoltAttackRound: 10
-  numberOfMiniEnemies: 2
-  timeToStayMiniEnemies: 40
-  timeEnemyPrepareToAttack: 2
-  timeBetweenTargetToBolt: 2
-  timeUntilFirdtAttackStart: 5
+  numberOfBoltsInSingleAttack: 14
+  timeBetweenEachBoltAttackRound: 6
+  timeEnemyPrepareToAttack: 2.8
+  timeBetweenTargetToBolt: 0.8
   attackTargetPrefab: {fileID: 117037929678102172, guid: d4ffa8c4ce1a583498a5c637a713f246, type: 3}
-  enemyPrefab: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
-  enemyPrefabType2: {fileID: 0}
+  enemyPrefab: {fileID: 6830948160091841947, guid: defb7f0686d76084d8666dfd4f1df498, type: 3}
+  enemyPrefabType2: {fileID: 6830948160091841947, guid: 134141ddf9cba684995513cd4f035ff7, type: 3}
   boltAttackPrefab: {fileID: 5961798894654412860, guid: 7f5be0644cc64bc47bd76b2302a2058e, type: 3}
-  numberOfBoltsAttackRounded: 4
-  numberOfAttacks: 3
-  speedAddedEachLevel: 0.9
-  sizeAddedEachLevel: 0.9
-  increaseEnemySpeed: 0.5
-  increaseEnemySize: 0.4
+  timeBetweenEachCreationOfMiniEnemies: 5
 --- !u!50 &8864878582617915169
 Rigidbody2D:
   serializedVersion: 4
@@ -342,7 +336,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 3, y: 2.8}
   m_EdgeRadius: 0
 --- !u!212 &4875382139208665130
 SpriteRenderer:

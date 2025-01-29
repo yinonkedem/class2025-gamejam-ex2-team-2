@@ -24,6 +24,7 @@ TagManager:
   - Bottom Stones
   - Dead Player
   - Air
+  - Cloud
   layers:
   - Default
   - TransparentFX

@@ -173,6 +173,17 @@
                 },
                 {
                     "name": "",
+                    "id": "bfc28c13-a270-4669-a626-a1fdb1f0998c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "12536226-bcbf-4616-a37b-64694879afba",
                     "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
@@ -207,7 +218,7 @@
                 {
                     "name": "",
                     "id": "17e63f08-aa7a-498b-8d8c-92731f2fdda7",
-                    "path": "<DualShockGamepad>/rightShoulder",
+                    "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

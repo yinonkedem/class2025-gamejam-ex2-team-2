@@ -42,9 +42,7 @@ public class Utils : Singleton<Utils>
         GameObject timer = FindInactiveObjectByName("Timer");
         timer.SetActive(true);
     }
-
-
-
+    
 
     public GameObject FindInactiveObjectByName(string name)
     {

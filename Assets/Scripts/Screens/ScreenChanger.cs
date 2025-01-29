@@ -9,7 +9,7 @@ public class ScreenChanger : MonoBehaviour
     private const string WINNING_SCREEN = "Winning Screen";
     private const string GAME_OVER_SCREEN = "GameOver Screen";
     private const string MAIN_SCREEN = "Main";
-
+    private GameObject[] clouds;
 
 
     private void Awake()
@@ -35,6 +35,8 @@ public class ScreenChanger : MonoBehaviour
         //Deactivate Main object
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
+        clouds = GameObject.FindGameObjectsWithTag("Cloud");
+        ChangeCloudsActivation(false);
     }
     
     
@@ -96,6 +98,7 @@ public class ScreenChanger : MonoBehaviour
 
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
+        ChangeCloudsActivation(false);
         
         Debug.Log("Winning Game activated.");
         
@@ -111,6 +114,7 @@ public class ScreenChanger : MonoBehaviour
 
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(false);
+        ChangeCloudsActivation(false);
         
         Debug.Log("Game Over activated.");
         StartCoroutine(WaitForEnter());
@@ -125,10 +129,19 @@ public class ScreenChanger : MonoBehaviour
 
         GameObject mainObject = Utils.Instance.FindInactiveObjectByName(MAIN_SCREEN);
         mainObject.SetActive(true);
+        ChangeCloudsActivation(true);
 
         GameObject startGame = Utils.Instance.FindInactiveObjectByName(OPENING_SCREEN);
         startGame.SetActive(false);
 
+    }
+
+    private void ChangeCloudsActivation(bool isActive)
+    {
+        foreach (GameObject cloud in clouds)
+        {
+            cloud.SetActive(isActive);
+        }
     }
 
 }

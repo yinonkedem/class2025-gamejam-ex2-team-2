@@ -136,7 +136,7 @@ MonoBehaviour:
   _bodyColl: {fileID: 2318352798384157625}
   _headColl: {fileID: 2155107082235895261}
   waterline: {fileID: 0}
-  dashCooldown: 5
+  dashCooldown: 2
 --- !u!114 &7013595144912071861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,25 +152,24 @@ MonoBehaviour:
   attackPrefab: {fileID: 8627557302977331826, guid: 9e68e1082ec7e7f4082369ccde1b5751, type: 3}
   otherPlayerPrefab: {fileID: 1248817673054280099, guid: 0be6c7fbfd86a2041b30d733aec408df, type: 3}
   otherPlayerOxygenBar: {fileID: 0}
-  maxTimeWithoutOxygen: 80
+  maxTimeWithoutOxygen: 60
   oxygenAddedAfterSecondInTheAir: 0.07
   oxygenDecreasedNumberFromInkCollision: 5
   oxygenDecreasedNumberWhenShooting: 0.5
   oxygenBar: {fileID: 0}
   attackSpeed: 10
   oxygenDecreasedNumberFromBoltAttack: 7
-  oxygenTransferRate: 10
+  oxygenTransferRate: 5
   otherPlayer: {fileID: 0}
-  oxygenDecreasedNumberFromMiniEnemyExplosion: 20
-  oxygenDecreasedNumberFromEnemyCollision: 0.02
+  oxygenDecreasedNumberFromMiniEnemyExplosion: 12
+  oxygenDecreasedNumberFromEnemyCollision: 8
   numberOfTimesPlayerCanBackToLife: 2
-  playerDeadSprite1: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
-  playerDeadSprite2: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  playerDeadSprite1: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
+  playerDeadSprite2: {fileID: 1488612626, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
   playerDeadSprite3: {fileID: -508659524, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}
-  oxygenCountToReturnOtherPlayerToLife: 15
   attackCooldown: 0.25
   airPrefab: {fileID: 1585688561699880644, guid: a68395375889af947971abd43e334b6e, type: 3}
-  airSpeed: 10
+  airSpeed: 14
   playerType: 1
 --- !u!61 &819734176206870869
 BoxCollider2D:

@@ -53,7 +53,7 @@ MonoBehaviour:
   _speed: 7
   _rotationSpeed: 100
   minSpeed: 1
-  maxSpeed: 4
+  maxSpeed: 4.7
 --- !u!114 &3364079987936431621
 MonoBehaviour:
   m_ObjectHideFlags: 0
