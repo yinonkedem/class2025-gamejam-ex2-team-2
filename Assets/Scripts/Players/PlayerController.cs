@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         // Set the oxygen bar's position relative to the player
         Vector3 oxygenBarPosition = transform.position; // Get the player's position
-        oxygenBarPosition.y += 1f;  // Offset to place it above the player
+        oxygenBarPosition.y += 1.4f;  // Offset to place it above the player
         oxygenBar.transform.position = oxygenBarPosition;  // Update oxygen bar's position
     }
     
