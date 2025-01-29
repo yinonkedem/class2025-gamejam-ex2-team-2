@@ -2319,7 +2319,7 @@ GameObject:
   - component: {fileID: 662384024}
   - component: {fileID: 662384023}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Open Screen 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2815,8 +2815,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 27.1613, y: -0.00001335144}
-  m_SizeDelta: {x: -116.9298, y: -11.7561}
+  m_AnchoredPosition: {x: 20.4672, y: 0.000022888184}
+  m_SizeDelta: {x: -144.5167, y: -16.4583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &751664180 stripped
 GameObject:
@@ -3795,7 +3795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.4, y: 452.57}
+  m_AnchoredPosition: {x: 9.4, y: 474.5}
   m_SizeDelta: {x: 300, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &945888712
@@ -3836,7 +3836,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.19607843}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3963,7 +3963,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4309614998982939247, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309614998982939247, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309614998982939247, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5949713043133913946, guid: 2f9d20db9d205f94d8cf574090cd4cf7, type: 3}
@@ -4353,7 +4361,7 @@ GameObject:
   - component: {fileID: 1103923639}
   - component: {fileID: 1103923638}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Open Screen 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5118,7 +5126,7 @@ RectTransform:
   m_GameObject: {fileID: 1407409228}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.21, y: 4.22, z: 1}
+  m_LocalScale: {x: 1.84, y: 3.59, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 945888711}

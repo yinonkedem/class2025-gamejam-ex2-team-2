@@ -28,7 +28,9 @@ public class StartGme : MonoBehaviour
         if (Input.GetKeyDown(nextScreenKey) && _isInFirstScrren)
         {
             //change source image in the canvas renderred
-
+            // inable two images in the canvas with names: Open Screen 2 and Open Screen 1
+            GameObject.Find("Open Screen 1").SetActive(false);
+            GameObject.Find("Open Screen 2").SetActive(false);
 
             GetComponent<Image>().sprite = secondScreen;
             //GetComponent<SpriteRenderer>().sprite = secondScreen;
