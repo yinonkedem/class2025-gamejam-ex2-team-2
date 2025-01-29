@@ -10,7 +10,6 @@ public class StartGme : MonoBehaviour
     [SerializeField] private KeyCode nextScreenKey = KeyCode.Return;
     private bool _isInFirstScrren;
     private GameObject _player;
-    private readonly float uploadPPlayerYPositionBy = 1f;
 
     // Start is called before the first frame update
     void Start()

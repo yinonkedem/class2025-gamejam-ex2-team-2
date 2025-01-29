@@ -8,7 +8,8 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private float timeToAllowPlayerToAttack;
     [SerializeField] private float timeOfAttack = 10f;
-    
+    [SerializeField] private KeyCode quitGameKey = KeyCode.Q;
+
     private bool arePlayerWon = false;
     private float rightWallPosition;
     private float leftWallPosition;
@@ -58,6 +59,16 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         CheckGameOver();
+        if (Input.GetKeyDown(quitGameKey))
+        {
+            QuitGame();
+        }
+    }
+    
+    private void QuitGame()
+    {
+        Debug.Log("Quitting the game...");
+        Application.Quit(); // Works in a built game, not in the editor
     }
     
     public void CheckGameOver()

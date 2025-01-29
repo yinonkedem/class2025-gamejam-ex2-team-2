@@ -30,15 +30,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int playerType;
     
     private BarController oxygenBarController;
-    private bool isTouchingWaterEnding = false;
-    private bool isTouchingPlayer = false;
+    private bool isTouchingWaterEnding;
     private bool isTouchingDeadPlayer = false;
     private GameObject currentAttack; 
     private float currentOxygenValue;
     private Animator _animator;
     private bool isDead = false;
     private InputManager inputManager;
-    private int i = 1;
     private float lastAttackTime = -Mathf.Infinity; // Initialize to a very low value
     private bool sendAir = false;
 
@@ -150,17 +148,10 @@ public class PlayerController : MonoBehaviour
         {
             if (currentOxygenValue <= maxTimeWithoutOxygen)
             {
-                i++;
                 currentOxygenValue += oxygenAddedAfterSecondInTheAir;
                 oxygenBarController.updateBar(currentOxygenValue, maxTimeWithoutOxygen);
             }
         }
-
-        if (collider.CompareTag("Player"))
-        {
-            isTouchingPlayer = true;
-        }
-
         if (collider.CompareTag("Dead Player"))
         {
             isTouchingDeadPlayer = true;
@@ -229,10 +220,6 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            isTouchingPlayer = false;
-        }
         if (other.CompareTag("Dead Player"))
         {
             isTouchingDeadPlayer = false;
