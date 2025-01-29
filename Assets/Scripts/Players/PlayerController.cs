@@ -243,7 +243,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void TurnToDeadPlayer()
+
+    private IEnumerator TurnToDeadPlayer()
     {
         GameManager.Instance.NumOfPlayersDeadUntilNow++;
         GameManager.Instance.NumOfPlayersDead++;
@@ -255,14 +256,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-             newSprite = playerDeadSprite2; 
+            newSprite = playerDeadSprite2; 
         }
      
         SpriteRenderer spriteRenderer = playerDead.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = newSprite;
-        playerDead.SetActive(true);
+
 
         StartCoroutine(Die());
+        yield return new WaitForSeconds(1f);
+        playerDead.SetActive(true);
         oxygenBar.SetActive(false);
         
     }
@@ -322,7 +325,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                TurnToDeadPlayer();
+                StartCoroutine(TurnToDeadPlayer());
             }
         }
         if (currentOxygenValue > 0&& !isTouchingWaterEnding)
