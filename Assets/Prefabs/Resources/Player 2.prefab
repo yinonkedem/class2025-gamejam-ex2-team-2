@@ -199,14 +199,14 @@ MonoBehaviour:
   otherPlayerOxygenBar: {fileID: 0}
   maxTimeWithoutOxygen: 60
   oxygenAddedAfterSecondInTheAir: 0.07
-  oxygenDecreasedNumberFromInkCollision: 5
+  oxygenDecreasedNumberFromInkCollision: 0.01
   oxygenDecreasedNumberWhenShooting: 0.5
   oxygenBar: {fileID: 0}
   attackSpeed: 10
   oxygenDecreasedNumberFromBoltAttack: 7
   oxygenTransferRate: 5
   otherPlayer: {fileID: 0}
-  oxygenDecreasedNumberFromMiniEnemyExplosion: 12
+  oxygenDecreasedNumberFromMiniEnemyExplosion: 15
   oxygenDecreasedNumberFromEnemyCollision: 8
   numberOfTimesPlayerCanBackToLife: 2
   playerDeadSprite1: {fileID: -798955152, guid: 1b6324183683e7340bdae0d22c4cd521, type: 3}

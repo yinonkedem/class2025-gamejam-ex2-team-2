@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player is hit by bolt attack");
             AudioController.Instance.PlayOxygenDecrease();
+            
             currentOxygenValue -= oxygenDecreasedNumberFromBoltAttack;
             oxygenBarController.updateBar(currentOxygenValue,maxTimeWithoutOxygen);
         }
