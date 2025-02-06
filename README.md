@@ -31,3 +31,6 @@ In **Cup Fight**, you and a partner (or AI-controlled teammate) descend into an 
 ### Prerequisites
 - **Unity** (version 2020.3 or newer recommended)
 - A Git client (e.g., Git Bash, GitHub Desktop) if you plan to clone and contribute.
+
+### Installation
+https://maykonvsky.itch.io/cup-fight
