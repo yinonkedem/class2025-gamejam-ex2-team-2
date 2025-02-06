@@ -28,9 +28,7 @@ In **Cup Fight**, you and a partner (or AI-controlled teammate) descend into an 
 
 ## Getting Started
 
-### Prerequisites
-- **Unity** (version 2020.3 or newer recommended)
-- A Git client (e.g., Git Bash, GitHub Desktop) if you plan to clone and contribute.
-
 ### Installation
-https://maykonvsky.itch.io/cup-fight
+1. download from https://maykonvsky.itch.io/cup-fight
+2. connect ps5 controller
+3. open the exe file and start to play!
